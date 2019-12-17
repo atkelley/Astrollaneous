@@ -1,0 +1,19 @@
+.daily-container-row {
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.daily-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.daily-headline {
+
+}
+
+.daily-description {
+  margin-right: 20px;
+}
