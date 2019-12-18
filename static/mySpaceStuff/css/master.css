@@ -1,3 +1,8 @@
+.navbar-logo-title {
+  font-size: 2em;
+  font-weight: bolder;
+}
+
 .daily-container-row {
   border: 2px solid black;
   border-radius: 5px;

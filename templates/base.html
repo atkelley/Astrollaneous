@@ -4,10 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Space Stuff</title>
-    <link rel="shortcut icon" type="image/png" href="{% static 'mySpaceStuff/img/favicon.ico' %}" />
-    <!-- <link rel="shortcut icon" href="{% static 'mySpaceStuff/img/favicon.ico' %}" /> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Astrollaneous: an assortment of all things space-related</title>
+    <!-- <link rel="shortcut icon" type="image/png" href="{% static 'mySpaceStuff/img/favicon.ico' %}" /> -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'mySpaceStuff/img/observatory.png' %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'mySpaceStuff/css/master.css' %}">
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg bg-dark mynav" role="navigation" id="navbar">
       <div class="container">
         <div class="navbar-nav align-items-center">
-          <a class="navbar-brand mynav" href="{% url 'home' %}">Star Portal</a>
+          <a class="navbar-brand mynav" href="{% url 'home' %}">Home</a>
         </div>
         <div class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
