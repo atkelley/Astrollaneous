@@ -2,11 +2,8 @@
   background-color: yellow;
 }
 
-.nav-tabs {
-    margin-left: 5%;
-}
-
 .container-links {
+  margin: 0 auto;
   max-width: 100%;
   background-color: white;
 }

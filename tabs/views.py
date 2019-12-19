@@ -17,12 +17,36 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
+def mars(request):
+    context = {"mars_page": "active"}
+    return render(request, 'mars.html', context)
+
+def neos(request):
+    context = {"neos_page": "active"}
+    return render(request, 'neos.html', context)
+
+def satellites(request):
+    context = {"satellites_page": "active"}
+    return render(request, 'satellites.html', context)
+
+def weather(request):
+    context = {"weather_page": "active"}
+    return render(request, 'weather.html', context)
+
+def nasa(request):
+    context = {"nasa_page": "active"}
+    return render(request, 'nasa.html', context)
+
+def techport(request):
+    context = {"techport_page": "active"}
+    return render(request, 'techport.html', context)
+
 def about(request):
-    context = {"about_page": "active"} # new info here
+    context = {"about_page": "active"}
     return render(request, 'about.html', context)
 
 def contact(request):
-    context = {"contact_page": "active"} # new info here
+    context = {"contact_page": "active"}
     return render(request, 'contact.html', context)
 
 class TestPage(TemplateView):

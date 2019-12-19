@@ -1,13 +1,28 @@
 <div class="container container-links">
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs justify-content-center">
     <li class="nav-item">
       <a class="nav-link {{ home_page }}" href="{% url 'home' %}">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ about_page }}" href="{% url 'about' %}">About</a>
+      <a class="nav-link {{ mars_page }}" href="{% url 'mars' %}">Mars</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link {{ neos_page }}" href="{% url 'neos' %}">NEOs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{ satellites_page }}" href="{% url 'satellites' %}">Satellites</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{ weather_page }}" href="{% url 'weather' %}">Space Weather</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{ nasa_page }}" href="{% url 'nasa' %}">NASA</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{ techport_page }}" href="{% url 'techport' %}">TechPort</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{ about_page }}" href="{% url 'about' %}">About</a>
     </li>
     <li class="nav-item">
       <a class="nav-link {{ contact_page }}" href="{% url 'contact' %}">Contact</a>
