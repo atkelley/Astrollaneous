@@ -19,7 +19,7 @@ from django.urls import path, include
 from mySpaceStuff import views
 
 urlpatterns = [
-    path('', views.HomePage.as_view(), name="home"),
+    path('', include("tabs.urls")),
     # path('admin/', admin.site.urls),
     # path('test/', views.TestPage.as_view(), name="test"),
     # path('thanks/', views.ThanksPage.as_view(), name="thanks"),

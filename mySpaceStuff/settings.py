@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '@4g7@if44(nmy*m@vju$y#j(ymkmq@
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['astrollaneous.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['astrollaneous.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'bootstrap4',
     'accounts.apps.AccountsConfig',
+    'tabs'
 ]
 
 MIDDLEWARE = [
