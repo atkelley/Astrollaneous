@@ -1,5 +1,26 @@
+.btn:hover, .btn>a:hover {
+  text-decoration: none;
+}
+
 .nav-link:hover {
-  background-color: yellow;
+  color: white;
+  background-color: #343a40;
+  opacity: 0.45;
+}
+
+.nav-tabs .nav-link {
+  border-top-left-radius: 0rem!important;
+  border-top-right-radius: 0rem!important;
+}
+
+.nav-link.active {
+  font-weight: bolder;
+  /* border-left: 1px solid grey!important;
+  border-right: 1px solid grey!important; */
+}
+
+.nav-link.active:hover {
+  opacity: 1.0;
 }
 
 .container-links {
@@ -58,6 +79,9 @@
 /* FOOTER SECTION */
 
 footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -78,6 +102,7 @@ footer {
   list-style-type: none;
   font-size: .75rem;
   border-bottom: none!important;
+  margin: 0;
 }
 
 .float-left {
@@ -91,4 +116,8 @@ footer {
 
 .nav-item-footer {
   display:inline-block;
+}
+
+.nav-item>button {
+  font-size: .75rem;
 }

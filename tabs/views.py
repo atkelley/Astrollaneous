@@ -15,45 +15,39 @@ def home(request):
         "description": daily_image_data['explanation'],
         "image_url": daily_image_data['hdurl'],
     }
-    return render(request, 'index.html', context)
+    return render(request, 'tabs/index.html', context)
 
 def mars(request):
     context = {"mars_page": "active"}
-    return render(request, 'mars.html', context)
+    return render(request, 'tabs/mars.html', context)
 
 def neos(request):
     context = {"neos_page": "active"}
-    return render(request, 'neos.html', context)
+    return render(request, 'tabs/neos.html', context)
 
 def satellites(request):
     context = {"satellites_page": "active"}
-    return render(request, 'satellites.html', context)
+    return render(request, 'tabs/satellites.html', context)
 
 def weather(request):
     context = {"weather_page": "active"}
-    return render(request, 'weather.html', context)
+    return render(request, 'tabs/weather.html', context)
 
 def nasa(request):
     context = {"nasa_page": "active"}
-    return render(request, 'nasa.html', context)
+    return render(request, 'tabs/nasa.html', context)
 
 def techport(request):
     context = {"techport_page": "active"}
-    return render(request, 'techport.html', context)
+    return render(request, 'tabs/techport.html', context)
 
 def about(request):
     context = {"about_page": "active"}
-    return render(request, 'about.html', context)
+    return render(request, 'tabs/about.html', context)
 
 def contact(request):
     context = {"contact_page": "active"}
-    return render(request, 'contact.html', context)
-
-class TestPage(TemplateView):
-    template_name = 'test.html'
-
-class ThanksPage(TemplateView):
-    template_name = 'thanks.html'
+    return render(request, 'tabs/contact.html', context)
 
 class AboutTab(TemplateView):
     template_name = 'about.html'

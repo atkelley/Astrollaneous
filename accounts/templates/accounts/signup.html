@@ -1,17 +1,27 @@
-{% extends "base.html" %}
+<form method="post">
+  {% csrf_token %}
 
-{# at the terminal, run pip install django-bootstrap4 #}
-{% load bootstrap4 %}
+  <div class="modal-header">
+    <h5 class="modal-title">Register New User</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
-{% block content %}
-<div class="container">
-  <h1>Sign Up</h1>
-  <form method="POST" class="form">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-      <button type="submit" class="btn btn-primary">Sign Up</button>
-    {% endbuttons %}
-  </form>
-</div>
-{% endblock %}
+  <div class="modal-body">
+    {% for field in form %}
+      <div class="form-group{% if field.errors %} invalid{% endif %}">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% for error in field.errors %}
+          <p class="help-block">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="submit-btn btn btn-success">Sign Up</button>
+  </div>
+</form>
