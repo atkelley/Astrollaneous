@@ -54,3 +54,41 @@
   background-color: white;
   border-radius: 5px;
 }
+
+/* FOOTER SECTION */
+
+footer {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  display: block;
+  margin: 0;
+  font-size: 1.5rem;
+  background-color: #ffffff;
+  color: #212121;
+  overflow-x: hidden;
+}
+
+.footer {
+  margin-top: 40px;
+  padding: 0px;
+}
+
+.footer-nav-tabs {
+  list-style-type: none;
+  font-size: .75rem;
+  border-bottom: none!important;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+  margin-right: 40px;
+}
+
+.nav-item-footer {
+  display:inline-block;
+}
