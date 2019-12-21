@@ -1,3 +1,7 @@
+.navbar {
+  padding: 0!important;
+}
+
 .btn:hover, .btn>a:hover {
   text-decoration: none;
 }
@@ -19,12 +23,16 @@
   border-right: 1px solid grey!important; */
 }
 
+.btn-link a:hover {
+  color: purple;
+}
+
 .nav-link.active:hover {
   opacity: 1.0;
 }
 
 .container-links {
-  margin: 0 auto;
+  margin: 0px auto 40px auto;
   max-width: 100%;
   background-color: white;
 }
@@ -52,7 +60,6 @@
 }
 
 .daily-row {
-  margin-top: 10px;
   padding: 10px;
   border-radius: 5px;
 }
@@ -79,8 +86,8 @@
 /* FOOTER SECTION */
 
 footer {
-  position: fixed;
-  bottom: 0;
+  /* position: fixed;
+  bottom: 0; */
   width: 100%;
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
