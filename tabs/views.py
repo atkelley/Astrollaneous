@@ -13,7 +13,9 @@ def home(request):
         "date": date.today(),
         "title": daily_image_data['title'],
         "description": daily_image_data['explanation'],
-        "image_url": daily_image_data['hdurl'],
+        "image_url": daily_image_data['url'],
+        "image_hdurl": daily_image_data['hdurl'],
+        "copyright": daily_image_data['copyright']
     }
     return render(request, 'tabs/index.html', context)
 

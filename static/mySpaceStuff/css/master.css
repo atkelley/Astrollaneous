@@ -83,6 +83,24 @@
   border-radius: 5px;
 }
 
+.button-float-right {
+  float: right;
+  margin: 15px 0px .5rem 0px;
+  padding: 3px 6px;
+  border-radius: 10px;
+  /* margin-bottom: 10px; */
+}
+
+.modal-title {
+  font-size: .75rem;
+  margin-left: 10px;
+  margin-top: 1.25rem!important;
+}
+
+.modal-body {
+  padding-bottom: .5rem!important;
+}
+
 /* FOOTER SECTION */
 
 footer {
