@@ -29,13 +29,21 @@
 
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <img itemprop="image" src='{{ image_hdurl }}'  class="img-rounded" style="width:100%; height:auto;">
-          <p class="modal-title float-left" id="myModalLabel"><em>{{ title }} &copy; {{ copyright }}</em></p>
-          <button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>
+      {% if media_type == "video" %}
+        <div class="modal-content video-modal-content">
+          <div class="modal-body embed-responsive embed-responsive-16by9">
+            <iframe width="100%" height="auto" src="{{ video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
         </div>
-      </div>
+      {% else %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <img itemprop="image" src='{{ image_hdurl }}'  class="img-rounded" style="width:100%; height:auto;">
+            <p class="modal-title float-left" id="myModalLabel"><em>{{ title }} &copy; {{ copyright }}</em></p>
+            <button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

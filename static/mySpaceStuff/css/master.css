@@ -101,6 +101,15 @@
   padding-bottom: .5rem!important;
 }
 
+.modal-content iframe{
+  margin: 0 auto;
+  display: block;
+}
+
+.video-modal-content {
+  border: 10px solid white!important;
+}
+
 /* FOOTER SECTION */
 
 footer {

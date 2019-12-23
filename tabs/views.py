@@ -6,16 +6,31 @@ from datetime import date
 import requests
 
 def home(request):
+    video_url = None
+    image_url = None
+    image_hdurl = None
+    copyright = None
     response = requests.get('https://api.nasa.gov/planetary/apod?api_key=suY5NhcHycX1CIkDaMCXNdY8dIYdp0O5meo3cJso')
     daily_image_data = response.json()
+
+    if daily_image_data['media_type'] == 'video':
+        video_url = daily_image_data['url']
+        temp = video_url.split("embed/", 1)[1].split('?')
+        image_url = 'http://img.youtube.com/vi/' + temp[0] + '/0.jpg'
+    else:
+        image_hdurl = daily_image_data['image_hdurl']
+        copyright = daily_image_data['copyright']
+
     context = {
         "home_page": "active",
         "date": date.today(),
         "title": daily_image_data['title'],
         "description": daily_image_data['explanation'],
-        "image_url": daily_image_data['url'],
-        "image_hdurl": daily_image_data['hdurl'],
-        "copyright": daily_image_data['copyright']
+        "media_type": daily_image_data['media_type'],
+        "video_url": video_url,
+        "image_url": image_url,
+        "image_hdurl": image_hdurl,
+        "copyright": copyright
     }
     return render(request, 'tabs/index.html', context)
 
