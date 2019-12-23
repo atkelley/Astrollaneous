@@ -4,9 +4,21 @@
   <div class="container main-content">
     <div class="row daily-row">
       <div class="row">
-        <div class="col-md-12">
-          <h1><strong>Mars!</strong></h1>
-        </div>
+        {% for rover in rovers %}
+          {% if forloop.counter0 == 1 %}
+            <div class="col mars-borders">
+          {% else %}
+            <div class="col">
+          {% endif %}
+            <a href="{% url 'rover' rover_name=rover.name|lower %}"><img src="/static/mySpaceStuff/img/{{ rover.name|lower }}.jpg" alt={{ rover.name }} class="mars-images"></a>
+            <p class="mars-title"><a href="https://en.wikipedia.org/wiki/{{ rover.name }}_(rover)" target="_blank" rel="noopener noreferrer">{{ rover.name }}</a></p>
+            <p class="mars-attribute">Launched: {{ rover.launch_date|date:"F d, Y"  }}</p>
+            <p class="mars-attribute">Landed: {{ rover.landing_date|date:"F d, Y"  }}</p>
+            <p class="mars-attribute">Max Date: {{ rover.max_date|date:"F d, Y" }}</p>
+            <p class="mars-attribute">Mission status: {{ rover.status }}</p>
+            <p class="mars-attribute">{{ rover.total_photos }} photos</p>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>

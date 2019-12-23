@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container main-content">
+    <div class="row daily-row">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="row">
+            <img src="/static/mySpaceStuff/img/{{ rover_name|lower }}.jpg" alt="{{ rover.name }}" class="rover-images">
+          </div>
+          <div class="row">
+            <h1 class="rover-title"><strong>Rover: <a href="https://en.wikipedia.org/wiki/{{ rover_name }}_(rover)" target="_blank" rel="noopener noreferrer">{{ rover_name|title }}</a></strong></h1>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="row">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Abbreviation</th>
+                  <th>Camera</th>
+                  <th>Curiosity</th>
+                  <th>Opportunity</th>
+                  <th>Spirit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>FHAZ</td>
+                  <td>Front Hazard Avoidance Camera</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                </tr>
+                <tr>
+                  <td>RHAZ</td>
+                  <td>Rear Hazard Avoidance Camera</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                </tr>
+                <tr>
+                  <td>MAST</td>
+                  <td>Mast Camera</td>
+                  <td>✔</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>CHEMCAM</td>
+                  <td>Chemistry and Camera Complex</td>
+                  <td>✔</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>MAHLI</td>
+                  <td>Mars Hand Lens Imager</td>
+                  <td>✔</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>MARDI</td>
+                  <td>Mars Descent Imager</td>
+                  <td>✔</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>NAVCAM</td>
+                  <td>Navigation Camera</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                </tr>
+                <tr>
+                  <td>PANCAM</td>
+                  <td>Panoramic Camera</td>
+                  <td></td>
+                  <td>✔</td>
+                  <td>✔</td>
+                </tr>
+                <tr>
+                  <td>MINITES</td>
+                  <td>Miniature Thermal Emission Spectrometer (Mini-TES)</td>
+                  <td></td>
+                  <td>✔</td>
+                  <td>✔</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

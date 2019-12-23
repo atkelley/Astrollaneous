@@ -4,6 +4,7 @@ from tabs import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('mars/', views.mars, name='mars'),
+    path('mars/<str:rover_name>/', views.rover, name='rover'),
     path('neos/', views.neos, name='neos'),
     path('satellites/', views.satellites, name='satellites'),
     path('weather/', views.weather, name='weather'),
