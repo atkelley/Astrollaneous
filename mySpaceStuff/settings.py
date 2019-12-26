@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'bootstrap4',
     'accounts.apps.AccountsConfig',
-    'tabs'
+    'tabs',
+    'blog.apps.BlogConfig',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -135,3 +137,6 @@ INTERNAL_IPS = ['127.0.0.1']
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

@@ -1,19 +1,26 @@
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
+from .forms import ContactForm
 from django.shortcuts import render
 import requests
 
-class TestPage(TemplateView):
-    template_name = 'test.html'
+# Create your views here.
+class ContactView(FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = '/thanks/'
 
-class ThanksPage(TemplateView):
-    template_name = 'thanks.html'
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return super().form_valid(form)
 
-class AboutPage(TemplateView):
+class AboutView(TemplateView):
     template_name = 'about.html'
 
-class HomePage(TemplateView):
+class HomeView(TemplateView):
     template_name = 'index.html'
 
     def get(self, request, *args, **kwargs):

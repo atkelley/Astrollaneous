@@ -1,14 +1,13 @@
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
-from bootstrap_modal_forms.forms import BSModalForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
 
-
-class UserCreateForm(UserCreationForm, BSModalForm):
+class CustomUserCreationForm(PopRequestMixin, CreateUpdateAjaxMixin, UserCreationForm):
     class Meta:
-        fields = ("username", "email", "password1", "password2")
-        model = get_user_model()
+        model = User
+        fields = ['username', 'password1', 'password2']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["username"].label = "Display name"
-        self.fields["email"].label = "Email address"
+class CustomAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']

@@ -1,3 +1,24 @@
+.md-form {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.icon {
+  padding: 10px;
+  background: lightgrey;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.contact-input {
+  display: inline-block!important;
+  width: 95%;
+}
+
 .navbar {
   padding: 0!important;
 }
@@ -70,6 +91,10 @@
   height: auto;
 }
 
+.daily-image:hover {
+  cursor: pointer;
+}
+
 .daily-description {
   margin-right: 20px;
 }
@@ -92,7 +117,7 @@
 }
 
 .modal-title {
-  font-size: .75rem;
+  font-size: 1rem;
   margin-left: 10px;
   margin-top: 1.25rem!important;
 }

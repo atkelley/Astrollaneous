@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
   <div class="container main-content">
@@ -92,6 +93,27 @@
             </table>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row daily-row">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Search Mars Photos</h4>
+          <form method="POST" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input type="radio" name="earth" value="earth" checked> Earth time<br>
+            <input type="radio" name="mars" value="mars"> Sol<br>
+            <select>
+             <option value="volvo">Volvo</option>
+             <option value="saab">Saab</option>
+             <option value="mercedes">Mercedes</option>
+             <option value="audi">Audi</option>
+            </select>
+            <input type="text" name="username">
+            <button type="submit" class="btn btn-primary btn-large">Search</button>
+          </form>
+        </div>
+
       </div>
     </div>
   </div>

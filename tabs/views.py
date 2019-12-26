@@ -20,7 +20,8 @@ def home(request):
         temp = video_url.split("embed/", 1)[1].split('?')
         image_url = 'http://img.youtube.com/vi/' + temp[0] + '/0.jpg'
     else:
-        image_hdurl = daily_image_data['image_hdurl']
+        image_url = daily_image_data['url']
+        image_hdurl = daily_image_data['hdurl']
         copyright = daily_image_data['copyright']
 
     context = {
@@ -63,6 +64,9 @@ def mars(request):
 def rover(request, rover_name):
     context = {"rover_name": rover_name}
     return render(request, 'tabs/rover.html', context)
+
+def search(request):
+    pass
 
 def neos(request):
     context = {"neos_page": "active"}
