@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import (TemplateView, ListView,
                                   DetailView, CreateView,
-                                  UpdateView, DeleteView)
+                                  UpdateView, DeleteView, FormView)
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
@@ -22,6 +22,12 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     redirect_field_name = 'blog/post_detail.html'
     form_class = PostForm
     model = Post
+
+# class CreatePostView(LoginRequiredMixin, CreateView):
+#     login_url = '/login/'
+#     redirect_field_name = 'blog/post_detail.html'
+#     form_class = PostForm
+#     model = Post
 
 class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
