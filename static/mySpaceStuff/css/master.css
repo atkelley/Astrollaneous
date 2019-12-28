@@ -1,3 +1,18 @@
+.post-list-danger {
+    margin-bottom: 20px;
+}
+
+.post-list {
+  margin: 20px 0px 0px 0px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.text-danger {
+  padding-right: 2px;
+  color: white!important;
+}
+
 h6.blog-header {
   margin-top: 5px!important;
 }
