@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'bootstrap4',
     'accounts.apps.AccountsConfig',
-    'tabs',
+    'tabs.apps.TabsConfig',
     'blog.apps.BlogConfig',
     'widget_tweaks'
 ]

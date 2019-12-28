@@ -17,7 +17,7 @@
 
     {% if request.get_full_path == '/about/' %}
       {% block about %}{% endblock %}
-    {% elif request.get_full_path == '/blog/' %}
+    {% elif request.get_full_path|slice:'0:6' == '/blog/' %}
       {% block blog %}{% endblock %}
     {% else %}
       {% include 'navbar.html' %}
@@ -43,9 +43,9 @@
         $(".contact-btn").modalForm({
             formURL: "{% url 'contact' %}"
         });
-        $(".create-btn").modalForm({
-            formURL: "{% url 'blog:create' %}"
-        });
+        // $(".create-btn").modalForm({
+        //     formURL: "{% url 'blog:create' %}"
+        // });
       });
     </script>
   </body>

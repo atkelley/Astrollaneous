@@ -1,27 +1,39 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+import misaka
+
+User = get_user_model()
 
 # Create your models here.
 class Post(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="blog", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
+    created_date = models.DateTimeField(auto_now=True)
+    published_date = models.DateTimeField(blank=True)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
-
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
-
-    def approve_comments(self):
-        return self.comments.filter(approved_comment=True)
-
-    def get_absolute_url(self):
-        return reverse("post_detail",kwargs={'pk':self.pk})
+    text_html = models.TextField(null=True, editable=False)
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.text_html = misaka.html(self.text)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(
+            "blog:single",
+            kwargs={
+                "username": self.user.username,
+                "pk": self.pk
+            }
+        )
+
+    class Meta:
+        ordering = ["-created_date"]
+        unique_together = ["user", "text"]
 
 
 class Comment(models.Model):

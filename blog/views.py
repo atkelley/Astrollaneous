@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.views import SelectRelatedMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import (TemplateView, ListView,
@@ -9,25 +10,33 @@ from django.views.generic import (TemplateView, ListView,
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
+class PostList(SelectRelatedMixin, ListView):
+    model = Post
+    select_related = ("user",)
+
 # Create your views here.
 class BlogView(ListView):
-    template_name = 'blog/index.html'
     model = Post
 
     def get_queryset(self):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
+class PostDetail(SelectRelatedMixin, DetailView):
+    model = Post
+    select_related = ("user",)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(
+            user__username__iexact=self.kwargs.get("username")
+        )
+
+
 class CreatePostView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_detail.html'
+    redirect_field_name = 'blog/index.html'
     form_class = PostForm
     model = Post
-
-# class CreatePostView(LoginRequiredMixin, CreateView):
-#     login_url = '/login/'
-#     redirect_field_name = 'blog/post_detail.html'
-#     form_class = PostForm
-#     model = Post
 
 class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
@@ -36,10 +45,6 @@ class DraftListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by('created_date')
-
-class PostDetailView(DetailView):
-    model = Post
-
 
 
 

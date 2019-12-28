@@ -1,0 +1,19 @@
+<div class="media">
+	<div class="media-body">
+		<h2>{{ post.user.username }}</h2>
+		<h3>{{ post.title }}</h3>
+		<h4>{{ post.created_date }}</h4>
+		<h5>{{ post.text_html|safe }}
+
+		</h5>
+
+		<div class="media-footer">
+			{% if user.is_authenticated and post.user == user and not hide_delete %}
+				<a href="" title="delete" class="btn btn-simple">
+					<span class="fa fa-remove text-danger" aria-hidden="true"></span>
+					<span class="text-danger icon-label">Delete</span>
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</div>

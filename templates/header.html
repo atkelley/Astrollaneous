@@ -14,7 +14,8 @@
       <div class="navbar-nav ml-auto">
         <a href="{% url 'blog:blog' %}"><button class="btn btn-link" type="button" name="button">Blog</button></a>
         {% if user.is_authenticated %}
-          <button class="create-btn btn btn-link" type="button" name="button">Create Post</button>
+          <!-- <button class="create-post-btn btn btn-link" type="button" name="button">Create Post</button> -->
+          <a href="{% url 'blog:create' %}"><button class="btn btn-link" type="button" name="button">Create Post</button></a>
           <a href="{% url 'accounts:logout' %}"><button class="btn btn-link" type="button" name="button">Log Out</button></a>
         {% else %}
           <button class="login-btn btn btn-link" type="button" name="button">Log In</button>
