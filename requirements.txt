@@ -14,6 +14,7 @@ misaka==2.1.1
 psycopg2-binary==2.8.4
 pytz==2019.3
 requests==2.22.0
+six==1.13.0
 soupsieve==1.9.5
 sqlparse==0.3.0
 urllib3==1.25.7
