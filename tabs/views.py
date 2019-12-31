@@ -11,7 +11,7 @@ def home(request):
     video_url = None
     image_url = None
     image_hdurl = None
-    copyright = None
+    copyright = 'NASA'
     response = requests.get('https://api.nasa.gov/planetary/apod?api_key=' + API_KEY)
     daily_image_data = response.json()
 
@@ -22,7 +22,9 @@ def home(request):
     else:
         image_url = daily_image_data['url']
         image_hdurl = daily_image_data['hdurl']
-        copyright = daily_image_data['copyright']
+
+        if hasattr(daily_image_data, 'copyright'):
+            copyright = daily_image_data['copyright']
 
     context = {
         "home_page": "active",
@@ -62,7 +64,20 @@ def mars(request):
     return render(request, 'tabs/mars.html', {"rovers": rovers})
 
 def rover(request, rover_name):
-    context = {"rover_name": rover_name}
+    cameras = {'FHAZ': 'Front Hazard Avoidance Camera',
+               'RHAZ': 'Rear Hazard Avoidance Camera',
+               'NAVCAM': 'Navigation Camera'}
+
+    if rover_name == 'curiosity':
+        cameras.update({'MAST': 'Mast Camera',
+                        'CHEMCAM': 'Chemistry and Camera Complex',
+                        'MAHLI': 'Mars Hand Lens Imager',
+                        'MARDI': 'Mars Descent Imager'})
+    else:
+        cameras.update({'PANCAM': 'Panoramic Camera',
+                        'MINITES': 'Miniature Thermal Emission Spectrometer'})
+
+    context = {"rover_name": rover_name, "cameras": cameras}
     return render(request, 'tabs/rover.html', context)
 
 def search(request):

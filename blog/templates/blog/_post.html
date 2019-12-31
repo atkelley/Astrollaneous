@@ -1,20 +1,19 @@
 {% block content %}
-	<div class="post-list">
-		<h1 class="mt-3">{{ post.title }}</h1>
-		<p class="lead"><em>Posted by <a href="#">{{ post.user.username }}</a> on {{ post.created_date|date:"F d, Y" }} at {{ post.created_date|date:"h:i a" }}</em></p>
+	<h1 class="mt-3">{{ post.title }}</h1>
+	<p class="lead"><em>Posted by <a href="#">{{ post.user.username }}</a> on {{ post.created_date|date:"F d, Y" }} at {{ post.created_date|date:"h:i a" }}</em></p>
+	<hr>
+	{% if post.image_url %}
+		<img class="img-fluid rounded" src="{{ post.image_url }}" alt="">
 		<hr>
-		{% if post.image_url %}
-			<img class="img-fluid rounded" src="{{ post.image_url }}" alt="">
-			<hr>
-		{% endif %}
-		<p class="lead">{{ post.text_html|safe }}</p>
-		{% if user.is_authenticated and post.user == user and not hide_delete %}
-			<div class="post-list-danger">
-				<a href="" title="delete" class="btn btn-danger">
-					<span class="fa fa-remove text-danger" aria-hidden="true"></span>
-					<span class="icon-label">Delete</span>
-				</a>
-			</div>
-		{% endif %}
-	</div>
+	{% endif %}
+	<p class="lead">{{ post.text_html|safe }}</p>
+	{% if user.is_authenticated and post.user == user and not hide_delete %}
+		<div class="post-list-danger">
+			<a href="" title="delete" class="btn btn-danger">
+				<span class="fa fa-remove text-danger" aria-hidden="true"></span>
+				<span class="icon-label">Delete</span>
+			</a>
+		</div>
+	{% endif %}
+	<hr>
 {% endblock %}

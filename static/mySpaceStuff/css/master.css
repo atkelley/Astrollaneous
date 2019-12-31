@@ -1,9 +1,14 @@
+input[type="checkbox"]:checked {
+  box-shadow: 0 0 0 3px hotpink;
+}
+
 .post-list-danger {
     margin-bottom: 20px;
 }
 
 .post-list {
   margin: 20px 0px 0px 0px;
+  padding: 10px 0px 10px 20px;
   background-color: white;
   border-radius: 10px;
 }

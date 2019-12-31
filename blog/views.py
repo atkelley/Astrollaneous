@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from braces.views import SelectRelatedMixin
+# from braces.views import SelectRelatedMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import (TemplateView, ListView,
@@ -10,7 +10,8 @@ from django.views.generic import (TemplateView, ListView,
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
-class PostList(SelectRelatedMixin, ListView):
+# class PostList(SelectRelatedMixin, ListView):
+class PostList(ListView):
     model = Post
     select_related = ("user",)
 
@@ -21,7 +22,8 @@ class BlogView(ListView):
     def get_queryset(self):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
-class PostDetail(SelectRelatedMixin, DetailView):
+# class PostDetail(SelectRelatedMixin, DetailView):
+class PostDetail(DetailView):
     model = Post
     select_related = ("user",)
 
