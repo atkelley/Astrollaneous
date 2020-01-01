@@ -4,131 +4,127 @@
 {% block content %}
   <div class="container main-content">
     <div class="row daily-row">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="row">
-            <img src="/static/mySpaceStuff/img/{{ rover_name|lower }}.jpg" alt="{{ rover.name }}" class="rover-images">
-          </div>
-          <div class="row">
-            <h1 class="rover-title"><strong>Rover: <a href="https://en.wikipedia.org/wiki/{{ rover_name }}_(rover)" target="_blank" rel="noopener noreferrer">{{ rover_name|title }}</a></strong></h1>
-          </div>
+      <div class="col-md-3">
+        <div class="row">
+          <img src="/static/mySpaceStuff/img/{{ rover_name|lower }}.jpg" alt="{{ rover.name }}" class="rover-images">
         </div>
-        <div class="col-md-9">
-          <div class="row">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Abbreviation</th>
-                  <th>Camera</th>
-                  <th>Curiosity</th>
-                  <th>Opportunity</th>
-                  <th>Spirit</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>FHAZ</td>
-                  <td>Front Hazard Avoidance Camera</td>
-                  <td>✔</td>
-                  <td>✔</td>
-                  <td>✔</td>
-                </tr>
-                <tr>
-                  <td>RHAZ</td>
-                  <td>Rear Hazard Avoidance Camera</td>
-                  <td>✔</td>
-                  <td>✔</td>
-                  <td>✔</td>
-                </tr>
-                <tr>
-                  <td>MAST</td>
-                  <td>Mast Camera</td>
-                  <td>✔</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>CHEMCAM</td>
-                  <td>Chemistry and Camera Complex</td>
-                  <td>✔</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>MAHLI</td>
-                  <td>Mars Hand Lens Imager</td>
-                  <td>✔</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>MARDI</td>
-                  <td>Mars Descent Imager</td>
-                  <td>✔</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>NAVCAM</td>
-                  <td>Navigation Camera</td>
-                  <td>✔</td>
-                  <td>✔</td>
-                  <td>✔</td>
-                </tr>
-                <tr>
-                  <td>PANCAM</td>
-                  <td>Panoramic Camera</td>
-                  <td></td>
-                  <td>✔</td>
-                  <td>✔</td>
-                </tr>
-                <tr>
-                  <td>MINITES</td>
-                  <td>Miniature Thermal Emission Spectrometer (Mini-TES)</td>
-                  <td></td>
-                  <td>✔</td>
-                  <td>✔</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="row">
+          <h1 class="rover-title"><strong>Rover: <a href="https://en.wikipedia.org/wiki/{{ rover_name }}_(rover)" target="_blank" rel="noopener noreferrer">{{ rover_name|title }}</a></strong></h1>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Abbreviation</th>
+                <th>Camera</th>
+                <th>Curiosity</th>
+                <th>Opportunity</th>
+                <th>Spirit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FHAZ</td>
+                <td>Front Hazard Avoidance Camera</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>RHAZ</td>
+                <td>Rear Hazard Avoidance Camera</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>MAST</td>
+                <td>Mast Camera</td>
+                <td>✔</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>CHEMCAM</td>
+                <td>Chemistry and Camera Complex</td>
+                <td>✔</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>MAHLI</td>
+                <td>Mars Hand Lens Imager</td>
+                <td>✔</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>MARDI</td>
+                <td>Mars Descent Imager</td>
+                <td>✔</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>NAVCAM</td>
+                <td>Navigation Camera</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>PANCAM</td>
+                <td>Panoramic Camera</td>
+                <td></td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>MINITES</td>
+                <td>Miniature Thermal Emission Spectrometer (Mini-TES)</td>
+                <td></td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+
     <div class="row daily-row">
-      <div class="row">
-        <div class="col-md-12">
-          <h4>Search Mars Photos</h4>
+      <div class="col-md-12">
+        <h4>Search Mars Photos</h4>
 
 
-          <form method="POST" action="{% url 'search' %}">
-            {% csrf_token %}
+        <form method="POST" action="{% url 'search' %}">
+          {% csrf_token %}
 
-            <p>Query by Sol: ranges from 0 (date of landing) to the current maximum ({{ rover_name }} current max is)</p>
-            <p>Query by Earth date:</p>
-            <input type="radio" name="date_selector" value="sol" id="sol"> Sol <input type="radio" name="date_selector" value="earth" id="earth"> Earth date <br>
-            <div class="whatever">
-              <input width="175" id="datepicker">
-            </div>
+          <p>Query by Sol: ranges from 0 (date of landing) to the current maximum ({{ rover_name }} current max is)</p>
+          <p>Query by Earth date:</p>
+          <input type="radio" name="date_selector" value="sol" id="sol"> Sol <input type="radio" name="date_selector" value="earth" id="earth"> Earth date <br>
+          <div class="whatever">
+            <input width="175" id="datepicker">
+          </div>
 
-            <div class="whatever">
-              <input type="number" id="tentacles" name="tentacles" min="0" max="100">
-            </div>
-
-
-
-            <p>Filter by Camera:</p>
-            <select>
-              {% for key, value in cameras.items %}
-                <option value="{{ key }}">{{ key }} - {{ value }}</option>
-              {% endfor %}
-            </select>
+          <div class="whatever">
+            <input type="number" id="tentacles" name="tentacles" min="0" max="100">
+          </div>
 
 
-            <button type="submit" class="btn btn-primary btn-large">Search</button>
-          </form>
-        </div>
 
+          <p>Filter by Camera:</p>
+          <select>
+            {% for key, value in cameras.items %}
+              <option value="{{ key }}">{{ key }} - {{ value }}</option>
+            {% endfor %}
+          </select>
+
+
+          <button type="submit" class="btn btn-primary btn-large">Search</button>
+        </form>
       </div>
     </div>
   </div>

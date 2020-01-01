@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
-from .views import AboutView, ContactView
+from mySpaceStuff import views
 
 urlpatterns = [
     path('', include('tabs.urls')),
     path('blog/', include('blog.urls')),
-    path('about/', AboutView.as_view(), name='about'),
-    path('contact/', ContactView.as_view(), name='contact'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.ContactView.as_view(), name='contact'),
     path('admin/', admin.site.urls),
     path('accounts/', include("accounts.urls", namespace="accounts")),
     path('accounts/', include("django.contrib.auth.urls"))

@@ -1,14 +1,57 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 
-{% block about %}
-  <div class="container astro-banner"></div>
+{% block content %}
   <div class="container main-content">
-    <div class="row daily-row">
-      <div class="row">
-        <div class="col-md-12">
-          <h1><strong>About!</strong></h1>
+    {% for telescope in telescopes %}
+      {% if forloop.counter0 == 1 %}
+        <div class="row daily-row">
+          <div class="col-md-8 about-images">
+            <h4><strong>{{ telescope.section_title }}</strong></h4>
+            <p>{{ telescope.section_text }}</p>
+          </div>
+          <div class="col-md-4">
+            <a data-toggle="modal" data-target="#myModal-{{ forloop.counter0 }}">
+              <img class="daily-image" src="{{ telescope.thumbnail_large_url }}" alt="{{ telescope.feed }}">
+            </a>
+            <p class="telescope-title">
+              <em>{{ telescope.title }}. Read the latest article from the {{ telescope.feed }} feed
+                <a href="{{ telescope.article_url }}" target="_blank" rel="noopener noreferrer">here.</a>
+              </em>
+            </p>
+          </div>
+        </div>
+      {% else %}
+        <div class="row daily-row">
+          <div class="col-md-4 about-images">
+            <a data-toggle="modal" data-target="#myModal-{{ forloop.counter0 }}">
+              <img class="daily-image" src="{{ telescope.thumbnail_large_url }}" alt="{{ telescope.feed }}">
+            </a>
+            <p class="telescope-title">
+              <em>{{ telescope.title }}. Read the latest article from the {{ telescope.feed }} feed
+                <a href="{{ telescope.article_url }}" target="_blank" rel="noopener noreferrer">here.</a>
+              </em>
+            </p>
+          </div>
+          <div class="col-md-8">
+            <h4><strong>{{ telescope.section_title }}</strong></h4>
+            <p>{{ telescope.section_text }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="modal fade" id="myModal-{{ forloop.counter0 }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <img itemprop="image" src="{{ telescope.image_square_large_url }}"  class="img-rounded" style="width:100%; height:auto;">
+              <p class="modal-title float-left" id="myModalLabel"><em>{{ telescope.title }} &copy; {{ telescope.feed }}</em></p>
+              <button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      <hr>
+    {% endfor %}
   </div>
 {% endblock %}

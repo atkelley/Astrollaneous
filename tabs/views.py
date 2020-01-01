@@ -2,8 +2,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.shortcuts import render
-import datetime
-import requests
+import datetime, requests, random
 
 API_KEY = "suY5NhcHycX1CIkDaMCXNdY8dIYdp0O5meo3cJso"
 
@@ -103,16 +102,9 @@ def techport(request):
     context = {"techport_page": "active"}
     return render(request, 'tabs/techport.html', context)
 
-def about(request):
-    context = {"about_page": "active"}
-    return render(request, 'tabs/about.html', context)
-
 def contact(request):
     context = {"contact_page": "active"}
     return render(request, 'tabs/contact.html', context)
-
-class AboutTab(TemplateView):
-    template_name = 'about.html'
 
 class HomeTab(TemplateView):
     template_name = 'index.html'

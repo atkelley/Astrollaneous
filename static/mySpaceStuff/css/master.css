@@ -1,3 +1,14 @@
+.main-content hr {
+  margin: 10px 0px!important;
+}
+
+.telescope-title {
+  margin: 0px!important;
+  padding: 0px 10px!important;
+  font-size: .75em!important;
+  font-weight: bold!important;
+}
+
 input[type="checkbox"]:checked {
   box-shadow: 0 0 0 3px hotpink;
 }
@@ -105,7 +116,7 @@ h6.blog-header {
 }
 
 .daily-row {
-  padding: 10px;
+  padding: 20px;
   border-radius: 5px;
 }
 
@@ -174,6 +185,15 @@ h6.blog-header {
   width: 100%;
   height: auto;
   border-radius: 5px;
+}
+
+.about-images img {
+  width: 100%;
+  height: auto;
+}
+
+.daily-image {
+  border-radius: 25px!important;
 }
 
 .rover-images {

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block blog %}
+{% block content %}
   <div class="container astro-banner"></div>
   <nav class="navbar navbar-expand-lg bg-light techfont">
     <div class="container">
@@ -16,7 +16,7 @@
   <div class="content container">
     <div class="row">
       <div class="post-list">
-        {% block content %}
+        {% block post_list %}
         {% endblock %}
       </div>
     </div>

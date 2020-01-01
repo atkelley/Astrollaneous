@@ -1,15 +1,15 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
   <div class="container main-content">
     <div class="row daily-row">
-      <div class="row">
-        {% for rover in rovers %}
-          {% if forloop.counter0 == 1 %}
-            <div class="col mars-borders">
-          {% else %}
-            <div class="col">
-          {% endif %}
+      {% for rover in rovers %}
+        {% if forloop.counter0 == 1 %}
+          <div class="col mars-borders">
+        {% else %}
+          <div class="col">
+        {% endif %}
             <a href="{% url 'rover' rover_name=rover.name|lower %}"><img src="/static/mySpaceStuff/img/{{ rover.name|lower }}.jpg" alt={{ rover.name }} class="mars-images"></a>
             <p class="mars-title"><a href="https://en.wikipedia.org/wiki/{{ rover.name }}_(rover)" target="_blank" rel="noopener noreferrer">{{ rover.name }}</a></p>
             <p class="mars-attribute">Launched: {{ rover.launch_date|date:"F d, Y"  }}</p>
@@ -18,8 +18,7 @@
             <p class="mars-attribute">Mission status: {{ rover.status }}</p>
             <p class="mars-attribute">{{ rover.total_photos }} photos</p>
           </div>
-        {% endfor %}
-      </div>
+      {% endfor %}
     </div>
   </div>
 {% endblock %}

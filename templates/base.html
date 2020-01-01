@@ -14,18 +14,12 @@
     <link rel="stylesheet" href="{% static 'mySpaceStuff/css/master.css' %}">
   </head>
   <body class="bg-dark">
+    
     {% include 'header.html' %}
-
-    {% if request.get_full_path == '/about/' %}
-      {% block about %}{% endblock %}
-    {% elif request.get_full_path|slice:'0:6' == '/blog/' %}
-      {% block blog %}{% endblock %}
-    {% else %}
-      {% include 'navbar.html' %}
-      {% block content %}{% endblock %}
-    {% endif %}
-
+    {% include 'navbar.html' %}
+    {% block content %}{% endblock %}
     {% include 'footer.html' %}
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
