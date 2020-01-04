@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{% static 'mySpaceStuff/css/master.css' %}">
   </head>
   <body class="bg-dark">
-    
+
     {% include 'header.html' %}
     {% include 'navbar.html' %}
     {% block content %}{% endblock %}
@@ -30,26 +30,10 @@
     <script type="text/javascript" src="{% static "mySpaceStuff/js/master.js" %}"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $(".login-btn").modalForm({
-            formURL: "{% url 'accounts:login' %}"
-        });
-        $(".signup-btn").modalForm({
-            formURL: "{% url 'accounts:signup' %}"
-        });
-        $(".contact-btn").modalForm({
-            formURL: "{% url 'contact' %}"
-        });
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
-
-        $("input[type='radio']").on("change", function() {
-           if ($("#sol").is(':checked')) {
-             $('.whatever').show();
-           } else {
-             $('.whatever').hide();
-           }
-         })
+        $('.login-btn').modalForm({formURL: "{% url 'accounts:login' %}"});
+        $('.signup-btn').modalForm({formURL: "{% url 'accounts:signup' %}"});
+        $('.contact-btn').modalForm({formURL: "{% url 'contact' %}"});
+        $('#rover-datepicker').datepicker({uiLibrary: 'bootstrap4'});
       });
     </script>
   </body>

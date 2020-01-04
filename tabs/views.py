@@ -63,21 +63,31 @@ def mars(request):
     return render(request, 'tabs/mars.html', {"rovers": rovers})
 
 def rover(request, rover_name):
-    cameras = {'FHAZ': 'Front Hazard Avoidance Camera',
-               'RHAZ': 'Rear Hazard Avoidance Camera',
-               'NAVCAM': 'Navigation Camera'}
+    cameras = []
+    base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
+    response = response = requests.get(base_url + rover_name + '/?api_key=' + API_KEY)
+    rover_data = response.json()
 
-    if rover_name == 'curiosity':
-        cameras.update({'MAST': 'Mast Camera',
-                        'CHEMCAM': 'Chemistry and Camera Complex',
-                        'MAHLI': 'Mars Hand Lens Imager',
-                        'MARDI': 'Mars Descent Imager'})
-    else:
-        cameras.update({'PANCAM': 'Panoramic Camera',
-                        'MINITES': 'Miniature Thermal Emission Spectrometer'})
+    launch_date_time_obj = datetime.datetime.strptime(rover_data['rover']['launch_date'], '%Y-%m-%d')
+    landing_date_time_obj = datetime.datetime.strptime(rover_data['rover']['landing_date'], '%Y-%m-%d')
+    max_date_time_obj = datetime.datetime.strptime(rover_data['rover']['max_date'], '%Y-%m-%d')
+    camera_data = rover_data['rover']['cameras']
+    for camera in camera_data:
+        camera_object = {camera['name']: camera['full_name']}
+        cameras.append(camera)
 
-    context = {"rover_name": rover_name, "cameras": cameras}
-    return render(request, 'tabs/rover.html', context)
+    rover_object = {
+        "rover_name": rover_name,
+        "launch_date": launch_date_time_obj,
+        "landing_date": landing_date_time_obj,
+        "max_date": max_date_time_obj,
+        "max_sol": rover_data['rover']['max_sol'],
+        "status": rover_data['rover']['status'],
+        "total_photos": rover_data['rover']['total_photos'],
+        "cameras": cameras
+    }
+
+    return render(request, 'tabs/rover.html', {"rover": rover_object})
 
 def search(request):
     pass
