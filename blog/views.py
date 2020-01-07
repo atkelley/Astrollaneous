@@ -18,9 +18,10 @@ class PostList(ListView):
 # Create your views here.
 class BlogView(ListView):
     model = Post
+    my_timezone = 'America/Toronto'
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+        return Post.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')
 
 # class PostDetail(SelectRelatedMixin, DetailView):
 class PostDetail(DetailView):

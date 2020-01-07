@@ -11,8 +11,7 @@ class Post(models.Model):
     user = models.ForeignKey(User, related_name="blog", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     image_url = models.CharField(max_length=200, null=True)
-    created_date = models.DateTimeField(auto_now=True)
-    published_date = models.DateTimeField(blank=True)
+    created_date = models.DateTimeField(blank=True)
     text = models.TextField()
     text_html = models.TextField(null=True, editable=False)
 
