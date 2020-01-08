@@ -33,7 +33,15 @@
         $('.login-btn').modalForm({formURL: "{% url 'accounts:login' %}"});
         $('.signup-btn').modalForm({formURL: "{% url 'accounts:signup' %}"});
         $('.contact-btn').modalForm({formURL: "{% url 'contact' %}"});
-        $('#rover-datepicker').datepicker({uiLibrary: 'bootstrap4'});
+        $('#rover-datepicker').datepicker({
+          uiLibrary: 'bootstrap4',
+          format: 'mm/dd/yyyy',
+          minDate: new Date("{{ rover.landing_date.isoformat }}"),
+          maxDate: new Date("{{ rover.max_date.isoformat }}"),
+          keyboardNavigation: true,
+          autoclose: true,
+          modal: true
+        });
       });
     </script>
   </body>
