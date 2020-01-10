@@ -1,21 +1,30 @@
+from django.core.mail import BadHeaderError, send_mail
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, FormView
 from .forms import ContactForm
-from django.shortcuts import render
+from django.contrib import messages
 import requests
 
 # Create your views here.
-class ContactView(FormView):
-    template_name = 'contact.html'
-    form_class = ContactForm
-    success_url = '/thanks/'
-
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.send_email()
-        return super().form_valid(form)
+def contact(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, email, ['kelley.andrew.t@gmail.com'])
+            except BadHeaderError:
+                messages.error(request, "Invalid header found!")
+                return HttpResponse('Invalid header found!')
+            messages.success(request, "Thank you for your message! Someone will get back to you within 24 hours.")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    return render(request, "contact.html", {'form': form})
 
 class AboutView(TemplateView):
     template_name = 'about.html'

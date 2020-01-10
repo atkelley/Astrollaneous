@@ -1,7 +1,9 @@
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
-from django.shortcuts import render
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from tabs.forms import MarsForm
 import datetime, requests, random
 
 API_KEY = "suY5NhcHycX1CIkDaMCXNdY8dIYdp0O5meo3cJso"
@@ -68,7 +70,6 @@ def rover(request, rover_name):
     response = response = requests.get(base_url + rover_name + '/?api_key=' + API_KEY)
     rover_data = response.json()
 
-    launch_date_time_obj = datetime.datetime.strptime(rover_data['rover']['launch_date'], '%Y-%m-%d')
     landing_date_time_obj = datetime.datetime.strptime(rover_data['rover']['landing_date'], '%Y-%m-%d')
     max_date_time_obj = datetime.datetime.strptime(rover_data['rover']['max_date'], '%Y-%m-%d')
     camera_data = rover_data['rover']['cameras']
@@ -78,7 +79,6 @@ def rover(request, rover_name):
 
     rover_object = {
         "rover_name": rover_name,
-        "launch_date": launch_date_time_obj,
         "landing_date": landing_date_time_obj,
         "max_date": max_date_time_obj,
         "max_sol": rover_data['rover']['max_sol'],
@@ -89,7 +89,7 @@ def rover(request, rover_name):
 
     return render(request, 'tabs/rover.html', {"rover": rover_object})
 
-def search(request):
+def search(request, rover_name):
     pass
 
 def neos(request):
@@ -112,10 +112,6 @@ def techport(request):
     context = {"techport_page": "active"}
     return render(request, 'tabs/techport.html', context)
 
-def contact(request):
-    context = {"contact_page": "active"}
-    return render(request, 'tabs/contact.html', context)
-
 class HomeTab(TemplateView):
     template_name = 'index.html'
 
@@ -130,6 +126,3 @@ class HomeTab(TemplateView):
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse("test"))
         return super().get(request, *args, **kwargs)
-
-class ContactTab(TemplateView):
-    pass

@@ -10,7 +10,7 @@
         {% else %}
           <div class="col">
         {% endif %}
-            <a href="{% url 'rover' rover_name=rover.name|lower %}"><img src="/static/mySpaceStuff/img/{{ rover.name|lower }}.jpg" alt={{ rover.name }} class="mars-images"></a>
+            <a href="{% url 'tabs:rover' rover_name=rover.name|lower %}"><img src="/static/mySpaceStuff/img/{{ rover.name|lower }}.jpg" alt={{ rover.name }} class="mars-images"></a>
             <p class="mars-title"><a href="https://en.wikipedia.org/wiki/{{ rover.name }}_(rover)" target="_blank" rel="noopener noreferrer">{{ rover.name }}</a></p>
             <p class="mars-attribute">Launched: {{ rover.launch_date|date:"F d, Y"  }}</p>
             <p class="mars-attribute">Landed: {{ rover.landing_date|date:"F d, Y"  }}</p>

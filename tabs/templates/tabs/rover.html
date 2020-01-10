@@ -110,7 +110,7 @@
       <div class="col-md-12">
         <div class="rover-container">
           <h4 class="rover-search-title"><strong>Search Mars Rover Photos <em>(by date, by camera or both!)</em></strong></h4>
-          <form method="POST" action="{% url 'search' %}">
+          <form method="POST" action="{% url 'tabs:search' rover_name=rover.rover_name|lower %}">
             {% csrf_token %}
             <div class="container">
               <div class="row">
@@ -133,7 +133,8 @@
                 <div class="col-md-6">
                   <div class="rover-cameras">
                     <p>By Camera:</p>
-                    <select class="rover-select">
+                    <select name="roverselect" class="rover-select">
+                      <option value="none"></option>
                       {% for camera in rover.cameras %}
                         <option value="{{ camera.name }}">{{ camera.name }} ({{ camera.full_name }})</option>
                       {% endfor %}

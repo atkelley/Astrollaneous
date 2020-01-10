@@ -6,23 +6,48 @@
     </div>
   </div>
 
+  {% if messages %}
+      {% for message in messages %}
+          {% if message.tags == 'success'%}
+              <script type=text/javascript>
+                toastr.options = {"closeButton": true, "positionClass": "toast-bottom-full-width"}
+                toastr.{{ message.tags }}('{{ message }}')
+              </script>
+          {% elif message.tags == 'info' %}
+              <script type=text/javascript>
+                toastr.options = {"closeButton": true, "positionClass": "toast-bottom-full-width"}
+                toastr.{{ message.tags }}('{{ message }}')
+              </script>
+          {% elif message.tags == 'warning' %}
+              <script type=text/javascript>
+                toastr.options = {"closeButton": true, "positionClass": "toast-bottom-center"}
+                toastr.{{ message.tags }}('{{ message }}')
+              </script>
+          {% elif message.tags == 'error' %}
+              <script type=text/javascript>
+                toastr.options = {"closeButton": true, "positionClass": "toast-bottom-center"}
+                toastr.{{ message.tags }}('{{ message }}')
+              </script>
+          {% endif %}
+      {% endfor %}
+  {% endif %}
+
   <nav class="navbar navbar-expand-lg mynav" role="navigation" id="navbar">
     <div class="container">
       <div class="navbar-nav align-items-center">
-        <a class="navbar-brand mynav" href="{% url 'home' %}"><img src="/static/mySpaceStuff/img/astro-logo.png" alt="astro-logo"></a>
+        <a class="navbar-brand mynav" href="{% url 'tabs:home' %}"><img src="/static/mySpaceStuff/img/astro-logo.png" alt="astro-logo"></a>
       </div>
       <div class="navbar-nav ml-auto">
         <a href="{% url 'blog:blog' %}"><button class="btn btn-link" type="button" name="button">Blog</button></a>
         {% if user.is_authenticated %}
-          <!-- <button class="create-post-btn btn btn-link" type="button" name="button">Create Post</button> -->
           <a href="{% url 'blog:create' %}"><button class="btn btn-link" type="button" name="button">Create Post</button></a>
           <a href="{% url 'accounts:logout' %}"><button class="btn btn-link" type="button" name="button">Log Out</button></a>
         {% else %}
-          <button class="login-btn btn btn-link" type="button" name="button">Log In</button>
-          <button class="signup-btn btn btn-link" type="button" name="button">Sign Up</button>
+          <button id="login-btn" class="btn btn-link" type="button" name="button">Log In</button>
+          <button id="signup-btn" class="btn btn-link" type="button" name="button">Sign Up</button>
         {% endif %}
         <a href="{% url 'about' %}"><button class="btn btn-link" type="button" name="button">About</button></a>
-        <button class="contact-btn btn btn-link" type="button" name="button">Contact</button>
+        <button id="contact-btn" class="btn btn-link" type="button" name="button">Contact</button>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>

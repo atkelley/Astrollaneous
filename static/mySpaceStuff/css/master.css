@@ -51,6 +51,8 @@ h6.blog-header {
 
 .contact-input {
   display: inline-block!important;
+  border-top-left-radius: 0px!important;
+  border-bottom-left-radius: 0px!important;
   width: 95%;
 }
 
@@ -153,6 +155,10 @@ h6.blog-header {
 .table {
   width: 98%;
   font-size: 1rem;
+}
+
+h2.modal-title {
+  font-size: 2rem;
 }
 
 .modal-title {
