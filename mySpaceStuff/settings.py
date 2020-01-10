@@ -141,4 +141,10 @@ DATABASES['default'].update(db_from_env)
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kelley.andrew.t@gmail.com'
+EMAIL_HOST_PASSWORD = 'ascension41'
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
