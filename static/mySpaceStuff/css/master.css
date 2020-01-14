@@ -1,3 +1,60 @@
+.modal-header {
+  padding: 0px;
+}
+
+.modal-header button span{
+  margin: 10px;
+}
+
+.modal-header .close {
+  padding: 10px 15px;
+  margin: 0px;
+}
+.modal-header ul {
+  border: none;
+}
+
+.modal-header ul li.corner {
+  border-top-left-radius: 10px;
+}
+
+.modal-header ul li {
+  padding: 10px 20px;
+  border-right: 1px solid lightgrey;
+}
+
+.modal-header ul li a {
+  border: none;
+  border-radius: 0;
+}
+
+.modal-header ul li a:hover, .modal-header ul li.active a:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+.modal-header ul li i {
+  margin-left: 5px;
+}
+
+.modal-header ul li a span {
+  margin-left: 10px;
+}
+
+.nav-tab.active {
+  background-color: #666!important;
+  color: white!important;
+}
+
+.modal-body .form-group {
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .main-content hr {
   margin: 10px 0px!important;
 }
@@ -171,7 +228,11 @@ h2.modal-title {
   padding-bottom: .5rem!important;
 }
 
-.modal-content iframe{
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-content iframe {
   margin: 0 auto;
   display: block;
 }

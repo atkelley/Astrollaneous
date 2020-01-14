@@ -32,8 +32,8 @@
     <script type="text/javascript" src="{% static "mySpaceStuff/js/master.js" %}"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $('#login-btn').modalForm({formURL: "{% url 'accounts:login' %}"});
-        $('#signup-btn').modalForm({formURL: "{% url 'accounts:signup' %}"});
+        $('#combo-btn').modalForm({formURL: "{% url 'accounts:combo' %}"});
+        $('#logout-btn').modalForm({formURL: "{% url 'accounts:logout' %}"});
         $('#contact-btn').modalForm({formURL: "{% url 'contact' %}"});
         $('#rover-datepicker').datepicker({
           uiLibrary: 'bootstrap4',
