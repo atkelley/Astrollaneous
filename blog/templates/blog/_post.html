@@ -7,14 +7,24 @@
 		<img class="img-fluid rounded" src="{{ post.image_url }}" alt="">
 		<hr>
 	{% endif %}
-	<p class="lead">{{ post.text_html|safe }}</p>
-	{% if user.is_authenticated and post.user == user and not hide_delete %}
-		<div class="post-list-danger">
-			<a href="" title="delete" class="btn btn-danger">
-				<span class="fa fa-remove text-danger" aria-hidden="true"></span>
-				<span class="icon-label">Delete</span>
-			</a>
-		</div>
-	{% endif %}
+	<div class="truncated" name="{{ post.id }}">
+		<p>{{ post.text|truncatewords:30 }}</p>
+	</div>
+	<div class="expanded" name="{{ post.id }}">
+		<p>{{ post.text_html|safe }}</p>
+	</div>
+
+	<div class="buttons">
+		<a role="button" id="expandable" name="truncated" class="btn btn-warning" onclick="togglePostText({{ post.id }})">
+			<span id="expandable-sign" class="sign" aria-hidden="true">+</span>
+			<span id="expandable-message" class="icon-label">Show More</span>
+		</a>
+		{% if user.is_authenticated and post.user == user and not hide_delete %}
+		<a href="" title="delete" class="btn btn-danger">
+			<span class="fa fa-remove" aria-hidden="true"></span>
+			<span class="icon-label">Delete</span>
+		</a>
+		{% endif %}
+	</div>
 	<hr>
 {% endblock %}

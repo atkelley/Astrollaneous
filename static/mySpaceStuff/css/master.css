@@ -70,8 +70,8 @@ input[type="checkbox"]:checked {
   box-shadow: 0 0 0 3px hotpink;
 }
 
-.post-list-danger {
-    margin-bottom: 20px;
+.buttons {
+  margin: 20px 0px;
 }
 
 .post-list {
@@ -81,8 +81,15 @@ input[type="checkbox"]:checked {
   border-radius: 10px;
 }
 
-.text-danger {
-  padding-right: 2px;
+.sign {
+  line-height: 1;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+}
+
+.icon-label {
+  padding-left: 2px;
   color: white!important;
 }
 

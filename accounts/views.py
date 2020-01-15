@@ -26,5 +26,5 @@ class LoginView(BSModalLoginView):
     extra_context = dict(success_url=reverse_lazy('tabs:home'))
 
 class ComboView(BSModalLoginView):
-    template_name = 'accounts/combo.html'
+    template_name = 'accounts/combo2.html'
     extra_context = dict(success_url=reverse_lazy('tabs:home'))
