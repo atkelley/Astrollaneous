@@ -1,3 +1,14 @@
+.help-block {
+  color: red;
+  font-size: .75rem;
+  font-weight: bold;
+}
+
+.non_field_error_list, .field_error_list {
+  margin: 5px 10px;
+  padding: 0px 0px 0px 15px;
+}
+
 .modal-header {
   padding: 0px;
 }
@@ -223,6 +234,8 @@ h6.blog-header {
 
 h2.modal-title {
   font-size: 2rem;
+  font-weight: bolder;
+  margin: 5px 15px!important;
 }
 
 .modal-title {
