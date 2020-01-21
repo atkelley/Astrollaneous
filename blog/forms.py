@@ -5,12 +5,14 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('user','title', 'text',)
+        fields = ('title', 'image_url', 'text',)
 
         widgets = {
+            'image_url': forms.TextInput(attrs={'class': 'textinputclass'}),
             'title': forms.TextInput(attrs={'class': 'textinputclass'}),
             'text': forms.Textarea(attrs={'class': 'editable medium-editor-textarea postcontent'}),
         }
+
 
 
 class CommentForm(forms.ModelForm):

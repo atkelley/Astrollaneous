@@ -1,3 +1,20 @@
+.fa-edit {
+  color: white !important;
+}
+
+.create-post-footer {
+  margin: 20px 0px;
+}
+
+.create-post-button {
+  width: 100px;
+}
+
+.create-post-title {
+  font-weight: bold;
+  margin: 20px 0px;
+}
+
 .help-block {
   color: red;
   font-size: .75rem;

@@ -10,11 +10,6 @@ from django.views.generic import (TemplateView, ListView,
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
-# class PostList(SelectRelatedMixin, ListView):
-class PostList(ListView):
-    model = Post
-    select_related = ("user",)
-
 # Create your views here.
 class BlogView(ListView):
     model = Post
@@ -34,12 +29,20 @@ class PostDetail(DetailView):
             user__username__iexact=self.kwargs.get("username")
         )
 
+class PostDetailView(DetailView):
+    model = Post
 
 class CreatePostView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/index.html'
+    redirect_field_name = 'blog/post_list.html'
     form_class = PostForm
     model = Post
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
@@ -49,23 +52,20 @@ class DraftListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by('created_date')
 
-
-
-
 class PostUpdateView(LoginRequiredMixin,UpdateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
-
     form_class = PostForm
-
     model = Post
-
 
 class PostDeleteView(LoginRequiredMixin,DeleteView):
     model = Post
     success_url = reverse_lazy('post_list')
 
-
+# class PostList(SelectRelatedMixin, ListView):
+class PostList(ListView):
+    model = Post
+    select_related = ("user",)
 
 
 

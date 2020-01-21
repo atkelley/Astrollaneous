@@ -4,14 +4,15 @@ from django.utils import timezone
 from django.urls import reverse
 import misaka
 
+from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # Create your models here.
 class Post(models.Model):
     user = models.ForeignKey(User, related_name="blog", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    image_url = models.CharField(max_length=200, null=True)
-    created_date = models.DateTimeField(blank=True)
+    image_url = models.CharField(max_length=200, null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     text_html = models.TextField(null=True, editable=False)
 
@@ -23,13 +24,14 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse(
-            "blog:single",
-            kwargs={
-                "username": self.user.username,
-                "pk": self.pk
-            }
-        )
+        return reverse("blog:blog")
+        # return reverse(
+        #     "blog:post_detail",
+        #     kwargs={
+        #         "username": self.user.username,
+        #         "pk": self.pk
+        #     }
+        # )
 
     class Meta:
         ordering = ["-created_date"]

@@ -1,5 +1,6 @@
-{% block post_list %}
 {% load tz %}
+
+<div class="container main-content">
 	<h1 class="mt-3">{{ post.title }}</h1>
 	<p class="lead"><em>Posted by <a href="#">{{ post.user.username }}</a> on {{ post.created_date|date:"F jS, Y" }} at {{ post.created_date|timezone:"America/Toronto"|date:"g:i a" }}</em></p>
 	<hr>
@@ -15,7 +16,7 @@
 	</div>
 
 	<div class="buttons">
-		<a role="button" id="expandable" name="truncated" class="btn btn-warning" onclick="togglePostText({{ post.id }})">
+		<a role="button" id="expandable" name="truncated" class="btn btn-success" onclick="togglePostText({{ post.id }})">
 			<span id="expandable-sign" class="sign" aria-hidden="true">+</span>
 			<span id="expandable-message" class="icon-label">Show More</span>
 		</a>
@@ -24,7 +25,11 @@
 			<span class="fa fa-remove" aria-hidden="true"></span>
 			<span class="icon-label">Delete</span>
 		</a>
+		<a href="" title="edit" class="btn btn-warning">
+			<span class="far fa-edit" aria-hidden="true"></span>
+			<span class="icon-label">Edit</span>
+		</a>
 		{% endif %}
 	</div>
 	<hr>
-{% endblock %}
+</div>

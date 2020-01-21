@@ -2,34 +2,40 @@
 {% load widget_tweaks %}
 
 {% block content %}
-  <form method="POST">
-    {% csrf_token %}
+  <div class="container main-content">
+    <form method="POST">
+      {% csrf_token %}
 
-    <div class="modal-body">
-      <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
-        {% for error in form.non_field_errors %}
-          {{ error }}
-        {% endfor %}
-      </div>
+      <div class="modal-body">
+         <h2 class="create-post-title">Create Post</h2>
+         <hr>
 
-      {% for field in form %}
-        <div class="form-group">
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {% render_field field class="form-control" placeholder=field.label %}
-          <div class="{% if field.errors %} invalid{% endif %}">
-            {% for error in field.errors %}
-              <p class="help-block">{{ error }}</p>
-            {% endfor %}
+         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+           {% for error in form.non_field_errors %}
+             <ul class="non_field_error_list">
+               <li class="help-block"><em>{{ error|escape }}</em></li>
+             </ul>
+           {% endfor %}
+         </div>
+
+         {% for field in form %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+            {% render_field field class="form-control" placeholder=field.label %}
+            <div class="{% if field.errors %} invalid{% endif %}">
+              {% for error in field.errors %}
+                <ul class="field_error_list">
+                  <li class="help-block"><em>{{ error|escape }}</em></li>
+                </ul>
+              {% endfor %}
+            </div>
           </div>
+        {% endfor %}
+
+        <div class="create-post-footer">
+          <button type="submit" class="btn btn-large btn-primary create-post-button">Save Post</button>
         </div>
-      {% endfor %}
-
-      <!-- Hidden input field for custom redirection after successful login -->
-      <input type="hidden" name="next" value="{{ success_url }}">
-    </div>
-
-    <div class="modal-footer">
-      <button type="button" class="submit-btn btn btn-primary">Save</button>
-    </div>
-  </form>
+      </div>
+    </form>
+  </div>
 {% endblock %}
