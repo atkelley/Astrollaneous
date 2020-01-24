@@ -38,6 +38,9 @@
         $('#login-btn').modalForm({formURL: "{% url 'accounts:login' %}"});
         $('#register-btn').modalForm({formURL: "{% url 'accounts:register' %}"});
         $('#contact-btn').modalForm({formURL: "{% url 'contact' %}"});
+        $("#post_delete").each(function () {
+          $(this).modalForm({formURL: $(this).data('id')});
+        });
         $('#rover-datepicker').datepicker({
           uiLibrary: 'bootstrap4',
           format: 'mm/dd/yyyy',

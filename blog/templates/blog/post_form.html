@@ -7,7 +7,7 @@
       {% csrf_token %}
 
       <div class="modal-body">
-         <h2 class="create-post-title">Create Post</h2>
+         <h2 class="create-post-title">{{ form_title }}</h2>
          <hr>
 
          <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
@@ -33,7 +33,8 @@
         {% endfor %}
 
         <div class="create-post-footer">
-          <button type="submit" class="btn btn-large btn-primary create-post-button">Save Post</button>
+          <button type="submit" class="btn btn-large btn-primary create-post-button">{{ form_title }}</button>
+          <a href="{{ cancel_url }}" class="btn btn-large btn-secondary create-post-button">Cancel</a>
         </div>
       </div>
     </form>

@@ -21,14 +21,14 @@
 			<span id="expandable-message" class="icon-label">Show More</span>
 		</a>
 		{% if user.is_authenticated and post.user == user and not hide_delete %}
-		<a href="" title="delete" class="btn btn-danger">
-			<span class="fa fa-remove" aria-hidden="true"></span>
-			<span class="icon-label">Delete</span>
-		</a>
-		<a href="" title="edit" class="btn btn-warning">
-			<span class="far fa-edit" aria-hidden="true"></span>
-			<span class="icon-label">Edit</span>
-		</a>
+			<button type="button" id="post_delete" class="btn btn-danger" data-id="{% url 'blog:post_delete' username=post.user.username pk=post.pk %}">
+				<span class="fa fa-remove" aria-hidden="true"></span>
+				<span class="icon-label">Delete</span>
+			</button>
+			<a title="edit" class="btn btn-warning" href="{% url 'blog:post_edit' username=post.user.username pk=post.pk %}">
+        <span class="far fa-edit" aria-hidden="true"></span>
+        <span class="icon-label">Edit</span>
+      </a>
 		{% endif %}
 	</div>
 	<hr>

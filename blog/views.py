@@ -4,9 +4,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # from braces.views import SelectRelatedMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import (TemplateView, ListView,
-                                  DetailView, CreateView,
-                                  UpdateView, DeleteView, FormView)
+from django.contrib import messages
+from django.views.generic import (TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, FormView)
+from bootstrap_modal_forms.generic import (BSModalCreateView,
+                                           BSModalUpdateView,
+                                           BSModalReadView,
+                                           BSModalDeleteView)
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
@@ -17,6 +20,57 @@ class BlogView(ListView):
 
     def get_queryset(self):
         return Post.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
+    redirect_field_name = 'blog/post_list.html'
+    form_class = PostForm
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['cancel_url'] = self.request.META.get('HTTP_REFERER', '/')
+        data['form_title'] = "Create Post"
+        return data
+
+    def form_valid(self, form):
+        messages.success(self.request, 'You have successfully posted to the blog.')
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    redirect_field_name = 'blog/post_list.html'
+    form_class = PostForm
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['cancel_url'] = self.request.META.get('HTTP_REFERER', '/')
+        data['form_title'] = "Edit Post"
+        return data
+
+    def form_valid(self, form):
+        messages.success(self.request, 'You have successfully updated your post.')
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+class PostDeleteView(LoginRequiredMixin, BSModalDeleteView):
+    model = Post
+    template_name = 'blog/post_confirm_delete.html'
+    success_message = 'You have successfully deleted your post.'
+    success_url = reverse_lazy('blog:blog')
+
+    def get_success_url(self):
+        messages.success(self.request, "You have successfully deleted '" + self.object.title + "' from the blog.")
+        return reverse_lazy('blog:blog')
+
+
+
 
 # class PostDetail(SelectRelatedMixin, DetailView):
 class PostDetail(DetailView):
@@ -32,17 +86,6 @@ class PostDetail(DetailView):
 class PostDetailView(DetailView):
     model = Post
 
-class CreatePostView(LoginRequiredMixin, CreateView):
-    login_url = '/login/'
-    redirect_field_name = 'blog/post_list.html'
-    form_class = PostForm
-    model = Post
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super().form_valid(form)
 
 class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
@@ -52,15 +95,7 @@ class DraftListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by('created_date')
 
-class PostUpdateView(LoginRequiredMixin,UpdateView):
-    login_url = '/login/'
-    redirect_field_name = 'blog/post_detail.html'
-    form_class = PostForm
-    model = Post
 
-class PostDeleteView(LoginRequiredMixin,DeleteView):
-    model = Post
-    success_url = reverse_lazy('post_list')
 
 # class PostList(SelectRelatedMixin, ListView):
 class PostList(ListView):
