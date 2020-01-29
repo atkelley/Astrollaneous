@@ -34,7 +34,7 @@ class Post(models.Model):
         # )
 
     def get_comments(self):
-        return self.comments.order_by('-created_date')
+        return self.comments
 
     class Meta:
         ordering = ["-created_date"]
@@ -52,3 +52,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        ordering = ["created_date"]
