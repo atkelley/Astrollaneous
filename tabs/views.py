@@ -17,7 +17,7 @@ def home(request):
     response = requests.get('https://api.nasa.gov/planetary/apod?api_key=' + API_KEY)
     daily_image_data = response.json()
 
-    if daily_image_data['code'] >= 400:
+    if 'code' in daily_image_data and daily_image_data['code'] >= 400:
         context = {
             "home_page": "active",
             "date": datetime.date.today(),
