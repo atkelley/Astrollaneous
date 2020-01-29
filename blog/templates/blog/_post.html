@@ -8,27 +8,52 @@
 		<img class="img-fluid rounded" src="{{ post.image_url }}" alt="">
 		<hr>
 	{% endif %}
-	<div class="truncated" name="{{ post.id }}">
+	<div class="truncated-text" name="{{ post.id }}">
 		<p>{{ post.text|truncatewords:30 }}</p>
 	</div>
-	<div class="expanded" name="{{ post.id }}">
+	<div class="expanded-text" name="{{ post.id }}">
 		<p>{{ post.text_html|safe }}</p>
+		<hr>
+		<h4>Comments:</h4>
+		{% for comment in post.comments.all %}
+			<div class="comment-wrapper">
+				<div class="comment-title">
+					<em><a href="#">{{ comment.author }}</a> on {{ comment.created_date|date:"F jS, Y" }} at {{ comment.created_date|timezone:"America/Toronto"|date:"g:i a" }}</em>
+				</div>
+				<div class="comment-body">
+					Post id: {{ comment.post.id }}
+					Comment id: {{ comment.id }}
+					{{ comment.text|safe|linebreaks }}
+				</div>
+				{% if user.is_authenticated %}
+					<div class="comment-delete">
+						<button type="button" id="comment_delete" class="btn-comment" data-id="{% url 'blog:comment_delete' pk=comment.pk %}">Delete</button>
+					</div><br>
+				{% endif %}
+			</div>
+		{% empty %}
+			<p><em>No comments posted...yet.</em></p>
+		{% endfor %}
 	</div>
 
 	<div class="buttons">
-		<a role="button" id="expandable" name="truncated" class="btn btn-success" onclick="togglePostText({{ post.id }})">
+		<a role="button" id="expandableText" name="{{ post.id }}" class="btn btn-success" onclick="togglePostText({{ post.id }})">
 			<span id="expandable-sign" class="sign" aria-hidden="true">+</span>
 			<span id="expandable-message" class="icon-label">Show More</span>
 		</a>
 		{% if user.is_authenticated and post.user == user and not hide_delete %}
 			<button type="button" id="post_delete" class="btn btn-danger" data-id="{% url 'blog:post_delete' username=post.user.username pk=post.pk %}">
 				<span class="fa fa-remove" aria-hidden="true"></span>
-				<span class="icon-label">Delete</span>
+				<span class="icon-label">Delete Post</span>
 			</button>
 			<a title="edit" class="btn btn-warning" href="{% url 'blog:post_edit' username=post.user.username pk=post.pk %}">
         <span class="far fa-edit" aria-hidden="true"></span>
-        <span class="icon-label">Edit</span>
+        <span class="icon-label">Edit Post</span>
       </a>
+			<button type="button" id="comment_create" class="btn btn-primary" data-id="{% url 'blog:comment_create' username=post.user.username pk=post.pk %}">
+				<span class="far fa-comments" aria-hidden="true"></span>
+        <span class="icon-label">Add Comment ({{ post.get_comments.count }})</span>
+			</button>
 		{% endif %}
 	</div>
 	<hr>

@@ -24,7 +24,7 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("blog:blog")
+        return reverse("blog:post_list")
         # return reverse(
         #     "blog:post_detail",
         #     kwargs={
@@ -32,6 +32,9 @@ class Post(models.Model):
         #         "pk": self.pk
         #     }
         # )
+
+    def get_comments(self):
+        return self.comments
 
     class Meta:
         ordering = ["-created_date"]
@@ -43,14 +46,9 @@ class Comment(models.Model):
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
-    approved_comment = models.BooleanField(default=False)
 
-    def approve(self):
-        self.approved_comment = True
-        self.save()
-
-    def get_absolute_url(self):
-        return reverse("post_list")
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.text

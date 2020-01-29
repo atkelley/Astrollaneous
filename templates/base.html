@@ -41,6 +41,12 @@
         $("#post_delete").each(function () {
           $(this).modalForm({formURL: $(this).data('id')});
         });
+        $("#comment_delete").each(function () {
+          $(this).modalForm({formURL: $(this).data('id')});
+        });
+        $("#comment_create").each(function () {
+          $(this).modalForm({formURL: $(this).data('id')});
+        });
         $('#rover-datepicker').datepicker({
           uiLibrary: 'bootstrap4',
           format: 'mm/dd/yyyy',
@@ -52,20 +58,17 @@
         });
       });
 
-      $('div.expanded').hide();
+      $('div.expanded-text').hide();
       function togglePostText(id) {
-        $('div.truncated[name=' + id + ']').toggle();
-        $('div.expanded[name=' + id + ']').toggle();
-        let name = $("div.buttons a#expandable").attr("name");
-        if (name == "truncated") {
-          $("div.buttons a#expandable").attr("name", "expanded");
-          $("div.buttons a span#expandable-message").text("Show Less");
-          $("div.buttons a span#expandable-sign").text("-");
-        }
-        if (name == "expanded") {
-          $("div.buttons a#expandable").attr("name", "truncated");
-          $("div.buttons a span#expandable-message").text("Show More");
-          $("div.buttons a span#expandable-sign").text("-");
+        $('div.truncated-text[name=' + id + ']').toggle();
+        $('div.expanded-text[name=' + id + ']').toggle();
+
+        if ($('div.buttons a[name=' + id + ']').find('span#expandable-message').text() == "Show More") {
+          $('div.buttons a[name=' + id + ']').find('span#expandable-message').text("Show Less");
+          $('div.buttons a[name=' + id + ']').find('span#expandable-sign').text("-");
+        } else {
+          $('div.buttons a[name=' + id + ']').find('span#expandable-message').text("Show More");
+          $('div.buttons a[name=' + id + ']').find('span#expandable-sign').text("+");
         }
       }
     </script>
