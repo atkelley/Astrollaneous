@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
+from django.conf.urls.static import static
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from tabs.forms import MarsForm
@@ -16,29 +17,42 @@ def home(request):
     response = requests.get('https://api.nasa.gov/planetary/apod?api_key=' + API_KEY)
     daily_image_data = response.json()
 
-    if daily_image_data['media_type'] == 'video':
-        video_url = daily_image_data['url']
-        temp = video_url.split("embed/", 1)[1].split('?')
-        image_url = 'http://img.youtube.com/vi/' + temp[0] + '/0.jpg'
+    if daily_image_data['code'] >= 400:
+        context = {
+            "home_page": "active",
+            "date": datetime.date.today(),
+            "title": "Chandra Spots a Mega-Cluster of Galaxies in the Making ",
+            "description": "Astronomers using data from NASA's Chandra X-ray Observatory and other telescopes have put together a detailed map of a rare collision between four galaxy clusters. Eventually all four clusters — each with a mass of at least several hundred trillion times that of the Sun — will merge to form one of the most massive objects in the universe. Galaxy clusters are the largest structures in the cosmos that are held together by gravity. Clusters consist of hundreds or even thousands of galaxies embedded in hot gas, and contain an even larger amount of invisible dark matter. Sometimes two galaxy clusters collide, as in the case of the Bullet Cluster, and occasionally more than two will collide at the same time. The new observations show a mega-structure being assembled in a system called Abell 1758, located about 3 billion light-years from Earth. It contains two pairs of colliding galaxy clusters that are heading toward one another. Scientists first recognized Abell 1758 as a quadruple galaxy cluster system in 2004 using data from Chandra and XMM-Newton, a satellite operated by the European Space Agency (ESA). Each pair in the system contains two galaxy clusters that are well on their way to merging. In the northern (top) pair seen in the composite image, the centers of each cluster have already passed by each other once, about 300 to 400 million years ago, and will eventually swing back around. The southern pair at the bottom of the image has two clusters that are close to approaching each other for the first time.",
+            "image_url": '/static/mySpaceStuff/img/backup_image.jpg',
+            "image_hdurl": '/static/mySpaceStuff/img/backup_image_large.jpg',
+            "copyright": "X-ray: NASA/CXC/SAO/G.Schellenberger et al.; Optical:SDSS"
+        }
+        return render(request, 'tabs/index.html', context)
+
     else:
-        image_url = daily_image_data['url']
-        image_hdurl = daily_image_data['hdurl']
+        if daily_image_data['media_type'] == 'video':
+            video_url = daily_image_data['url']
+            temp = video_url.split("embed/", 1)[1].split('?')
+            image_url = 'http://img.youtube.com/vi/' + temp[0] + '/0.jpg'
+        else:
+            image_url = daily_image_data['url']
+            image_hdurl = daily_image_data['hdurl']
 
-        if hasattr(daily_image_data, 'copyright'):
-            copyright = daily_image_data['copyright']
+            if hasattr(daily_image_data, 'copyright'):
+                copyright = daily_image_data['copyright']
 
-    context = {
-        "home_page": "active",
-        "date": datetime.date.today(),
-        "title": daily_image_data['title'],
-        "description": daily_image_data['explanation'],
-        "media_type": daily_image_data['media_type'],
-        "video_url": video_url,
-        "image_url": image_url,
-        "image_hdurl": image_hdurl,
-        "copyright": copyright
-    }
-    return render(request, 'tabs/index.html', context)
+        context = {
+            "home_page": "active",
+            "date": datetime.date.today(),
+            "title": daily_image_data['title'],
+            "description": daily_image_data['explanation'],
+            "media_type": daily_image_data['media_type'],
+            "video_url": video_url,
+            "image_url": image_url,
+            "image_hdurl": image_hdurl,
+            "copyright": copyright
+        }
+        return render(request, 'tabs/index.html', context)
 
 def mars(request):
     context = {}
