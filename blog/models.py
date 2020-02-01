@@ -24,14 +24,13 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("blog:post_list")
-        # return reverse(
-        #     "blog:post_detail",
-        #     kwargs={
-        #         "username": self.user.username,
-        #         "pk": self.pk
-        #     }
-        # )
+        return reverse(
+            "blog:post_list",
+            kwargs={
+                "username": self.user.username,
+                "pk": self.pk
+            }
+        )
 
     def get_comments(self):
         return self.comments
@@ -42,7 +41,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='comments',on_delete=models.CASCADE)
+    post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -52,6 +51,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+    def get_absolute_url(self):
+        return reverse(
+            "blog:post_list",
+            kwargs={
+                "username": self.user.username,
+                "pk": self.pk
+            }
+        )
 
     class Meta:
         ordering = ["created_date"]

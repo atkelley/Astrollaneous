@@ -27,7 +27,10 @@
 				</div>
 				{% if user.is_authenticated %}
 					<div class="comment-delete">
-						<button type="button" id="comment_delete" class="btn-comment" data-id="{% url 'blog:comment_delete' pk=comment.pk %}">Delete</button>
+						<button type="button" class="btn-comment comment_delete" data-id="{% url 'blog:comment_delete' username=post.user.username pk=comment.pk %}">Delete</button>
+					</div>
+					<div class="comment-edit">
+						<button type="button" class="btn-comment comment_edit" data-id="{% url 'blog:comment_edit' username=post.user.username pk=comment.pk %}">Edit</button>
 					</div><br>
 				{% endif %}
 			</div>
@@ -42,15 +45,15 @@
 			<span id="expandable-message" class="icon-label">Show More</span>
 		</a>
 		{% if user.is_authenticated and post.user == user and not hide_delete %}
-			<button type="button" id="post_delete" class="btn btn-danger" data-id="{% url 'blog:post_delete' username=post.user.username pk=post.pk %}">
+			<button type="button" class="btn btn-danger post_delete" data-id="{% url 'blog:post_delete' username=post.user.username pk=post.pk %}">
 				<span class="fa fa-remove" aria-hidden="true"></span>
 				<span class="icon-label">Delete Post</span>
 			</button>
-			<a title="edit" class="btn btn-warning" href="{% url 'blog:post_edit' username=post.user.username pk=post.pk %}">
+			<a class="btn btn-warning" href="{% url 'blog:post_edit' username=post.user.username pk=post.pk %}">
         <span class="far fa-edit" aria-hidden="true"></span>
         <span class="icon-label">Edit Post</span>
       </a>
-			<button type="button" id="comment_create" class="btn btn-primary" data-id="{% url 'blog:comment_create' username=post.user.username pk=post.pk %}">
+			<button type="button" class="btn btn-primary comment_create" data-id="{% url 'blog:comment_create' username=post.user.username pk=post.pk %}">
 				<span class="far fa-comments" aria-hidden="true"></span>
         <span class="icon-label">Add Comment ({{ post.get_comments.count }})</span>
 			</button>

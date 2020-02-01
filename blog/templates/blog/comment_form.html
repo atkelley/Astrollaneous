@@ -1,10 +1,10 @@
 {% load widget_tweaks %}
 
-<form method="POST" action="">
+<form method="POST">
   {% csrf_token %}
 
   <div class="modal-header">
-    <h2 class="modal-title">Create Comment</h2>
+    <h2 class="modal-title">{{ form_title }}</h2>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <i class="fas fa-times"></i>
     </button>
@@ -33,7 +33,7 @@
     {% endfor %}
 
     <div class="create-comment-footer">
-      <button type="submit" class="btn btn-large btn-primary create-comment-button">Add Comment</button>
+      <button type="submit" class="btn btn-large btn-primary create-comment-button">{{ form_title }}</button>
     </div>
   </div>
 </form>
