@@ -21,8 +21,6 @@
 					<em><a href="#">{{ comment.author }}</a> on {{ comment.created_date|date:"F jS, Y" }} at {{ comment.created_date|timezone:"America/Toronto"|date:"g:i a" }}</em>
 				</div>
 				<div class="comment-body">
-					Post id: {{ comment.post.id }}
-					Comment id: {{ comment.id }}
 					{{ comment.text|safe|linebreaks }}
 				</div>
 				{% if user.is_authenticated %}

@@ -30,7 +30,7 @@ class BlogView(ListView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_list.html'
+    success_url = reverse_lazy('blog:post_list')
     form_class = PostForm
     model = Post
 
