@@ -13,4 +13,5 @@ urlpatterns = [
     path('weather/', views.weather, name='weather'),
     path('nasa/', views.nasa, name='nasa'),
     path('techport/', views.techport, name='techport'),
+    path('techport/<int:project_id>/search', views.techport_search, name='techport_search'),
 ]

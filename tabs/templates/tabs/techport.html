@@ -2,9 +2,15 @@
 
 {% block content %}
   <div class="container main-content">
+    <!-- {% block techport_content %}
+    {% endblock %} -->
     <div class="row daily-row">
       <div class="col-md-12">
         <h1><strong>TechPort!</strong></h1>
+        <!-- <p>{{techport_data.projects.projects}}</p> -->
+        {% for project in techport_data.projects.projects %}
+          <a href="{% url 'tabs:techport_search' project_id=project.id %}">{{ project.id }}</a>
+        {% endfor %}
       </div>
     </div>
   </div>

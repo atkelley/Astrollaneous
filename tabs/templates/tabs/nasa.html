@@ -5,7 +5,26 @@
     <div class="row daily-row">
       <div class="col-md-12">
         <h1><strong>NASA!</strong></h1>
+        <form method="POST" action="{% url 'tabs:nasa' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" value="Submit">
+        </form>
       </div>
     </div>
+    {% if context.nasa_data %}
+      <div class="row daily-row">
+        <p>{{ context.nasa_data.collection.metadata.total_hits }}</p><br>
+        {% for item in context.nasa_data.collection.items %}
+          {% if item.data.0.media_type == 'image' %}
+            <p>{{ item.data.0.media_type }}</p><br>
+          {% elif item.data.0.media_type == 'video' %}
+            <p>{{ item.data.0.media_type }}</p><br>
+          {% elif item.data.0.media_type == 'audio' %}
+            <p>{{ item.data.0.media_type }}</p><br>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

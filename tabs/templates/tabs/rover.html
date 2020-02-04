@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 {% load bootstrap4 %}
 
 {% block content %}
@@ -116,14 +117,14 @@
               <div class="row">
                 <div class="col-md-3">
                   <label class="rover-earth">
-                    <input type="radio" name="date_selector" value="earth" id="earth" checked> By Earth date
+                    <input type="radio" name="earth_date_selector" value="earth" id="earth" checked> By Earth date
                     <p><em>({{ rover.landing_date|date:"m/d/Y" }} to {{ rover.max_date|date:"m/d/Y" }})</em></p>
                     <input id="rover-datepicker" width="175" data-value="{{ rover.max_date|date:'m/d/Y' }}">
                   </label>
                 </div>
                 <div class="col-md-3">
                   <label class="rover-sol">
-                    <input type="radio" name="date_selector" value="sol" id="sol"> By Sol
+                    <input type="radio" name="sol_date_selector" value="sol" id="sol"> By Sol
                     <p><em>(Day 0 to Day {{ rover.max_sol }})</em></p>
                     <div class="rover-input-number">
                       <input id="rover-number" type="number" min="0" max="max">
@@ -151,5 +152,16 @@
 
       </div>
     </div>
-  </div>
+    <div class="row daily-row">
+      <div class="col-md-12">
+        <div class="rover-container">
+          <div class="row daily-row ml-2">
+            <h3><strong>Rover Camera Locations:</strong></h3>
+          </div>
+          <div class="row daily-row">
+            <img src="/static/mySpaceStuff/img/mars-rover-cameras.jpg" alt="" class="rover-image">
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}

@@ -1,10 +1,10 @@
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from tabs.forms import MarsForm
+from tabs.forms import MarsForm, NasaForm
 import datetime, requests, random
 
 API_KEY = "suY5NhcHycX1CIkDaMCXNdY8dIYdp0O5meo3cJso"
@@ -104,7 +104,18 @@ def rover(request, rover_name):
     return render(request, 'tabs/rover.html', {"rover": rover_object})
 
 def search(request, rover_name):
-    pass
+    if request.method == 'POST':
+        form = MarsForm(request.POST)
+        if form.is_valid():
+            date = request.POST.get('earth_date_selector')
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+    else:
+        form = MarsForm()
+
+    return render(request, 'tabs/rover.html', {'rover_name': rover_name, 'form': form})
 
 def neos(request):
     context = {"neos_page": "active"}
@@ -115,28 +126,58 @@ def satellites(request):
     return render(request, 'tabs/satellites.html', context)
 
 def weather(request):
-    context = {"weather_page": "active"}
+    data = []
+    base_url = "https://api.nasa.gov/insight_weather"
+    response = response = requests.get(base_url + '/?api_key=' + API_KEY + '&feedtype=json')
+    weather_data = response.json()
+
+    context = {"weather_page": "active", "weather_data": weather_data}
     return render(request, 'tabs/weather.html', context)
 
 def nasa(request):
-    context = {"nasa_page": "active"}
-    return render(request, 'tabs/nasa.html', context)
+    collection = []
+
+    if request.method == "POST":
+        form = NasaForm(request.POST)
+        if form.is_valid():
+            query_term = form.cleaned_data['query_term']
+            response = requests.get('https://images-api.nasa.gov/search?q=' + query_term)
+            # response_data = response.json()
+
+            # collection.append(response_data)
+
+            # for item in response_data.collection.items:
+            #     if item.data[0].media_type == 'video':
+            #         data1 = json.load(item.href)
+            #         data2 = json.dumps(data1)
+            #         collection.append(data2)
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            # NOTE: I'm forgoing the redirect AND the else case
+            # since I always want a fresh form passed
+            # if the form is valid, then appropriate context data is returned as well
+
+    form = NasaForm()
+    context = {"nasa_page": "active", "nasa_data": collection}
+    return render(request, 'tabs/nasa.html', {'form': form, 'context': context})
 
 def techport(request):
-    context = {"techport_page": "active"}
+    data = []
+    now = datetime.datetime.now()
+    past_date_time = datetime.datetime(2019, now.month, now.day)
+    past_date_time_string = past_date_time.strftime("%Y-%m-%d")
+
+    base_url = "https://api.nasa.gov/techport/api/projects?updatedSince="
+    response = response = requests.get(base_url + past_date_time_string + '&api_key=' + API_KEY)
+    techport_data = response.json()
+
+    context = {"techport_page": "active", "techport_data": techport_data}
     return render(request, 'tabs/techport.html', context)
 
-class HomeTab(TemplateView):
-    template_name = 'index.html'
-
-    def get(self, request, *args, **kwargs):
-        response = requests.get('https://api.nasa.gov/planetary/apod?api_key=suY5NhcHycX1CIkDaMCXNdY8dIYdp0O5meo3cJso')
-        daily_image_data = response.json()
-        kwargs['date'] = daily_image_data['date']
-        kwargs['title'] = daily_image_data['title']
-        kwargs['description'] = daily_image_data['explanation']
-        kwargs['image_url'] = daily_image_data['hdurl']
-
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse("test"))
-        return super().get(request, *args, **kwargs)
+def techport_search(request, project_id):
+    base_url = "https://api.nasa.gov/techport/api/projects/"
+    response = response = requests.get(base_url + str(project_id) + '?api_key=' + API_KEY)
+    techport_search_data = response.json()
+    context = {"techport_search_data": techport_search_data}
+    return render(request, 'tabs/techport_search.html', context)

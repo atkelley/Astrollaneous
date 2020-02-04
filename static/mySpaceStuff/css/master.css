@@ -1,3 +1,12 @@
+.techport_search {
+  float: right!important;
+  margin: 20px 10px;
+}
+
+.fa-backward {
+  color: grey!important;
+}
+
 .btn-comment {
   padding: 0;
   margin: 0;

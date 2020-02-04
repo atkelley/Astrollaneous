@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container main-content">
+    <span class="techport_search">
+      <a href="{% url 'tabs:techport' %}"><span class="fas fa-backward fa-3x" aria-hidden="true"></span></a>
+    </span>
+    <div class="row daily-row">
+      <div class="col-md-12">
+        <h4><strong>Title:</strong></h4>
+        <p>{{ techport_search_data.project.title }}</p>
+        <h4><strong>Start Date:</strong></h4>
+        <p>{{ techport_search_data.project.startDate }}</p>
+        <h4><strong>End Date:</strong></h4>
+        <p>{{ techport_search_data.project.endDate }}</p>
+        <h4><strong>Status:</strong></h4>
+        <p>{{ techport_search_data.project.status }}</p>
+        <h4><strong>Responsible Program:</strong></h4>
+        <p>{{ techport_search_data.project.responsibleProgram }}</p>
+        <h4><strong>Lead Organization:</strong></h4>
+        <p>{{ techport_search_data.project.leadOrganization.name }} - {{ techport_search_data.project.leadOrganization.city }}, {{ techport_search_data.project.leadOrganization.state }}</p>
+        <h4><strong>Program Manager(s):</strong></h4><p>
+        {% for manager in techport_search_data.project.programManagers %}
+          {{ manager }}
+        {% endfor %}</p>
+        <h4><strong>Project Manager(s):</strong></h4><p>
+        {% for manager in techport_search_data.project.projectManagers %}
+          {{ manager }}
+        {% endfor %}</p>
+        <h4><strong>Principal Investigator(s):</strong></h4><p>
+        {% for investigator in techport_search_data.project.principalInvestigators %}
+          {{ investigator }}
+        {% endfor %}</p>
+        <h4><strong>Description:</strong></h4>
+        <p>{{ techport_search_data.project.description|safe }}</p>
+        <h4><strong>Benefits:</strong></h4>
+        <p>{{ techport_search_data.project.benefits|safe }}</p>
+        <h4><strong>Closeout Summary:</strong></h4>
+        <p>{{ techport_search_data.project.closeoutSummary|safe }}</p>
+        <h4><strong>Closeout Document(s):</strong></h4><p>
+        {% for document in techport_search_data.project.closeoutDocuments %}
+          <a href="{{ document }}">{{ document }}</a>
+        {% endfor %}</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
