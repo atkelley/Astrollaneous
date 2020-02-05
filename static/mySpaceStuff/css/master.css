@@ -1,10 +1,22 @@
-.techport_search {
+.techport_search_property_container {
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px 0px;
+}
+
+.techport_search_right {
+  float: left!important;
+  margin: 20px 10px;
+}
+
+.techport_search_left {
   float: right!important;
   margin: 20px 10px;
 }
 
-.fa-backward {
-  color: grey!important;
+.techport-search-submit {
+  margin-top: 10px;
 }
 
 .btn-comment {
@@ -321,6 +333,15 @@ h6.blog-header {
   border-radius: 5px;
 }
 
+.techport-search-row {
+  padding: 20px 20px 0px 20px;
+  border-radius: 5px;
+}
+
+.techport-search-results-row {
+  padding: 0px 20px 20px 20px;
+}
+
 .daily-image {
   padding: 10px;
   max-width: 100%;
@@ -389,6 +410,20 @@ h2.modal-title {
   display: inline-block!important;
   padding-bottom: 5px;
   height: 200px;
+}
+
+.techport-search-label {
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.techport-search-container {
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgba(0, 128, 128, 0.25);
 }
 
 .rover-sol, .rover-earth, .rover-cameras {

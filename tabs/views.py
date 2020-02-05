@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
+from django.core.cache import cache
 from tabs.forms import MarsForm, NasaForm
 import datetime, requests, random
 
@@ -162,22 +163,63 @@ def nasa(request):
     context = {"nasa_page": "active", "nasa_data": collection}
     return render(request, 'tabs/nasa.html', {'form': form, 'context': context})
 
+techport_data_cache = None
+
 def techport(request):
-    data = []
-    now = datetime.datetime.now()
-    past_date_time = datetime.datetime(2019, now.month, now.day)
-    past_date_time_string = past_date_time.strftime("%Y-%m-%d")
+    techport_data = None
+    current_date = datetime.datetime.now()
+    default_date_object = datetime.datetime(current_date.year - 1, current_date.month, current_date.day)
+    default_date = default_date_object.strftime("%Y-%m-%d")
 
-    base_url = "https://api.nasa.gov/techport/api/projects?updatedSince="
-    response = response = requests.get(base_url + past_date_time_string + '&api_key=' + API_KEY)
-    techport_data = response.json()
+    if request.method == "POST":
+        picked_date = request.POST['techport-datepicker']
+        if not picked_date:
+            picked_date = default_date
 
-    context = {"techport_page": "active", "techport_data": techport_data}
+        if cache.get('picked_date') != picked_date:
+            base_url = "https://api.nasa.gov/techport/api/projects?updatedSince="
+            full_url = base_url + picked_date + '&api_key=' + API_KEY
+            response = requests.get(base_url + picked_date + '&api_key=' + API_KEY)
+            techport_data = response.json()
+            cache.set('picked_date', picked_date)
+            cache.set('techport_data', techport_data)
+        else:
+            techport_data = cache.get('techport_data')
+
+    context = {
+        "techport_page": "active",
+        "default_date": default_date_object,
+        "techport_data": techport_data,
+    }
+
     return render(request, 'tabs/techport.html', context)
 
 def techport_search(request, project_id):
-    base_url = "https://api.nasa.gov/techport/api/projects/"
-    response = response = requests.get(base_url + str(project_id) + '?api_key=' + API_KEY)
-    techport_search_data = response.json()
-    context = {"techport_search_data": techport_search_data}
-    return render(request, 'tabs/techport_search.html', context)
+    previous = None
+    next = None
+
+    if cache.get('techport_data'):
+        techport_data = cache.get('techport_data')
+        projects = techport_data['projects']['projects']
+
+        for index in range(len(projects)):
+            if projects[index]['id'] == project_id:
+                if index == 0:
+                    next = projects[index+1]
+                elif index == len(projects)-1:
+                    previous = projects[index-1]
+                else:
+                    previous = projects[index-1]
+                    next = projects[index+1]
+
+        base_url = "https://api.nasa.gov/techport/api/projects/"
+        response = response = requests.get(base_url + str(project_id) + '?api_key=' + API_KEY)
+        techport_search_data = response.json()
+        context = {
+            "techport_search_data": techport_search_data,
+            "previous": previous,
+            "next": next
+        }
+        return render(request, 'tabs/techport_search.html', context)
+    else:
+        return redirect(request.META.get('HTTP_REFERER', 'techport'))

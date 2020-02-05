@@ -1,17 +1,49 @@
 {% extends "base.html" %}
+{% load template_extras %}
 
 {% block content %}
   <div class="container main-content">
-    <!-- {% block techport_content %}
-    {% endblock %} -->
-    <div class="row daily-row">
-      <div class="col-md-12">
-        <h1><strong>TechPort!</strong></h1>
-        <!-- <p>{{techport_data.projects.projects}}</p> -->
-        {% for project in techport_data.projects.projects %}
-          <a href="{% url 'tabs:techport_search' project_id=project.id %}">{{ project.id }}</a>
-        {% endfor %}
+    <div class="row techport-search-row">
+      <div class="col-md-4">
+        <form method="POST" action="{% url 'tabs:techport' %}">
+          {% csrf_token %}
+          <div class="techport-search-container">
+            <label class="techport-search-label">
+              <h6><em>Search by Date:</em></h6>
+              <input name="techport-datepicker" id="techport-datepicker" width="175" data-value="{{ default_date|date:'Y-m-d' }}" />
+              <input class="techport-search-submit" type="submit" value="Submit" name="submit"/>
+            </label>
+          </div>
+        </form>
       </div>
+      <div class="col-md-8">
+        <p>
+          The TechPort team is a unique group of developers, designers, architects, and engineers whose primary goal is technology communication, via the use of their web-based portal.
+          TechPort gathers technology investment information from across NASA and transforms them into opportunities for collaboration and partnerships,
+          through robust analyses and data visualizations. These both identify key technology drivers that enable Agency decision making
+          and allow the public to discover the technologies NASA is working on every day to explore space, understand the universe,
+          and improve aeronautics. Whether it's a concept in its early stage, a prototype, or a fully developed technology - it's all here in TechPort.
+          We invite you to come look around!
+        </p>
+      </div>
+    </div>
+    <hr>
+    <div class="row techport-search-results-row">
+      <div class="col-md-12">
+        {% if techport_data.projects.totalCount %}
+          <h1><strong>{{ techport_data.projects.totalCount }} Projects found.</strong></h1>
+        {% endif %}
+      </div>
+      {% if techport_data %}
+        <div class="col-md-12">
+          {% for project in techport_data.projects.projects %}
+            <a href="{% url 'tabs:techport_search' project_id=project.id %}">{{ project.id }}</a>
+            <!-- {% with techport_data.projects.projects|bookends:forloop.counter0 as bookend %}
+              <a href="{% url 'tabs:techport_search' project_id=project.id %}">{{ project.id }}</a>
+            {% endwith %} -->
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

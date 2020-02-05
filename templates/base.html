@@ -38,7 +38,7 @@
         $('#login-btn').modalForm({formURL: "{% url 'accounts:login' %}"});
         $('#register-btn').modalForm({formURL: "{% url 'accounts:register' %}"});
         $('#contact-btn').modalForm({formURL: "{% url 'contact' %}"});
-        
+
         $(".post_delete").each(function () {
           $(this).modalForm({formURL: $(this).data('id')});
         });
@@ -57,6 +57,14 @@
           format: 'mm/dd/yyyy',
           minDate: new Date("{{ rover.landing_date.isoformat }}"),
           maxDate: new Date("{{ rover.max_date.isoformat }}"),
+          keyboardNavigation: true,
+          autoclose: true,
+          modal: true
+        });
+
+        $('#techport-datepicker').datepicker({
+          uiLibrary: 'bootstrap4',
+          format: 'yyyy-mm-dd',
           keyboardNavigation: true,
           autoclose: true,
           modal: true
