@@ -4,18 +4,62 @@
   <div class="container main-content">
     <div class="row daily-row">
       <div class="col-md-12">
-        <h1><strong>NASA!</strong></h1>
-        <form method="POST" action="{% url 'tabs:nasa' %}">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <input type="submit" value="Submit">
-        </form>
+
+        <div class="nasa-search-container">
+          <form method="POST" action="{% url 'tabs:nasa' %}">
+            {% csrf_token %}
+            <input name="nasa-search-input" class="nasa-search-input" type="text" placeholder='Search for...(e.g. "Orion")' name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+
       </div>
     </div>
-    {% if context.nasa_data %}
+  </div>
+
+  <div class="container main-content nasa-main-content">
+    {% if nasa_search_input %}
       <div class="row daily-row">
-        <p>{{ context.nasa_data.collection.metadata.total_hits }}</p><br>
-        {% for item in context.nasa_data.collection.items %}
+        <h3 class="nasa-search-title"><strong>{{ video_collection|length }} Results returned for "{{ nasa_search_input }}":</strong></h3>
+      </div>
+    {% endif %}
+    {% if video_collection %}
+      {% for video in video_collection %}
+        <div class="row daily-row">
+          <div class="col-md-3">
+            <div class="nasa-image-wrapper">
+              <a data-toggle="modal" data-target="#myModal">
+                <img class="nasa-image" src="{{ video.preview_image }}" alt="">
+                <i class="fas fa-play fa-3x"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <h5><strong>NASA ID: </strong>{{ video.nasa_id }}</h5>
+            <h6><strong>Date Created: </strong>{{ video.create_date|date:"F jS, Y" }}</h6>
+            <p>{{ video.description }}</p>
+          </div>
+        </div>
+        <hr>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content video-modal-content">
+        <div class="modal-body embed-responsive embed-responsive-16by9">
+          <iframe width="100%" height="auto" src="{{ video.url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% if nasa_search_data %}
+      <div class="row daily-row">
+        <p>{{ nasa_search_data.collection.metadata.total_hits }}</p><br>
+        {% for item in nasa_search_data.collection.items %}
           {% if item.data.0.media_type == 'image' %}
             <p>{{ item.data.0.media_type }}</p><br>
           {% elif item.data.0.media_type == 'video' %}
@@ -26,5 +70,4 @@
         {% endfor %}
       </div>
     {% endif %}
-  </div>
-{% endblock %}
+  {% endblock %}

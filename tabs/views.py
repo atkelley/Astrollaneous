@@ -5,8 +5,9 @@ from django.conf.urls.static import static
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.core.cache import cache
-from tabs.forms import MarsForm, NasaForm
-import datetime, requests, random
+from tabs.forms import MarsForm
+import datetime, requests, random, json, urllib, pytz, re
+from urllib.error import URLError, HTTPError
 
 API_KEY = "suY5NhcHycX1CIkDaMCXNdY8dIYdp0O5meo3cJso"
 
@@ -135,35 +136,58 @@ def weather(request):
     context = {"weather_page": "active", "weather_data": weather_data}
     return render(request, 'tabs/weather.html', context)
 
+
+
 def nasa(request):
-    collection = []
+    nasa_search_input = None
+    nasa_search_data = None
+    audio_collection = None
+    image_collection = None
+    video_collection = []
 
     if request.method == "POST":
-        form = NasaForm(request.POST)
-        if form.is_valid():
-            query_term = form.cleaned_data['query_term']
-            response = requests.get('https://images-api.nasa.gov/search?q=' + query_term)
-            # response_data = response.json()
+        nasa_search_input = request.POST['nasa-search-input']
 
-            # collection.append(response_data)
+        if nasa_search_input:
+            base_url = "https://images-api.nasa.gov/search?q="
+            response = response = requests.get(base_url + nasa_search_input)
+            nasa_search_data = response.json()
 
-            # for item in response_data.collection.items:
-            #     if item.data[0].media_type == 'video':
-            #         data1 = json.load(item.href)
-            #         data2 = json.dumps(data1)
-            #         collection.append(data2)
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            # NOTE: I'm forgoing the redirect AND the else case
-            # since I always want a fresh form passed
-            # if the form is valid, then appropriate context data is returned as well
+            for item in nasa_search_data['collection']['items']:
+                if item['data'][0]['media_type'] == 'video':
+                    try:
+                        cleaned_url = item['href'].replace(" ", "%20").replace(u"\u201c", '"').replace(u"\u201d", '"')
+                        req = urllib.request.Request(cleaned_url)
+                        response = urllib.request.urlopen(req)
+                    except Exception as e:
+                        print(e)
+                    else:
+                        raw_json = response.read()
+                        video_data = json.loads(raw_json)
 
-    form = NasaForm()
-    context = {"nasa_page": "active", "nasa_data": collection}
-    return render(request, 'tabs/nasa.html', {'form': form, 'context': context})
+                        video_urls = [video_url for video_url in video_data if '~orig.mp4' in video_url]
+                        if video_urls:
+                            # Remove the ':' from the timezone, if it's there.
+                            cleaned_date_created_string = re.sub("\+(?P<hour>\d{2}):(?P<minute>\d{2})$", "+\g<hour>\g<minute>" , item['data'][0]['date_created'])
+                            datetime_object = datetime.datetime.strptime(cleaned_date_created_string, "%Y-%m-%dT%H:%M:%S%z")
+                            converted_datetime_object = datetime_object.astimezone(pytz.UTC)
+                            video_collection.append({
+                                'nasa_id': item['data'][0]['nasa_id'],
+                                'create_date': converted_datetime_object,
+                                'description': item['data'][0]['description'],
+                                'preview_image': item['links'][0]['href'],
+                                'url': video_urls.pop()
+                            })
 
-techport_data_cache = None
+    context = {
+        "nasa_page": "active",
+        "nasa_search_input": nasa_search_input,
+        "audio_collection": audio_collection,
+        "image_collection": image_collection,
+        "video_collection": video_collection
+    }
+
+    return render(request, 'tabs/nasa.html', context)
 
 def techport(request):
     techport_data = None

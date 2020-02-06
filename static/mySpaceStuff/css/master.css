@@ -1,3 +1,31 @@
+.nasa-search-container {
+    text-align: center;
+}
+
+.nasa-search-input {
+  width: 50%;
+  border: 2px solid grey!important;
+  border-radius: 5px;
+  padding: 6px;
+  font-size: 17px;
+  border: none;
+}
+
+.nasa-search-container button {
+  /* float: right; */
+  padding: 6px 10px;
+  border: 2px solid grey!important;
+  border-radius: 5px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.nasa-search-container button:hover {
+  background: #ccc;
+}
+
 .techport_search_property_container {
   border: 1px solid grey;
   border-radius: 10px;
@@ -342,6 +370,33 @@ h6.blog-header {
   padding: 0px 20px 20px 20px;
 }
 
+.nasa-image-wrapper {
+   position: relative;
+}
+
+.nasa-image-wrapper .fa-play {
+   position: absolute;
+   top: 32.5%;
+   left: 42.5%;
+   color: white!important;
+}
+
+.nasa-image {
+  padding: 10px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.nasa-image:hover, .nasa-image-wrapper .fa-play:hover {
+  cursor: pointer;
+}
+
+.nasa-image:hover {
+  box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
 .daily-image {
   padding: 10px;
   max-width: 100%;
@@ -354,6 +409,18 @@ h6.blog-header {
 
 .daily-description {
   margin-right: 20px;
+}
+
+.nasa-search-title {
+  margin-left: 20px!important;
+  margin-bottom: 0px!important;
+  text-decoration: underline;
+}
+
+.nasa-main-content {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 20px!important;
 }
 
 .main-content {
