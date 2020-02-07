@@ -171,13 +171,13 @@ def get_collection(category, nasa_search_data):
                     'nasa_id': item['data'][0]['nasa_id'],
                     'create_date': converted_datetime_object,
                     'description': item['data'][0]['description'],
-                    'url': urls.pop().replace(" ", "%20")
+                    'url': urls.pop().replace(" ", "%20").replace("http ", "https")
                 }
 
                 if large_urls:
-                    search_object['large_url'] = large_urls.pop().replace(" ", "%20")
+                    search_object['large_url'] = large_urls.pop().replace(" ", "%20").replace("http ", "https")
                 if item.get('links', False):
-                    search_object['preview_image'] = item['links'][0]['href'].replace(" ", "%20")
+                    search_object['preview_image'] = item['links'][0]['href'].replace(" ", "%20").replace("http ", "https")
                 if item['data'][0].get('location', False):
                     search_object['location'] = item['data'][0]['location']
                 if item['data'][0].get('photographer', False):
