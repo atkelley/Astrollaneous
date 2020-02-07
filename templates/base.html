@@ -52,6 +52,24 @@
           $(this).modalForm({formURL: $(this).data('id')});
         });
 
+        $("#nasaModal").on('show.bs.modal', function(event) {
+          let url = $(event.relatedTarget).data('id');
+          console.log(url);
+          let div = $(this).find('.embed-responsive-16by9');
+          div.empty();
+
+          if ($(event.relatedTarget).data('filter') == 'video') {
+            let iframe = '<iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+            div.append(iframe)
+          }
+
+          if ($(event.relatedTarget).data('filter') == 'image') {
+            let img = '<img itemprop="image" src="' + url + '" class="img-rounded" style="width:100%; height:auto;">'
+            let btn = '<button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>'
+            div.append(img, btn);
+          }
+        });
+
         $('#rover-datepicker').datepicker({
           uiLibrary: 'bootstrap4',
           format: 'mm/dd/yyyy',
@@ -84,6 +102,32 @@
           $('div.buttons a[name=' + id + ']').find('span#expandable-sign').text("+");
         }
       }
+
+      $('.nasa-description-container').each(function () {
+        var maxheight = 125;
+        var text = $(this);
+
+        if (text.height() > maxheight){
+          text.css({ 'overflow': 'hidden','height': maxheight + 'px' });
+
+          var link = $('<a href="#">Show More</a>');
+          var linkDiv = $('<div></div>');
+          linkDiv.append(link);
+          $(this).after(linkDiv);
+
+          link.click(function (event) {
+            event.preventDefault();
+
+            if (text.height() > maxheight) {
+                $(this).html("Show More");
+                text.css('height', maxheight + 'px');
+            } else {
+                $(this).html("Show Less");
+                text.css('height', 'auto');
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>

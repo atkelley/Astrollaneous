@@ -370,6 +370,20 @@ h6.blog-header {
   padding: 0px 20px 20px 20px;
 }
 
+audio:focus {
+  outline: none;
+}
+
+.nasa-search-checkbox {
+  margin: 7px;
+}
+
+.nasa-search-checkbox input {
+  margin-right: 5px;
+  margin-bottom: 3px;
+  vertical-align: middle;
+}
+
 .nasa-image-wrapper {
    position: relative;
 }
