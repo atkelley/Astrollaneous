@@ -1,3 +1,7 @@
+#rover-number {
+  text-align: right;
+}
+
 .nasa-search-container {
     text-align: center;
 }
@@ -537,9 +541,34 @@ h2.modal-title {
   font-weight: bold;
 }
 
+.rover-content {
+  height: auto;
+  padding: 20px;
+}
+
 .rover-container {
   border: 1px solid lightgrey;
   border-radius: 5px;
+}
+
+.rover-image-results {
+  padding: 0px 10px;
+}
+
+.rover-image-container, .img-responsive {
+  margin: 5px;
+  border: 1px solid #ccc;
+  /* float: left; */
+  width: 20%;
+  display: inline-block;
+
+     text-align: justify;
+
+}
+
+.rover-image-container img {
+  width: 100%;
+  height: auto;
 }
 
 .rover-submit {

@@ -52,22 +52,30 @@
           $(this).modalForm({formURL: $(this).data('id')});
         });
 
+        $(".rover_image").each(function () {
+          $(this).modalForm({formURL: $(this).data('id')});
+        });
+
         $("#nasaModal").on('show.bs.modal', function(event) {
           let url = $(event.relatedTarget).data('id');
-          console.log(url);
           let div = $(this).find('.embed-responsive-16by9');
           div.empty();
 
           if ($(event.relatedTarget).data('filter') == 'video') {
-            let iframe = '<iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
-            div.append(iframe)
-          }
+            let iframe = '<iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            div.append(iframe);
+          };
 
           if ($(event.relatedTarget).data('filter') == 'image') {
             let img = '<img itemprop="image" src="' + url + '" class="img-rounded" style="width:100%; height:auto;">'
             let btn = '<button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>'
             div.append(img, btn);
-          }
+          };
+        });
+
+        $('#myRoverModal').on('show.bs.modal', function (e) {
+            var image = $(e.relatedTarget).attr('src');
+            $(".img-responsive").attr("src", image);
         });
 
         $('#rover-datepicker').datepicker({

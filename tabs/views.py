@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.core.cache import cache
-from tabs.forms import MarsForm
 import datetime, requests, random, json, urllib, pytz, re
 from urllib.error import URLError, HTTPError
 
@@ -57,84 +56,104 @@ def home(request):
         return render(request, 'tabs/index.html', context)
 
 def mars(request):
-    context = {}
     rovers = []
     rover_names = ['curiosity', 'spirit', 'opportunity']
-    base_url = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
 
-    for rover in rover_names:
-        response = requests.get(base_url + rover + '?api_key=' + API_KEY)
-        rover_data = response.json()
-        launch_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['launch_date'], '%Y-%m-%d')
-        landing_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['landing_date'], '%Y-%m-%d')
-        max_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['max_date'], '%Y-%m-%d')
-        rover_object = {
-            "name": rover_data['photo_manifest']['name'],
-            "launch_date": launch_date_time_obj,
-            "landing_date": landing_date_time_obj,
-            "max_date": max_date_time_obj,
-            "status": rover_data['photo_manifest']['status'],
-            "total_photos": rover_data['photo_manifest']['total_photos']
-        }
-        rovers.append(rover_object)
+    for rover_name in rover_names:
+        if not cache.get(rover_name):
+            base_url = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
+            response = requests.get(base_url + rover_name + '?api_key=' + API_KEY)
+            rover_data = response.json()
+
+            launch_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['launch_date'], '%Y-%m-%d')
+            landing_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['landing_date'], '%Y-%m-%d')
+            max_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['max_date'], '%Y-%m-%d')
+            rover_object = {
+                "name": rover_data['photo_manifest']['name'],
+                "launch_date": launch_date_time_obj,
+                "landing_date": landing_date_time_obj,
+                "max_date": max_date_time_obj,
+                "status": rover_data['photo_manifest']['status'],
+                "total_photos": rover_data['photo_manifest']['total_photos']
+            }
+
+            rovers.append(rover_object)
+            cache.set(rover_name, rover_object)
+        else:
+            rovers.append(cache.get(rover_name))
 
     return render(request, 'tabs/mars.html', {"rovers": rovers})
 
+def get_rover(rover_name):
+    # if not cache.get(rover_name):
+        cameras = []
+        base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
+        response = response = requests.get(base_url + rover_name + '/?api_key=' + API_KEY)
+        rover_data = response.json()
+
+        landing_date_time_obj = datetime.datetime.strptime(rover_data['rover']['landing_date'], '%Y-%m-%d')
+        max_date_time_obj = datetime.datetime.strptime(rover_data['rover']['max_date'], '%Y-%m-%d')
+        camera_data = rover_data['rover']['cameras']
+        for camera in camera_data:
+            camera_object = {camera['name']: camera['full_name']}
+            cameras.append(camera)
+
+        rover_object = {
+            "rover_name": rover_name,
+            "landing_date": landing_date_time_obj,
+            "max_date": max_date_time_obj,
+            "max_sol": rover_data['rover']['max_sol'],
+            "status": rover_data['rover']['status'],
+            "total_photos": rover_data['rover']['total_photos'],
+            "cameras": cameras
+        }
+
+    #     cache.set(rover_name, rover_object)
+    # else:
+    #     rover_object = cache.get(rover_name)
+
+        return rover_object
+
 def rover(request, rover_name):
-    cameras = []
-    base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
-    response = response = requests.get(base_url + rover_name + '/?api_key=' + API_KEY)
-    rover_data = response.json()
-
-    landing_date_time_obj = datetime.datetime.strptime(rover_data['rover']['landing_date'], '%Y-%m-%d')
-    max_date_time_obj = datetime.datetime.strptime(rover_data['rover']['max_date'], '%Y-%m-%d')
-    camera_data = rover_data['rover']['cameras']
-    for camera in camera_data:
-        camera_object = {camera['name']: camera['full_name']}
-        cameras.append(camera)
-
-    rover_object = {
-        "rover_name": rover_name,
-        "landing_date": landing_date_time_obj,
-        "max_date": max_date_time_obj,
-        "max_sol": rover_data['rover']['max_sol'],
-        "status": rover_data['rover']['status'],
-        "total_photos": rover_data['rover']['total_photos'],
-        "cameras": cameras
-    }
-
+    rover_object = get_rover(rover_name)
     return render(request, 'tabs/rover.html', {"rover": rover_object})
 
 def search(request, rover_name):
+    date = None
+    date_selector = None
+    rover_data = None
+    rover_object = get_rover(rover_name)
+
     if request.method == 'POST':
-        form = MarsForm(request.POST)
-        if form.is_valid():
-            date = request.POST.get('earth_date_selector')
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
-    else:
-        form = MarsForm()
+        date_selector = request.POST.getlist('date_selector')
+        earth_date = request.POST.get('earth_date')
+        sol_date = request.POST.get('sol_date')
+        camera_selector = request.POST.get('camera_selector')
 
-    return render(request, 'tabs/rover.html', {'rover_name': rover_name, 'form': form})
+        date = {
+            'date_selector': request.POST.getlist('date_selector'),
+            'earth_date': request.POST.get('earth_date'),
+            'sol_date': request.POST.get('sol_date'),
+            'camera_selector': request.POST.get('camera_selector'),
+        }
 
-def neos(request):
-    context = {"neos_page": "active"}
-    return render(request, 'tabs/neos.html', context)
+        date_parameter = ""
+        camera_parameter = ""
+        if date_selector[0] == "earth":
+            new_earth_date = datetime.datetime.strptime(earth_date, '%m/%d/%Y').strftime('%Y-%m-%d')
+            date_parameter = "?earth_date=" + new_earth_date
+        if date_selector[0] == "sol":
+            date_parameter = "?sol=" + sol_date
+        if camera_selector != "none":
+            camera_parameter = "&camera=" + camera_selector.lower()
 
-def satellites(request):
-    context = {"satellites_page": "active"}
-    return render(request, 'tabs/satellites.html', context)
 
-def weather(request):
-    data = []
-    base_url = "https://api.nasa.gov/insight_weather"
-    response = response = requests.get(base_url + '/?api_key=' + API_KEY + '&feedtype=json')
-    weather_data = response.json()
+        base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
+        url = base_url + date_parameter + camera_parameter + '&api_key=' + API_KEY
+        response = requests.get(base_url + date_parameter + camera_parameter + '&api_key=' + API_KEY)
+        rover_data = response.json()
 
-    context = {"weather_page": "active", "weather_data": weather_data}
-    return render(request, 'tabs/weather.html', context)
+    return render(request, 'tabs/rover.html', {"rover": rover_object, "date": date, "rover_data": rover_data})
 
 def get_collection(category, nasa_search_data):
     collection = []
@@ -272,3 +291,20 @@ def techport_search(request, project_id):
         return render(request, 'tabs/techport_search.html', context)
     else:
         return redirect(request.META.get('HTTP_REFERER', 'techport'))
+
+def neos(request):
+    context = {"neos_page": "active"}
+    return render(request, 'tabs/neos.html', context)
+
+def satellites(request):
+    context = {"satellites_page": "active"}
+    return render(request, 'tabs/satellites.html', context)
+
+def weather(request):
+    data = []
+    base_url = "https://api.nasa.gov/insight_weather"
+    response = response = requests.get(base_url + '/?api_key=' + API_KEY + '&feedtype=json')
+    weather_data = response.json()
+
+    context = {"weather_page": "active", "weather_data": weather_data}
+    return render(request, 'tabs/weather.html', context)
