@@ -156,57 +156,56 @@ def search(request, rover_name):
     return render(request, 'tabs/rover.html', {"rover": rover_object, "date": date, "rover_data": rover_data})
 
 def get_collection(category, nasa_search_data):
-    collection = []
+  collection = []
 
-    for item in nasa_search_data['collection']['items']:
-        try:
-            cleaned_url = item['href'].replace(" ", "%20").replace(u"\u201c", '"').replace(u"\u201d", '"')
-            req = urllib.request.Request(cleaned_url)
-            response = urllib.request.urlopen(req)
-        except Exception as e:
-            print(e)
-        else:
-            raw_json = response.read()
-            data = json.loads(raw_json)
+  for item in nasa_search_data['collection']['items']:
+    try:
+      cleaned_url = item['href'].replace(" ", "%20").replace(u"\u201c", '"').replace(u"\u201d", '"')
+      req = urllib.request.Request(cleaned_url)
+      response = urllib.request.urlopen(req)
+    except Exception as e:
+      print(e)
+    else:
+      raw_json = response.read()
+      data = json.loads(raw_json)
 
-            urls = None
-            large_urls = None
-            if category == 'audio':
-                urls = [url for url in data if '~orig.mp3' in url]
-            if category == 'video':
-                urls = [url for url in data if '~orig.mp4' in url]
-            if category == 'image':
-                urls = [url for url in data if '~orig.jpg' in url]
-                large_urls = [url for url in data if '~Large.jpg' in url]
+      urls = None
+      large_urls = None
+      if category == 'audio':
+        urls = [url for url in data if '~orig.mp3' in url]
+      if category == 'video':
+        urls = [url for url in data if '~orig.mp4' in url]
+      if category == 'image':
+        urls = [url for url in data if '~orig.jpg' in url]
+        large_urls = [url for url in data if '~Large.jpg' in url]
 
-            if urls:
-                cleaned_date_created_string = re.sub("\+(?P<hour>\d{2}):(?P<minute>\d{2})$", "+\g<hour>\g<minute>" , item['data'][0]['date_created'])
-                datetime_object = datetime.datetime.strptime(cleaned_date_created_string, "%Y-%m-%dT%H:%M:%S%z")
-                converted_datetime_object = datetime_object.astimezone(pytz.UTC)
+      if urls:
+        cleaned_date_created_string = re.sub("\+(?P<hour>\d{2}):(?P<minute>\d{2})$", "+\g<hour>\g<minute>" , item['data'][0]['date_created'])
+        datetime_object = datetime.datetime.strptime(cleaned_date_created_string, "%Y-%m-%dT%H:%M:%S%z")
+        converted_datetime_object = datetime_object.astimezone(pytz.UTC)
 
-                search_object = {
-                    'category': category,
-                    'title': item['data'][0]['title'],
-                    'nasa_id': item['data'][0]['nasa_id'],
-                    'create_date': converted_datetime_object,
-                    'description': item['data'][0]['description'],
-                    'url': urls.pop().replace(" ", "%20").replace("http ", "https")
-                }
+        search_object = {
+          'title': item['data'][0]['title'],
+          'nasa_id': item['data'][0]['nasa_id'],
+          'create_date': converted_datetime_object,
+          'description': item['data'][0]['description'],
+          'url': urls.pop().replace(" ", "%20").replace("http ", "https")
+        }
 
-                if large_urls:
-                    search_object['large_url'] = large_urls.pop().replace(" ", "%20").replace("http ", "https")
-                if item.get('links', False):
-                    search_object['preview_image'] = item['links'][0]['href'].replace(" ", "%20").replace("http ", "https")
-                if item['data'][0].get('location', False):
-                    search_object['location'] = item['data'][0]['location']
-                if item['data'][0].get('photographer', False):
-                    search_object['photographer'] = item['data'][0]['photographer']
-                if item['data'][0].get('secondary_creator', False):
-                    search_object['secondary_creator'] = item['data'][0]['secondary_creator']
+        if large_urls:
+          search_object['large_url'] = large_urls.pop().replace(" ", "%20").replace("http ", "https")
+        if item.get('links', False):
+          search_object['preview_image'] = item['links'][0]['href'].replace(" ", "%20").replace("http ", "https")
+        if item['data'][0].get('location', False):
+          search_object['location'] = item['data'][0]['location']
+        if item['data'][0].get('photographer', False):
+          search_object['photographer'] = item['data'][0]['photographer']
+        if item['data'][0].get('secondary_creator', False):
+          search_object['secondary_creator'] = item['data'][0]['secondary_creator']
 
-                collection.append(search_object)
+        collection.append(search_object)
 
-    return collection
+  return collection
 
 def nasa(request):
     categories = ['video', 'image', 'audio']
@@ -215,20 +214,20 @@ def nasa(request):
     category_collection = []
 
     if request.method == "POST":
-        nasa_search_input = request.POST['nasa-search-input']
+      nasa_search_input = request.POST['nasa-search-input']
 
-        if nasa_search_input:
-            base_url = "https://images-api.nasa.gov/search?q="
-            response = response = requests.get(base_url + nasa_search_input)
-            nasa_search_data = response.json()
+      if nasa_search_input:
+        base_url = "https://images-api.nasa.gov/search?q="
+        response = response = requests.get(base_url + nasa_search_input)
+        nasa_search_data = response.json()
 
-            for category in categories:
-                category_collection.append(get_collection(category, nasa_search_data))
+        for category in categories:
+          category_collection.append({"name": category, "collection": get_collection(category, nasa_search_data)})
 
     context = {
-        "nasa_page": "active",
-        "nasa_search_input": nasa_search_input,
-        "categories": category_collection
+      "nasa_page": "active",
+      "nasa_search_input": nasa_search_input,
+      "categories": category_collection
     }
 
     return render(request, 'tabs/nasa.html', context)

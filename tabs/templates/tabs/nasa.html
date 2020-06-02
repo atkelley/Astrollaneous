@@ -22,37 +22,38 @@
     {% for category in categories %}
       <div class="container main-content nasa-main-content">
         <div class="row daily-row">
-          <h3 class="nasa-search-title"><strong>{{ collection|length }} {{collection.category}} results returned for "{{ nasa_search_input }}":</strong></h3>
+          <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} results for "{{ nasa_search_input }}":</strong></h3>
         </div>
-        {% for collection in category %}
+
+        {% for item in category.collection %}
           <div class="row daily-row">
             <div class="col-md-4">
               <div class="nasa-image-wrapper">
-                {% if collection.category == 'video' %}
-                  <a data-toggle="modal" data-target="#nasaModal" data-id="{{ collection.url }}" data-filter="{{ collection.category }}">
-                    <img class="nasa-image" src="{{ collection.preview_image }}" alt="">
+                {% if category.name == 'video' %}
+                  <a data-toggle="modal" data-target="#nasaModal" data-id="{{ item.url }}" data-filter="{{ category.name }}">
+                    <img class="nasa-image" src="{{ item.preview_image }}" alt="">
                     <i class="fas fa-play fa-3x"></i>
                   </a>
-                {% elif collection.category == 'image' %}
-                  <a data-toggle="modal" data-target="#nasaModal" data-id="{{ collection.url }}" data-filter="{{ collection.category }}">
-                    <img class="nasa-image" src="{{ collection.preview_image }}" alt="">
+                {% elif category.name == 'image' %}
+                  <a data-toggle="modal" data-target="#nasaModal" data-id="{{ item.url }}" data-filter="{{ category.name }}">
+                    <img class="nasa-image" src="{{ item.preview_image }}" alt="">
                   </a>
-                {% elif collection.category == 'audio' %}
+                {% elif category.name == 'audio' %}
                   <audio controls>
-                    <source src="{{ collection.url }}" type="audio/mpeg">
+                    <source src="{{ item.url }}" type="audio/mpeg">
                     Your browser does not support the audio element.
                   </audio>
                 {% endif %}
               </div>
             </div>
             <div class="col-md-8">
-              <h5><strong>NASA ID: </strong>{{ collection.nasa_id }}</h5>
-              {% if collection.title %}
-                <h5><strong>Title: </strong>{{ collection.title }}</h5>
+              <h5><strong>NASA ID: </strong>{{ item.nasa_id }}</h5>
+              {% if item.title %}
+                <h5><strong>Title: </strong>{{ item.title }}</h5>
               {% endif %}
-              <h6><strong>Date Created: </strong>{{ collection.create_date|date:"F jS, Y" }}</h6>
+              <h6><strong>Date Created: </strong>{{ item.create_date|date:"F jS, Y" }}</h6>
               <div class="nasa-description-container">
-                <p>{{ collection.description }}</p>
+                <p>{{ item.description }}</p>
               </div>
             </div>
           </div>

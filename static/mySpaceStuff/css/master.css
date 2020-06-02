@@ -638,8 +638,8 @@ h2.modal-title {
 /* FOOTER SECTION */
 
 footer {
-  /* position: fixed;
-  bottom: 0; */
+  position: fixed;
+  bottom: 0;
   width: 100%;
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
