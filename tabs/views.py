@@ -214,7 +214,7 @@ def nasa(request):
     category_collection = []
 
     if request.method == "POST":
-      nasa_search_input = request.POST['nasa-search-input']
+      nasa_search_input = request.POST['nasa-search-input'].strip()
 
       if nasa_search_input:
         base_url = "https://images-api.nasa.gov/search?q="

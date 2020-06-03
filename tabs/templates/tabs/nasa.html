@@ -18,58 +18,39 @@
     </div>
   </div>
 
-  {% if nasa_search_input %}
+  {% if categories %}
     {% for category in categories %}
-      <div class="container main-content nasa-main-content">
-        <div class="row daily-row">
-          <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} results for "{{ nasa_search_input }}":</strong></h3>
-        </div>
-
-        {% for item in category.collection %}
+      {% if category.name == 'image' %}
+        <div class="container main-content nasa-main-content">
           <div class="row daily-row">
-            <div class="col-md-4">
-              <div class="nasa-image-wrapper">
-                {% if category.name == 'video' %}
-                  <a data-toggle="modal" data-target="#nasaModal" data-id="{{ item.url }}" data-filter="{{ category.name }}">
-                    <img class="nasa-image" src="{{ item.preview_image }}" alt="">
-                    <i class="fas fa-play fa-3x"></i>
-                  </a>
-                {% elif category.name == 'image' %}
-                  <a data-toggle="modal" data-target="#nasaModal" data-id="{{ item.url }}" data-filter="{{ category.name }}">
-                    <img class="nasa-image" src="{{ item.preview_image }}" alt="">
-                  </a>
-                {% elif category.name == 'audio' %}
-                  <audio controls>
-                    <source src="{{ item.url }}" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                  </audio>
-                {% endif %}
-              </div>
-            </div>
-            <div class="col-md-8">
-              <h5><strong>NASA ID: </strong>{{ item.nasa_id }}</h5>
-              {% if item.title %}
-                <h5><strong>Title: </strong>{{ item.title }}</h5>
-              {% endif %}
-              <h6><strong>Date Created: </strong>{{ item.create_date|date:"F jS, Y" }}</h6>
-              <div class="nasa-description-container">
-                <p>{{ item.description }}</p>
-              </div>
-            </div>
+            <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} results for "{{ nasa_search_input }}":</strong></h3>
           </div>
-          <hr>
-        {% endfor %}
-      </div>
+
+          <div class="nasa-slideshow-container">
+            {% for item in category.collection %}
+              <div class="nasa-slides fade-in">
+                <div class="nasa-slide-counter">{{ forloop.counter }} / {{ category.collection|length }}</div>
+                <img src="{{ item.preview_image }}" alt="{{ item.title }}">
+                <a class="prev" onclick="nextSlide(-1)">&#10094;</a>
+                <a class="next" onclick="nextSlide(1)">&#10095;</a>
+                <div class="nasa-slide-description">{{ item.description }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+
+      {% endif %}
     {% endfor %}
-  {% endif %}
 
-  <div class="modal fade" id="nasaModal" tabindex="-1" role="dialog" aria-labelledby="NasaModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content video-modal-content">
-        <div class="modal-body embed-responsive embed-responsive-16by9">
-
+    <div class="modal fade" id="nasaModal" tabindex="-1" role="dialog" aria-labelledby="NasaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content video-modal-content">
+          <div class="modal-body embed-responsive embed-responsive-16by9">
+  
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 {% endblock %}

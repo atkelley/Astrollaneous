@@ -444,6 +444,7 @@ audio:focus {
 .main-content {
   background-color: white;
   border-radius: 5px;
+  margin-bottom: 60px!important;
 }
 
 .rover-bottom {
@@ -674,9 +675,93 @@ footer {
 }
 
 .nav-item-footer {
-  display:inline-block;
+  display: inline-block;
 }
 
-.nav-item>button {
+.nav-item > button {
   font-size: .75rem;
+}
+
+/* NASA Image Slideshow */
+.nasa-slideshow-container {
+  padding: 15px;
+}
+
+.nasa-slides {
+  width: 100%;
+  height: 520px;
+  background-color: #F5F5F5;
+  border: 1px solid #A0A0A0;
+  border-radius: 10px;
+  position: relative;
+}
+
+.nasa-slides > img {
+  cursor: pointer;
+  display: block!important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-height: 100%;
+  padding: 10px 0px 40px 0px;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.6);
+}
+
+.nasa-slide-description {
+  font-size: 1.0rem;
+  padding: 10px 40px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.nasa-slide-counter {
+  font-size: 0.75rem;
+  padding: 10px 10px;
+  position: absolute;
+  top: 0;
+}
+
+.fade-in {
+  -webkit-animation-name: fade-in;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade-in;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade-in {
+  from {opacity: 0.4}
+  to {opacity: 1.0}
+}
+
+@keyframes fade-in {
+  from {opacity: 0.4}
+  to {opacity: 1.0}
 }
