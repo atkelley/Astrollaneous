@@ -58,6 +58,8 @@
 
         $("#nasaModal").on('show.bs.modal', function(event) {
           let url = $(event.relatedTarget).data('id');
+          let title = $(event.relatedTarget).data('title');
+          let year = $(event.relatedTarget).data('date');
           let div = $(this).find('.embed-responsive-16by9');
           div.empty();
 
@@ -67,9 +69,10 @@
           };
 
           if ($(event.relatedTarget).data('filter') == 'image') {
-            let img = '<img itemprop="image" src="' + url + '" class="img-rounded" style="width:100%; height:auto;">'
-            let btn = '<button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>'
-            div.append(img, btn);
+            let img = '<img itemprop="image" src="' + url + '" class="img-rounded" style="width:100%; height:auto;">';
+            let p = '<p class="modal-title float-left"><em>' + title + ' - NASA &copy; ' + year + '</em></p>';
+            let btn = '<button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>';
+            div.append(img, p, btn);
           };
         });
 
@@ -112,7 +115,7 @@
       }
 
       $('.nasa-description-container').each(function () {
-        var maxheight = 125;
+        var maxheight = 100;
         var text = $(this);
 
         if (text.height() > maxheight){

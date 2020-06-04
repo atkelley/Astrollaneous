@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container main-content">
+  <div class="container main-content home-content">
     <div class="row daily-row">
       <div class="col-md-4">
         <a data-toggle="modal" data-target="#myModal">
@@ -37,7 +37,7 @@
         <div class="modal-content">
           <div class="modal-body">
             <img itemprop="image" src='{{ image_hdurl }}' class="img-rounded" style="width:100%; height:auto;">
-            <p class="modal-title float-left" id="myModalLabel"><em>{{ title }} &copy; {{ copyright }}</em></p>
+            <p class="modal-title float-left" id="myModalLabel"><em>{{ title }} - NASA &copy; 2020</em></p>
             <button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>
           </div>
         </div>
