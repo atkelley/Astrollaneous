@@ -160,7 +160,7 @@ def get_collection(category, nasa_search_data):
 
   for item in nasa_search_data['collection']['items']:
     try:
-      cleaned_url = item['href'].replace(" ", "%20").replace(u"\u201c", '"').replace(u"\u201d", '"')
+      cleaned_url = item['href'].replace(" ", "%20").replace("“", '"').replace("”", '"')
       req = urllib.request.Request(cleaned_url)
       response = urllib.request.urlopen(req)
     except Exception as e:
