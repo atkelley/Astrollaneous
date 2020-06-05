@@ -56,19 +56,30 @@
           $(this).modalForm({formURL: $(this).data('id')});
         });
 
+        $("#nasaModal").on('hidden.bs.modal', function (e) {
+          $("#nasaModal iframe").attr("src", "");
+        });
+
         $("#nasaModal").on('show.bs.modal', function(event) {
           let url = $(event.relatedTarget).data('id');
+          let type = $(event.relatedTarget).data('filter');
           let title = $(event.relatedTarget).data('title');
           let year = $(event.relatedTarget).data('date');
           let div = $(this).find('.embed-responsive-16by9');
           div.empty();
 
-          if ($(event.relatedTarget).data('filter') == 'video') {
+          if (type == 'video') {
+            let outerDiv = $(this).find('.modal-content');
+            outerDiv.addClass('video-modal-content');
+            div.addClass('embed-responsive');
             let iframe = '<iframe width="100%" height="auto" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
             div.append(iframe);
           };
 
-          if ($(event.relatedTarget).data('filter') == 'image') {
+          if (type == 'image') {
+            let outerDiv = $(this).find('.modal-content');
+            outerDiv.removeClass('video-modal-content');
+            div.removeClass('embed-responsive');
             let img = '<img itemprop="image" src="' + url + '" class="img-rounded" style="width:100%; height:auto;">';
             let p = '<p class="modal-title float-left"><em>' + title + ' - NASA &copy; ' + year + '</em></p>';
             let btn = '<button type="button" class="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>';

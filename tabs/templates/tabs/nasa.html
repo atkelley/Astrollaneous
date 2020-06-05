@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load url_helper %}
 
 {% block content %}
   <div class="modal fade bd-example-modal-lg" id="nasaModal"  tabindex="-1" role="dialog" aria-labelledby="NasaModalLabel" aria-hidden="true">
@@ -33,7 +34,7 @@
       {% if category.name == 'video' %}
         <div class="container main-content nasa-video-content">
           <div class="row daily-row">
-            <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} results for "{{ nasa_search_input }}":</strong></h3>
+            <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} result{{ category.collection|length|pluralize }} for "{{ nasa_search_input }}":</strong></h3>
           </div>
 
           {% for item in category.collection %}
@@ -41,8 +42,8 @@
               <div class="col-md-4">
                 <div class="nasa-image-wrapper">
                   <a data-toggle="modal" data-target="#nasaModal" data-id="{{ item.url }}" data-filter="{{ category.name }}">
-                    <img class="nasa-image" src="{{ item.preview_image }}" alt="">
-                    <i class="fas fa-play fa-3x"></i>
+                  <img class="nasa-image" src="{{ item.preview_image }}" alt="">
+                  <i class="fas fa-play fa-3x"></i>
                   </a>
                 </div>
               </div>
@@ -66,7 +67,7 @@
       {% elif category.name == 'image' %}
         <div class="container main-content nasa-image-content">
           <div class="row daily-row">
-            <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} results for "{{ nasa_search_input }}":</strong></h3>
+            <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} result{{ category.collection|length|pluralize }} for "{{ nasa_search_input }}":</strong></h3>
           </div>
 
           <div class="nasa-slideshow-container">
@@ -89,7 +90,7 @@
       {% elif category.name == 'audio' %}
         <div class="container main-content nasa-audio-content">
           <div class="row daily-row">
-            <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} results for "{{ nasa_search_input }}":</strong></h3>
+            <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} result{{ category.collection|length|pluralize }} for "{{ nasa_search_input }}":</strong></h3>
           </div>
 
           {% for item in category.collection %}

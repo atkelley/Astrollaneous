@@ -207,30 +207,77 @@ def get_collection(category, nasa_search_data):
 
   return collection
 
-def nasa(request):
-    categories = ['video', 'image', 'audio']
-    nasa_search_data = None
-    nasa_search_input = None
-    category_collection = []
+def get_collections(nasa_search_data):
+  video = []
+  image = []
+  audio = []
 
-    if request.method == "POST":
-      nasa_search_input = request.POST['nasa-search-input'].strip()
+  for item in nasa_search_data['collection']['items']:
+    cleaned_date_created_string = re.sub("\+(?P<hour>\d{2}):(?P<minute>\d{2})$", "+\g<hour>\g<minute>" , item['data'][0]['date_created'])
+    datetime_object = datetime.datetime.strptime(cleaned_date_created_string, "%Y-%m-%dT%H:%M:%S%z")
+    converted_datetime_object = datetime_object.astimezone(pytz.UTC)
 
-      if nasa_search_input:
-        base_url = "https://images-api.nasa.gov/search?q="
-        response = response = requests.get(base_url + nasa_search_input)
-        nasa_search_data = response.json()
-
-        for category in categories:
-          category_collection.append({"name": category, "collection": get_collection(category, nasa_search_data)})
-
-    context = {
-      "nasa_page": "active",
-      "nasa_search_input": nasa_search_input,
-      "categories": category_collection
+    search_object = {
+      'title': item['data'][0]['title'],
+      'nasa_id': item['data'][0]['nasa_id'],
+      'create_date': converted_datetime_object,
+      'description': item['data'][0]['description']
     }
 
-    return render(request, 'tabs/nasa.html', context)
+    json_url = item['href'].replace(" ", "%20").replace("“", '"').replace("”", '"')
+    try:
+      response = requests.get(json_url)
+      response.raise_for_status()
+    except HTTPError as http_err:
+      print(f'HTTP error occurred: {http_err}')
+    except Exception as err:
+      print(f'Other error occurred: {err}')
+    else:
+      data = response.json()
+      
+      if item['data'][0]['media_type'] == 'audio':
+        for value in data:
+          if '~orig.mp3' in value or '~orig.wav' in value:
+            search_object['url'] = value.replace(" ", "%20").replace("“", '"').replace("”", '"')
+        audio.append(search_object)
+      else:
+        search_object['preview_image'] = item['links'][0]['href'].replace(" ", "%20").replace("http ", "https").replace("“", '"').replace("”", '"')
+
+        if item['data'][0]['media_type'] == 'image':
+          for value in data:
+            if '~orig.jpg' in value or '~Large.jpg' in value or '~large.jpg' in value or '~medium.jpg' in value:
+              search_object['url'] = value.replace(" ", "%20").replace("“", '"').replace("”", '"')
+          image.append(search_object)
+        else:
+          for value in data:
+            if '~orig.mp4' in value or '~medium.mp4' in value :
+              search_object['url'] = value.replace(" ", "%20").replace("“", '"').replace("”", '"')
+          video.append(search_object)
+
+  collections = [{"name": "video", "collection": video}, {"name": "image", "collection": image}, {"name": "audio", "collection": audio}]
+  return collections
+
+def nasa(request):
+  categories = []
+  nasa_search_data = None
+  nasa_search_input = None
+
+  if request.method == "POST":
+    nasa_search_input = request.POST['nasa-search-input'].strip()
+
+    if nasa_search_input:
+      base_url = "https://images-api.nasa.gov/search?q="
+      response = requests.get(base_url + nasa_search_input)
+      nasa_search_data = response.json()
+      categories = get_collections(nasa_search_data)
+
+  context = {
+    "nasa_page": "active",
+    "nasa_search_input": nasa_search_input,
+    "categories": categories
+  }
+
+  return render(request, 'tabs/nasa.html', context)
 
 def techport(request):
     techport_data = None
