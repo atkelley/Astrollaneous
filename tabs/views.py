@@ -147,7 +147,6 @@ def search(request, rover_name):
         if camera_selector != "none":
             camera_parameter = "&camera=" + camera_selector.lower()
 
-
         base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
         url = base_url + date_parameter + camera_parameter + '&api_key=' + API_KEY
         response = requests.get(base_url + date_parameter + camera_parameter + '&api_key=' + API_KEY)
@@ -209,30 +208,30 @@ def nasa(request):
   return render(request, 'tabs/nasa.html', context)
 
 def techport(request):
-    techport_data = None
-    current_date = datetime.datetime.now()
-    default_date_object = datetime.datetime(current_date.year - 1, current_date.month, current_date.day)
-    default_date = default_date_object.strftime("%Y-%m-%d")
+  techport_data = None
+  current_date = datetime.datetime.now()
+  default_date_object = datetime.datetime(current_date.year - 1, current_date.month, current_date.day)
+  default_date = default_date_object.strftime("%Y-%m-%d")
 
-    if request.method == "POST":
-        picked_date = request.POST['techport-datepicker']
-        if not picked_date:
-            picked_date = default_date
+  if request.method == "POST":
+    picked_date = request.POST['techport-datepicker']
+    if not picked_date:
+      picked_date = default_date
 
-        if cache.get('picked_date') != picked_date:
-            base_url = "https://api.nasa.gov/techport/api/projects?updatedSince="
-            full_url = base_url + picked_date + '&api_key=' + API_KEY
-            response = requests.get(base_url + picked_date + '&api_key=' + API_KEY)
-            techport_data = response.json()
-            cache.set('picked_date', picked_date)
-            cache.set('techport_data', techport_data)
-        else:
-            techport_data = cache.get('techport_data')
+      if cache.get('picked_date') != picked_date:
+        base_url = "https://api.nasa.gov/techport/api/projects?updatedSince="
+        full_url = base_url + picked_date + '&api_key=' + API_KEY
+        response = requests.get(base_url + picked_date + '&api_key=' + API_KEY)
+        techport_data = response.json()
+        cache.set('picked_date', picked_date)
+        cache.set('techport_data', techport_data)
+      else:
+        techport_data = cache.get('techport_data')
 
     context = {
-        "techport_page": "active",
-        "default_date": default_date_object,
-        "techport_data": techport_data,
+      "techport_page": "active",
+      "default_date": default_date_object,
+      "techport_data": techport_data,
     }
 
     return render(request, 'tabs/techport.html', context)
