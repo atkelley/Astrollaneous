@@ -169,7 +169,7 @@ def get_collections(nasa_search_data):
       'nasa_id': item['data'][0]['nasa_id'],
       'create_date': converted_datetime_object,
       'description': item['data'][0]['description'],
-      'json_url': item['href'].replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http ", "https")
+      'json_url': item['href'].replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http", "https")
     }
 
     if item['data'][0]['media_type'] == 'audio':

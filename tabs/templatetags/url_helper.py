@@ -26,17 +26,17 @@ def get_url(category, json_url):
 def get_video_url(data):
   for value in data:
     if '~orig.mp4' in value or '~medium.mp4' in value:
-      return value.replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http ", "https")
+      return value.replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http", "https")
   return None
 
 def get_image_url(data):
   for value in data:
     if '~orig.jpg' in value or '~Large.jpg' in value or '~large.jpg' in value or '~medium.jpg' in value:
-      return value.replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http ", "https")
+      return value.replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http", "https")
   return None
 
 def get_audio_url(data):
   for value in data:
     if '~orig.mp3' in value or '~orig.wav' in value:
-      return value.replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http ", "https")
+      return value.replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http", "https")
   return None
