@@ -8,6 +8,8 @@ from django.core.cache import cache
 import datetime, requests, random, json, urllib, pytz, re
 from urllib.error import URLError, HTTPError
 
+from .templatetags.url_helper import get_url
+
 API_KEY = "suY5NhcHycX1CIkDaMCXNdY8dIYdp0O5meo3cJso"
 
 def home(request):
@@ -153,7 +155,7 @@ def search(request, rover_name):
         rover_data = response.json()
 
     return render(request, 'tabs/rover.html', {"rover": rover_object, "date": date, "rover_data": rover_data})
-
+    
 def get_collections(nasa_search_data):
   video = []
   image = []
@@ -164,22 +166,27 @@ def get_collections(nasa_search_data):
     datetime_object = datetime.datetime.strptime(cleaned_date_created_string, "%Y-%m-%dT%H:%M:%S%z")
     converted_datetime_object = datetime_object.astimezone(pytz.UTC)
 
+    description = item['data'][0]['title']
+    if "description" in item['data'][0]:
+      description = item['data'][0]['description']
+
     search_object = {
       'title': item['data'][0]['title'],
       'nasa_id': item['data'][0]['nasa_id'],
       'create_date': converted_datetime_object,
-      'description': item['data'][0]['description'],
-      'json_url': item['href'].replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http", "https")
+      'description': description,
+      'json_url': item['href']
     }
 
     if item['data'][0]['media_type'] == 'audio':
       audio.append(search_object)
     else:
-      search_object['preview_image'] = item['links'][0]['href'].replace(" ", "%20").replace("http ", "https").replace("“", '"').replace("”", '"')
+      search_object['preview_image'] = item['links'][0]['href']
 
       if item['data'][0]['media_type'] == 'image':
         image.append(search_object)
       else:
+        search_object['url'] = get_url('video', item['href'])
         video.append(search_object)
 
   collections = [{"name": "video", "collection": video}, {"name": "image", "collection": image}, {"name": "audio", "collection": audio}]

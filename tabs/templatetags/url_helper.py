@@ -26,7 +26,7 @@ def get_url(category, json_url):
 def get_video_url(data):
   for value in data:
     if '~orig.mp4' in value or '~medium.mp4' in value:
-      return value.replace(" ", "%20").replace("“", '"').replace("”", '"').replace("http", "https")
+      return value.replace("http", "https")
   return None
 
 def get_image_url(data):
