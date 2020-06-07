@@ -41,7 +41,7 @@
             <div class="row daily-row">
               <div class="col-md-4">
                 <div class="nasa-image-wrapper">
-                  <a data-toggle="modal" data-target="#nasaModal" data-id="{{ item.url }}" data-filter="{{ category.name }}">
+                  <a data-toggle="modal" data-target="#nasaModal" data-id="{% get_url category.name item.json_url %}" data-filter="{{ category.name }}">
                   <img class="nasa-image" src="{{ item.preview_image }}" alt="">
                   <i class="fas fa-play fa-3x"></i>
                   </a>
@@ -75,7 +75,7 @@
               <div class="nasa-slides fade-in">
                 <div class="nasa-slides-wrapper">
                   <div class="nasa-slide-counter">{{ forloop.counter }} / {{ category.collection|length }}</div>
-                  <a data-toggle="modal" data-target="#nasaModal" data-id="{{ item.url }}" data-title="{{ item.title }}" data-date="{{ item.create_date|date:"Y" }}" data-filter="{{ category.name }}">
+                  <a data-toggle="modal" data-target="#nasaModal" data-id="{% get_url category.name item.json_url %}" data-title="{{ item.title }}" data-date="{{ item.create_date|date:"Y" }}" data-filter="{{ category.name }}">
                     <img src="{{ item.preview_image }}" alt="{{ item.title }}">
                   </a>
                   <a class="prev" onclick="nextSlide(-1)">&#10094;</a>
@@ -98,7 +98,7 @@
               <div class="col-md-4">
                 <div class="nasa-image-wrapper">
                   <audio controls>
-                    <source src="{{ item.url }}" type="audio/mpeg">
+                    <source src="{% get_url category.name item.json_url %}" type="audio/mpeg">
                     Your browser does not support the audio element.
                   </audio>
                 </div>
