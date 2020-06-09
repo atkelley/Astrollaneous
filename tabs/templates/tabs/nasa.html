@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="container main-content">
+  <div class="container nasa-search-content">
     <div class="row daily-row">
       <div class="col-md-12">
         <div class="nasa-search-container">
@@ -29,10 +29,18 @@
     </div>
   </div>
 
+
   {% if categories %}
+    <div class="container nasa-main-content">
+      <div class="row tabs">
+        <button class="tablinks left active" onclick="openTab(event, 'image')">Image</button>
+        <button class="tablinks" onclick="openTab(event, 'video')">Video</button>
+        <button class="tablinks right" onclick="openTab(event, 'audio')">Audio</button>
+      </div>
+
     {% for category in categories %}
       {% if category.name == 'video' %}
-        <div class="container main-content nasa-video-content">
+        <div class="container nasa-video-content tab-content" id="video">
           <div class="row daily-row">
             <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} result{{ category.collection|length|pluralize }} for "{{ nasa_search_input }}":</strong></h3>
           </div>
@@ -61,12 +69,14 @@
                 </div>
               </div>
             </div>
-            <hr>
+            {% if forloop.counter != category.collection|length %}
+              <hr>
+            {% endif %}
           {% endfor %}
         </div>
 
       {% elif category.name == 'image' %}
-        <div class="container main-content nasa-image-content">
+        <div class="container nasa-image-content tab-content" id="image">
           <div class="row daily-row">
             <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} result{{ category.collection|length|pluralize }} for "{{ nasa_search_input }}":</strong></h3>
           </div>
@@ -89,7 +99,7 @@
         </div>
 
       {% elif category.name == 'audio' %}
-        <div class="container main-content nasa-audio-content">
+        <div class="container nasa-audio-content tab-content" id="audio">
           <div class="row daily-row">
             <h3 class="nasa-search-title"><strong>{{ category.collection|length }} {{ category.name }} result{{ category.collection|length|pluralize }} for "{{ nasa_search_input }}":</strong></h3>
           </div>
@@ -117,10 +127,13 @@
                 </div>
               </div>
             </div>
-            <hr>
+            {% if forloop.counter != category.collection|length %}
+              <hr>
+            {% endif %}
           {% endfor %}
         </div>
       {% endif %}
     {% endfor %}
   {% endif %}
+</div>
 {% endblock %}

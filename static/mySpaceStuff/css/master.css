@@ -363,6 +363,7 @@ h6.blog-header {
 .daily-row {
   padding: 20px;
   border-radius: 5px;
+  background-color: #fff;
 }
 
 .techport-search-row {
@@ -435,7 +436,7 @@ audio:focus {
   text-decoration: underline;
 }
 
-.main-content {
+.nasa-search-content, .nasa-main-content {
   background-color: white;
   border-radius: 5px;
 }
@@ -446,7 +447,11 @@ audio:focus {
   margin-top: 20px!important;
 }
 
-.home-content, .nasa-audio-content {
+.nasa-main-content {
+  padding-bottom: 40px;
+} 
+
+.home-content, .nasa-main-content {
   margin-bottom: 80px!important;
 }
 
@@ -531,7 +536,7 @@ h2.modal-title {
 }
 
 .rover-select, .rover-select option {
-    width: 100%;
+  width: 100%;
 }
 .rover-title {
   margin: 0px 0px 10px 20px;
@@ -562,12 +567,9 @@ h2.modal-title {
 .rover-image-container, .img-responsive {
   margin: 5px;
   border: 1px solid #ccc;
-  /* float: left; */
   width: 20%;
   display: inline-block;
-
-     text-align: justify;
-
+  text-align: justify;
 }
 
 .rover-image-container img {
@@ -588,8 +590,7 @@ h2.modal-title {
   margin-bottom: 20px;
   padding: 10px 0px;
   border: 1px solid #A0A0A0;
-  border-top-radius: 5px;
-  border-bottom-radius: 5px;
+  border-radius: 5px;
   text-align: center;
 }
 
@@ -640,7 +641,6 @@ h2.modal-title {
 }
 
 /* FOOTER SECTION */
-
 footer {
   position: fixed;
   bottom: 0;
@@ -768,4 +768,53 @@ footer {
 @keyframes fade-in {
   from {opacity: 0.4}
   to {opacity: 1.0}
+}
+
+ .tabs {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  float: right;
+  margin: 15px 20px 0px 0px;
+}
+
+.left, .left.active {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-right: 1px solid #ccc;
+}
+
+.right, .right.active {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-left: 1px solid #ccc;
+}
+
+.tabs button {
+  background-color: #fff;
+  float: left;
+  border: none!important;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+
+.tabs button:hover {
+  background-color: #ccc;
+  outline: 0;
+}
+
+.tabs button.active {
+  background-color: #ccc;
+  outline: 0;
+}
+
+.tab-content {
+  display: none;
+} 
+
+.nasa-image-content.tab-content {
+  display: block;
+}
+
+.nasa-search-checkbox input[type="checkbox"]:checked {
+  box-shadow: none!important;
 }

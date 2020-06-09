@@ -156,7 +156,7 @@ def search(request, rover_name):
 
     return render(request, 'tabs/rover.html', {"rover": rover_object, "date": date, "rover_data": rover_data})
     
-def get_collections(nasa_search_data):
+def get_collections(nasa_search_data, category_types):
   video = []
   image = []
   audio = []
@@ -178,16 +178,17 @@ def get_collections(nasa_search_data):
       'json_url': item['href']
     }
 
-    if item['data'][0]['media_type'] == 'audio':
+    if item['data'][0]['media_type'] == 'audio' and 'audio' in category_types:
       audio.append(search_object)
-    else:
-      search_object['preview_image'] = item['links'][0]['href']
 
-      if item['data'][0]['media_type'] == 'image':
-        image.append(search_object)
-      else:
-        search_object['url'] = get_url('video', item['href'])
-        video.append(search_object)
+    if item['data'][0]['media_type'] == 'image' and 'image' in category_types:
+      search_object['preview_image'] = item['links'][0]['href']
+      image.append(search_object)
+
+    if item['data'][0]['media_type'] == 'video' and 'video' in category_types:
+      search_object['preview_image'] = item['links'][0]['href']
+      search_object['url'] = get_url('video', item['href'])
+      video.append(search_object)
 
   collections = [{"name": "video", "collection": video}, {"name": "image", "collection": image}, {"name": "audio", "collection": audio}]
   return collections
@@ -196,15 +197,20 @@ def nasa(request):
   categories = []
   nasa_search_data = None
   nasa_search_input = None
+  category_types = ['image', 'audio', 'video']
 
   if request.method == "POST":
     nasa_search_input = request.POST['nasa-search-input'].strip()
+    nasa_checkboxes = request.POST.getlist('nasa_search_checkboxes')
+
+    if nasa_checkboxes:
+      category_types = nasa_checkboxes
 
     if nasa_search_input:
-      base_url = "https://images-api.nasa.gov/search?q="
-      response = requests.get(base_url + nasa_search_input)
+      base_url = "https://images-api.nasa.gov/search?q=" + nasa_search_input
+      response = requests.get(base_url)
       nasa_search_data = response.json()
-      categories = get_collections(nasa_search_data)
+      categories = get_collections(nasa_search_data, category_types)
 
   context = {
     "nasa_page": "active",

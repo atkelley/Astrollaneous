@@ -124,32 +124,6 @@
           $('div.buttons a[name=' + id + ']').find('span#expandable-sign').text("+");
         }
       }
-
-      $('.nasa-description-container').each(function () {
-        var maxheight = 100;
-        var text = $(this);
-
-        if (text.height() > maxheight){
-          text.css({ 'overflow': 'hidden','height': maxheight + 'px' });
-
-          var link = $('<a href="#">Show More</a>');
-          var linkDiv = $('<div></div>');
-          linkDiv.append(link);
-          $(this).after(linkDiv);
-
-          link.click(function (event) {
-            event.preventDefault();
-
-            if (text.height() > maxheight) {
-                $(this).html("Show More");
-                text.css('height', maxheight + 'px');
-            } else {
-                $(this).html("Show Less");
-                text.css('height', 'auto');
-            }
-          });
-        }
-      });
     </script>
   </body>
 </html>
