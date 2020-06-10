@@ -66,3 +66,12 @@ function truncateText() {
     }
   });
 }
+
+$(document).ready(function() {
+  $('#nasa-submit').on('click', function() {   
+    if ($('.nasa-search-input').val()) {
+      $('.nasa-main-content').css('display', 'none');
+      $('#loader-container').css('display', 'block');
+    }
+  });
+});

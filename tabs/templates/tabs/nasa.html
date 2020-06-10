@@ -19,7 +19,7 @@
           <form method="POST" action="{% url 'tabs:nasa' %}">
             {% csrf_token %}
             <input name="nasa-search-input" class="nasa-search-input" type="text" placeholder='Search for...(e.g. "Orion")' name="search">
-            <button type="submit"><i class="fa fa-search"></i></button><br>
+            <button type="submit" id="nasa-submit"><i class="fa fa-search"></i></button><br>
             <label class="nasa-search-checkbox" for="Images"><input type="checkbox" name="nasa_search_checkboxes" value="image">Images</label>
             <label class="nasa-search-checkbox" for="Video"><input type="checkbox" name="nasa_search_checkboxes" value="video">Video</label>
             <label class="nasa-search-checkbox" for="Audio"><input type="checkbox" name="nasa_search_checkboxes" value="audio" label="Audio">Audio</label>
@@ -29,6 +29,14 @@
     </div>
   </div>
 
+  <div id="loader-container">
+    <div id="loader-wrap">
+      <div class="loader"></div> 
+    </div>
+    <div id="loading-wrap">
+      <h3 class="loading">Loading...</h3>
+    </div>
+  </div>
 
   {% if categories %}
     <div class="container nasa-main-content">
