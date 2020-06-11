@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container main-content">
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.70.1/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.70.1/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+  <div class="container main-content satellite-main-content ">
     <div class="row daily-row">
       <div class="col-md-12">
         <h1><strong>Satellites</strong></h1>
-        <h3><strong>Under construction, but coming soon!</strong></h3>
+
+        <script>
+          Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3NjY4YmUzMC1jMTViLTRlMDQtYTVjYy1iNjM3ZGJmMjY5YzkiLCJpZCI6MjkyNzksInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1OTE4OTEwMjJ9.MFPIy6lQ2Q7TeTvlXSIGU37XseGxBb8Xl84taslmIms';
+        </script>
+        <div id="cesiumContainer" class="fullSize"></div>
+
       </div>
     </div>
   </div>

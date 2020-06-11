@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.core.cache import cache
-import datetime, requests, random, json, urllib, pytz, re
+import datetime, requests, random, json, urllib, pytz, re, tle2czml
 from urllib.error import URLError, HTTPError
 
 from .templatetags.url_helper import get_url
@@ -268,7 +268,7 @@ def techport_search(request, project_id):
                     next = projects[index+1]
 
         base_url = "https://api.nasa.gov/techport/api/projects/"
-        response = response = requests.get(base_url + str(project_id) + '?api_key=' + API_KEY)
+        response = requests.get(base_url + str(project_id) + '?api_key=' + API_KEY)
         techport_search_data = response.json()
         context = {
             "techport_search_data": techport_search_data,
@@ -284,7 +284,21 @@ def neos(request):
     return render(request, 'tabs/neos.html', context)
 
 def satellites(request):
-    context = {"satellites_page": "active"}
+    if request.method == "GET":
+      # base_url = "https://celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=tle"
+
+      # response = urllib.request.urlopen(base_url)
+      # f = open("static/mySpaceStuff/tle_active.txt", "wb")
+      # f.writelines(response)
+      # f.close()
+      # start_time = datetime.datetime.now()
+      # end_time = datetime.datetime(start_time.year, start_time.month, start_time.day - 1)
+      # tle2czml.create_czml("static/mySpaceStuff/tle_active.txt", outputfile_path="static/mySpaceStuff/tle_active.czml")
+
+      context = {
+        "satellites_page": "active",
+      }
+
     return render(request, 'tabs/satellites.html', context)
 
 def weather(request):
