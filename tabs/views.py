@@ -5,7 +5,8 @@ from django.conf.urls.static import static
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.core.cache import cache
-import datetime, requests, random, json, urllib, pytz, re, tle2czml
+import datetime, requests, random, json, urllib, pytz, re
+# import tle2czml
 from urllib.error import URLError, HTTPError
 
 from .templatetags.url_helper import get_url
