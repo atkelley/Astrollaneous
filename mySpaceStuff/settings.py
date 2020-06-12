@@ -14,21 +14,33 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '@4g7@if44(nmy*m@vju$y#j(ymkmq@p0k9_)vx+ino3ei$r+09'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '@4g7@if44(nmy*m@vju$y#j(ymkmq@p0k9_)vx+ino3ei$r+09')
+from pathlib import Path
+
+my_file = Path(".env")
+if my_file.exists():
+  from decouple import config
+  SECRET_KEY = config('DJANGO_SECRET_KEY')
+else:
+  SECRET_KEY = ENV['DJANGO_SECRET_KEY']
+
+
+
+# if isset(ENV['DJANGO_SECRET_KEY']):
+#   SECRET_KEY = ENV['DJANGO_SECRET_KEY']
+# else:
+#   from decouple import config
+#   SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ['astrollaneous.herokuapp.com', '127.0.0.1', 'localhost']
-
 
 # Application definition
 
