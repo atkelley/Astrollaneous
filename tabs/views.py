@@ -9,8 +9,17 @@ import datetime, requests, random, json, urllib, pytz, re, tle2czml
 from urllib.error import URLError, HTTPError
 from .templatetags.url_helper import get_url
 from decouple import config
+from pathlib import Path
 
-NASA_API_KEY = config('NASA_API_KEY')
+# NASA_API_KEY = config('NASA_API_KEY')
+
+my_file = Path(".env")
+
+if my_file.exists():
+  from decouple import config
+  NASA_API_KEY = config('NASA_API_KEY')
+else:
+  NASA_API_KEY = os.environ.get('NASA_API_KEY')
 
 def home(request):
   video_url = None
