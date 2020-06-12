@@ -10,6 +10,7 @@ from urllib.error import URLError, HTTPError
 from .templatetags.url_helper import get_url
 from decouple import config
 from pathlib import Path
+import os
 
 # NASA_API_KEY = config('NASA_API_KEY')
 
@@ -19,7 +20,7 @@ if my_file.exists():
   from decouple import config
   NASA_API_KEY = config('NASA_API_KEY')
 else:
-  NASA_API_KEY = ENV('NASA_API_KEY')
+  NASA_API_KEY = os.environ.get('NASA_API_KEY')
 
 def home(request):
   video_url = None
