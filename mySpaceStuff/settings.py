@@ -26,7 +26,7 @@ if my_file.exists():
   from decouple import config
   SECRET_KEY = config('DJANGO_SECRET_KEY')
 else:
-  SECRET_KEY = ENV['DJANGO_SECRET_KEY']
+  SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 
 
