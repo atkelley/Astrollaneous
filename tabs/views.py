@@ -51,11 +51,26 @@ def home(request):
       if hasattr(daily_image_data, 'copyright'):
         copyright = daily_image_data['copyright']
 
+    index = -1
+    description = daily_image_data['explanation']
+
+    if description.find("Comet NEOWISE Images") > 0:
+      index = description.find("Comet NEOWISE Images")
+    elif description.find("Notable NEOWISE Images") > 0:
+      index = description.find("Notable NEOWISE Images")
+    elif description.find("Notable Images") > 0:
+      index = description.find("Notable Images")
+    else:
+      index = None
+
+    if index:
+      description = description[0: index]
+
     context = {
       "home_page": "active",
       "date": datetime.date.today(),
       "title": daily_image_data['title'],
-      "description": daily_image_data['explanation'],
+      "description": description,
       "media_type": daily_image_data['media_type'],
       "video_url": video_url,
       "image_url": image_url,
@@ -65,103 +80,104 @@ def home(request):
     return render(request, 'tabs/index.html', context)
 
 def mars(request):
-    rovers = []
-    rover_names = ['curiosity', 'spirit', 'opportunity']
+  rovers = []
+  rover_names = ['curiosity', 'spirit', 'opportunity']
 
-    for rover_name in rover_names:
-        if not cache.get(rover_name):
-            base_url = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
-            response = requests.get(base_url + rover_name + '?api_key=' + NASA_API_KEY)
-            rover_data = response.json()
+  for rover_name in rover_names:
+    if not cache.get(rover_name):
+      base_url = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
+      response = requests.get(base_url + rover_name + '?api_key=' + NASA_API_KEY)
+      rover_data = response.json()
 
-            launch_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['launch_date'], '%Y-%m-%d')
-            landing_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['landing_date'], '%Y-%m-%d')
-            max_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['max_date'], '%Y-%m-%d')
-            rover_object = {
-                "name": rover_data['photo_manifest']['name'],
-                "launch_date": launch_date_time_obj,
-                "landing_date": landing_date_time_obj,
-                "max_date": max_date_time_obj,
-                "status": rover_data['photo_manifest']['status'],
-                "total_photos": rover_data['photo_manifest']['total_photos']
-            }
+      launch_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['launch_date'], '%Y-%m-%d')
+      landing_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['landing_date'], '%Y-%m-%d')
+      max_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['max_date'], '%Y-%m-%d')
+      rover_object = {
+        "name": rover_data['photo_manifest']['name'],
+        "launch_date": launch_date_time_obj,
+        "landing_date": landing_date_time_obj,
+        "max_date": max_date_time_obj,
+        "status": rover_data['photo_manifest']['status'],
+        "total_photos": rover_data['photo_manifest']['total_photos']
+      }
 
-            rovers.append(rover_object)
-            cache.set(rover_name, rover_object)
-        else:
-            rovers.append(cache.get(rover_name))
+      rovers.append(rover_object)
+      cache.set(rover_name, rover_object)
+    else:
+      rovers.append(cache.get(rover_name))
 
-    return render(request, 'tabs/mars.html', {"rovers": rovers})
+  return render(request, 'tabs/mars.html', {"rovers": rovers})
 
 def get_rover(rover_name):
-    # if not cache.get(rover_name):
-        cameras = []
-        base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
-        response = response = requests.get(base_url + rover_name + '/?api_key=' + NASA_API_KEY)
-        rover_data = response.json()
+  if not cache.get(rover_name):
+    cameras = []
+    base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
+    response = requests.get(base_url + rover_name + '/?api_key=' + NASA_API_KEY)
+    rover_data = response.json()
 
-        landing_date_time_obj = datetime.datetime.strptime(rover_data['rover']['landing_date'], '%Y-%m-%d')
-        max_date_time_obj = datetime.datetime.strptime(rover_data['rover']['max_date'], '%Y-%m-%d')
-        camera_data = rover_data['rover']['cameras']
-        for camera in camera_data:
-            camera_object = {camera['name']: camera['full_name']}
-            cameras.append(camera)
+    landing_date_time_obj = datetime.datetime.strptime(rover_data['rover']['landing_date'], '%Y-%m-%d')
+    max_date_time_obj = datetime.datetime.strptime(rover_data['rover']['max_date'], '%Y-%m-%d')
+    camera_data = rover_data['rover']['cameras']
 
-        rover_object = {
-            "rover_name": rover_name,
-            "landing_date": landing_date_time_obj,
-            "max_date": max_date_time_obj,
-            "max_sol": rover_data['rover']['max_sol'],
-            "status": rover_data['rover']['status'],
-            "total_photos": rover_data['rover']['total_photos'],
-            "cameras": cameras
-        }
+    for camera in camera_data:
+      camera_object = {camera['name']: camera['full_name']}
+      cameras.append(camera)
 
-    #     cache.set(rover_name, rover_object)
-    # else:
-    #     rover_object = cache.get(rover_name)
+    rover_object = {
+      "rover_name": rover_name,
+      "landing_date": landing_date_time_obj,
+      "max_date": max_date_time_obj,
+      "max_sol": rover_data['rover']['max_sol'],
+      "status": rover_data['rover']['status'],
+      "total_photos": rover_data['rover']['total_photos'],
+      "cameras": cameras
+    }
 
-        return rover_object
+    cache.set(rover_name, rover_object)
+  else:
+    rover_object = cache.get(rover_name)
+
+  return rover_object
 
 def rover(request, rover_name):
-    rover_object = get_rover(rover_name)
-    return render(request, 'tabs/rover.html', {"rover": rover_object})
+  rover_object = get_rover(rover_name)
+  return render(request, 'tabs/rover.html', {"rover": rover_object})
 
 def search(request, rover_name):
-    date = None
-    date_selector = None
-    rover_data = None
-    rover_object = get_rover(rover_name)
+  date = None
+  date_selector = None
+  rover_data = None
+  rover_object = get_rover(rover_name)
 
-    if request.method == 'POST':
-        date_selector = request.POST.getlist('date_selector')
-        earth_date = request.POST.get('earth_date')
-        sol_date = request.POST.get('sol_date')
-        camera_selector = request.POST.get('camera_selector')
+  if request.method == 'POST':
+    date_selector = request.POST.getlist('date_selector')
+    earth_date = request.POST.get('earth_date')
+    sol_date = request.POST.get('sol_date')
+    camera_selector = request.POST.get('camera_selector')
 
-        date = {
-            'date_selector': request.POST.getlist('date_selector'),
-            'earth_date': request.POST.get('earth_date'),
-            'sol_date': request.POST.get('sol_date'),
-            'camera_selector': request.POST.get('camera_selector'),
-        }
+    date = {
+      'date_selector': request.POST.getlist('date_selector'),
+      'earth_date': request.POST.get('earth_date'),
+      'sol_date': request.POST.get('sol_date'),
+      'camera_selector': request.POST.get('camera_selector'),
+    }
 
-        date_parameter = ""
-        camera_parameter = ""
-        if date_selector[0] == "earth":
-            new_earth_date = datetime.datetime.strptime(earth_date, '%m/%d/%Y').strftime('%Y-%m-%d')
-            date_parameter = "?earth_date=" + new_earth_date
-        if date_selector[0] == "sol":
-            date_parameter = "?sol=" + sol_date
-        if camera_selector != "none":
-            camera_parameter = "&camera=" + camera_selector.lower()
+    date_parameter = ""
+    camera_parameter = ""
+    if date_selector[0] == "earth":
+      new_earth_date = datetime.datetime.strptime(earth_date, '%m/%d/%Y').strftime('%Y-%m-%d')
+      date_parameter = "?earth_date=" + new_earth_date
+    if date_selector[0] == "sol":
+      date_parameter = "?sol=" + sol_date
+    if camera_selector != "none":
+      camera_parameter = "&camera=" + camera_selector.lower()
 
-        base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
-        url = base_url + date_parameter + camera_parameter + '&api_key=' + NASA_API_KEY
-        response = requests.get(base_url + date_parameter + camera_parameter + '&api_key=' + NASA_API_KEY)
-        rover_data = response.json()
+    base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
+    url = base_url + date_parameter + camera_parameter + '&api_key=' + NASA_API_KEY
+    response = requests.get(base_url + date_parameter + camera_parameter + '&api_key=' + NASA_API_KEY)
+    rover_data = response.json()
 
-    return render(request, 'tabs/rover.html', {"rover": rover_object, "date": date, "rover_data": rover_data})
+  return render(request, 'tabs/rover.html', {"rover": rover_object, "date": date, "rover_data": rover_data})
     
 def get_collections(nasa_search_data, category_types):
   video = []
@@ -228,91 +244,94 @@ def nasa(request):
   return render(request, 'tabs/nasa.html', context)
 
 def techport(request):
-  techport_data = None
-  current_date = datetime.datetime.now()
-  default_date_object = datetime.datetime(current_date.year - 1, current_date.month, current_date.day)
-  default_date = default_date_object.strftime("%Y-%m-%d")
+  date = datetime.datetime.now()
+
+  context = {
+    "techport_page": "active",
+    "date": date - datetime.timedelta(days = 1),
+    "techport_data": None,
+  }
 
   if request.method == "POST":
-    picked_date = request.POST['techport-datepicker']
-    if not picked_date:
-      picked_date = default_date
+    date = request.POST.get('techport-datepicker')
+    date_list = date.split('/')
+    date_object = datetime.datetime(int(date_list[2]), int(date_list[0]), int(date_list[1]))
 
-      if cache.get('picked_date') != picked_date:
-        base_url = "https://api.nasa.gov/techport/api/projects?updatedSince="
-        full_url = base_url + picked_date + '&api_key=' + NASA_API_KEY
-        response = requests.get(base_url + picked_date + '&api_key=' + NASA_API_KEY)
-        techport_data = response.json()
-        cache.set('picked_date', picked_date)
-        cache.set('techport_data', techport_data)
-      else:
-        techport_data = cache.get('techport_data')
+    if cache.get('techport_date') != date:
+      base_url = "https://api.nasa.gov/techport/api/projects?updatedSince="
+      full_url = base_url + date_list[2] + "-" + date_list[0] + "-" + date_list[1] + '&api_key=' + NASA_API_KEY
+      response = requests.get(full_url)
+      techport_data = response.json()
+      cache.set('techport_date', date)
+      cache.set('techport_data', techport_data)
+    else:
+      techport_data = cache.get('techport_data')
 
     context = {
       "techport_page": "active",
-      "default_date": default_date_object,
+      "date": date_object,
       "techport_data": techport_data,
     }
 
-    return render(request, 'tabs/techport.html', context)
+  return render(request, 'tabs/techport.html', context)
 
 def techport_search(request, project_id):
     previous = None
     next = None
 
     if cache.get('techport_data'):
-        techport_data = cache.get('techport_data')
-        projects = techport_data['projects']['projects']
+      techport_data = cache.get('techport_data')
+      projects = techport_data['projects']['projects']
 
-        for index in range(len(projects)):
-            if projects[index]['id'] == project_id:
-                if index == 0:
-                    next = projects[index+1]
-                elif index == len(projects)-1:
-                    previous = projects[index-1]
-                else:
-                    previous = projects[index-1]
-                    next = projects[index+1]
+      for index in range(len(projects)):
+        if projects[index]['id'] == project_id:
+          if index == 0:
+            next = projects[index + 1]
+          elif index == len(projects) - 1:
+            previous = projects[index - 1]
+          else:
+            previous = projects[index - 1]
+            next = projects[index + 1]
 
-        base_url = "https://api.nasa.gov/techport/api/projects/"
-        response = requests.get(base_url + str(project_id) + '?api_key=' + NASA_API_KEY)
-        techport_search_data = response.json()
-        context = {
-            "techport_search_data": techport_search_data,
-            "previous": previous,
-            "next": next
-        }
-        return render(request, 'tabs/techport_search.html', context)
+      base_url = "https://api.nasa.gov/techport/api/projects/"
+      response = requests.get(base_url + str(project_id) + '?api_key=' + NASA_API_KEY)
+      techport_search_data = response.json()
+      context = {
+        "techport_search_data": techport_search_data,
+        "previous": previous,
+        "next": next
+      }
+      return render(request, 'tabs/techport_search.html', context)
     else:
         return redirect(request.META.get('HTTP_REFERER', 'techport'))
 
 def neos(request):
-    context = {"neos_page": "active"}
-    return render(request, 'tabs/neos.html', context)
+  context = {"neos_page": "active"}
+  return render(request, 'tabs/neos.html', context)
 
 def satellites(request):
-    if request.method == "GET":
-      # base_url = "https://celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=tle"
+  if request.method == "GET":
+    base_url = "https://celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=tle"
 
-      # response = urllib.request.urlopen(base_url)
-      # f = open("static/mySpaceStuff/tle_active.txt", "wb")
-      # f.writelines(response)
-      # f.close()
-      # start_time = datetime.datetime.now()
-      # end_time = datetime.datetime(start_time.year, start_time.month, start_time.day - 1)
-      # tle2czml.create_czml("static/mySpaceStuff/tle_active.txt", outputfile_path="static/mySpaceStuff/tle_active.czml")
+    # response = urllib.request.urlopen(base_url)
+    # f = open("static/mySpaceStuff/tle_active.txt", "wb")
+    # f.writelines(response)
+    # f.close()
+    # start_time = datetime.datetime.now()
+    # end_time = datetime.datetime(start_time.year, start_time.month, start_time.day - 1)
+    tle2czml.create_czml("static/mySpaceStuff/tle_test.txt", outputfile_path="static/mySpaceStuff/tle_active.czml")
 
-      context = {
-        "satellites_page": "active",
-      }
+    context = {
+      "satellites_page": "active",
+    }
 
-    return render(request, 'tabs/satellites.html', context)
+  return render(request, 'tabs/satellites.html', context)
 
 def weather(request):
-    data = []
-    base_url = "https://api.nasa.gov/insight_weather"
-    response = response = requests.get(base_url + '/?api_key=' + NASA_API_KEY + '&feedtype=json')
-    weather_data = response.json()
+  data = []
+  base_url = "https://api.nasa.gov/insight_weather"
+  response = response = requests.get(base_url + '/?api_key=' + NASA_API_KEY + '&feedtype=json')
+  weather_data = response.json()
 
-    context = {"weather_page": "active", "weather_data": weather_data}
-    return render(request, 'tabs/weather.html', context)
+  context = {"weather_page": "active", "weather_data": weather_data}
+  return render(request, 'tabs/weather.html', context)

@@ -372,7 +372,9 @@ h6.blog-header {
 }
 
 .techport-search-results-row {
-  padding: 0px 20px 20px 20px;
+  margin: 30px 5px 50px 20px;
+  border-top: 1px dashed black;
+  padding: 20px 20px 20px 20px;
 }
 
 audio:focus {
@@ -519,6 +521,20 @@ h2.modal-title {
   background-color: rgba(0, 128, 128, 0.25);
 }
 
+.techport-search-container {
+  height: 247px;
+}
+
+.techport-search-info {
+  height: 245px;
+}
+
+.techport-search-info {
+  vertical-align: middle;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
 .rover-sol, .rover-earth, .rover-cameras {
   padding: 20px;
   border: 1px solid lightgrey;
@@ -526,7 +542,7 @@ h2.modal-title {
   height: 150px;
 }
 
-.rover-sol p, .rover-earth p {
+.rover-sol p, .rover-earth p, .techport-search-label p {
   font-size: .75em;
 }
 

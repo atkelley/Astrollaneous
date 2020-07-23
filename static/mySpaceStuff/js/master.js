@@ -77,33 +77,42 @@ $(document).ready(function() {
 });
 
 
-var viewer = new Cesium.Viewer("cesiumContainer", {
-  shouldAnimate: true,
-});
 
 
-viewer.dataSources.add(
-  Cesium.CzmlDataSource.load('/static/mySpaceStuff/js/simple.czml')
-);
+var sPath = window.location.pathname;
+if(sPath == "/satellites/"){
+  Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3NjY4YmUzMC1jMTViLTRlMDQtYTVjYy1iNjM3ZGJmMjY5YzkiLCJpZCI6MjkyNzksInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1OTE4OTEwMjJ9.MFPIy6lQ2Q7TeTvlXSIGU37XseGxBb8Xl84taslmIms';
+  var viewer = new Cesium.Viewer("cesiumContainer", {
+    shouldAnimate: true,
+  });
 
-
-// Sandcastle.addDefaultToolbarButton("Satellites", function () {
-  // viewer.dataSources.add(
-  //   Cesium.CzmlDataSource.load("../SampleData/simple.czml")
-  // );
-
-//   viewer.camera.flyHome(0);
-// });
-
-// Sandcastle.addToolbarButton("Vehicle", function () {
-//   viewer.dataSources.add(
-//     Cesium.CzmlDataSource.load("../SampleData/Vehicle.czml")
-//   );
-
-  // viewer.scene.camera.setView({
-  //   destination: Cesium.Cartesian3.fromDegrees(-116.52, 35.02, 95000),
-  //   orientation: {
-  //     heading: 6,
-  //   },
+  viewer.dataSources.add(
+    Cesium.CzmlDataSource.load('/static/mySpaceStuff/js/simple.czml')
+    // Cesium.CzmlDataSource.load('/static/mySpaceStuff/tle_active.czml')
+  );
+  
+  
+  // for (i of viewer.dataSources) {
+  //   if (i == '_dataSources') {
+  //     console.log('hi');
+  //   }
+  // }
+  
+  //.entityCollection._entities[4]._description
+  
+  // Sandcastle.addDefaultToolbarButton("Satellites", function () {
+    // viewer.dataSources.add(
+    //   Cesium.CzmlDataSource.load("../SampleData/simple.czml")
+    // );
+  
+  //   viewer.camera.flyHome(0);
   // });
-// });
+}
+
+
+
+
+
+
+
+

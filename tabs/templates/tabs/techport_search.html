@@ -4,6 +4,9 @@
   <div class="container main-content">
     <div class="row daily-row">
       <div class="col-md-6">
+        <span class="techport_search_right">
+          <a href="{% url 'tabs:techport' %}"><span class="fas fa-chevron-left fa-3x" aria-hidden="true"></span></a>
+        </span>
         {% if previous %}
           <span class="techport_search_left">
             <a href="{% url 'tabs:techport_search' project_id=previous.id %}"><span class="fas fa-arrow-left fa-3x" aria-hidden="true"></span></a>
@@ -17,7 +20,13 @@
         </span>
         {% endif %}
       </div>
-      <div class="col-md-12">
+      <div class="col-md-2">
+        <div class="techport_search_property_container">
+          <h4><strong>Project ID:</strong></h4>
+          <a href="https://techport.nasa.gov/view/{{ techport_search_data.project.id }}" target="_blank">{{ techport_search_data.project.id }}</a></a>
+        </div>
+      </div>
+      <div class="col-md-10">
         <div class="techport_search_property_container">
           <h4><strong>Title:</strong></h4>
           {{ techport_search_data.project.title }}
@@ -118,7 +127,7 @@
         <div class="col-md-6">
           <div class="techport_search_property_container">
             <h4><strong>Closeout Summary:</strong></h4>
-            {{ techport_search_data.project.closeoutSummary|safe }}
+            {{ techport_search_data.project.closeoutSummary|safe|cut:"Project website:" }}
           </div>
         </div>
       {% endif %}

@@ -25,10 +25,8 @@ my_file = Path(".env")
 if my_file.exists():
   from decouple import config
   SECRET_KEY = config('DJANGO_SECRET_KEY')
-  NASA_API_KEY = config('NASA_API_KEY')
 else:
   SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-  NASA_API_KEY = os.environ.get('NASA_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
