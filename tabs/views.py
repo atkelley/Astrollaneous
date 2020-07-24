@@ -84,58 +84,49 @@ def mars(request):
   rover_names = ['curiosity', 'spirit', 'opportunity']
 
   for rover_name in rover_names:
-    if not cache.get(rover_name):
-      base_url = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
-      response = requests.get(base_url + rover_name + '?api_key=' + NASA_API_KEY)
-      rover_data = response.json()
+    base_url = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
+    response = requests.get(base_url + rover_name + '?api_key=' + NASA_API_KEY)
+    rover_data = response.json()
 
-      launch_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['launch_date'], '%Y-%m-%d')
-      landing_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['landing_date'], '%Y-%m-%d')
-      max_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['max_date'], '%Y-%m-%d')
-      rover_object = {
-        "name": rover_data['photo_manifest']['name'],
-        "launch_date": launch_date_time_obj,
-        "landing_date": landing_date_time_obj,
-        "max_date": max_date_time_obj,
-        "status": rover_data['photo_manifest']['status'],
-        "total_photos": rover_data['photo_manifest']['total_photos']
-      }
+    launch_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['launch_date'], '%Y-%m-%d')
+    landing_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['landing_date'], '%Y-%m-%d')
+    max_date_time_obj = datetime.datetime.strptime(rover_data['photo_manifest']['max_date'], '%Y-%m-%d')
+    rover_object = {
+      "name": rover_data['photo_manifest']['name'],
+      "launch_date": launch_date_time_obj,
+      "landing_date": landing_date_time_obj,
+      "max_date": max_date_time_obj,
+      "status": rover_data['photo_manifest']['status'],
+      "total_photos": rover_data['photo_manifest']['total_photos']
+    }
 
-      rovers.append(rover_object)
-      cache.set(rover_name, rover_object)
-    else:
-      rovers.append(cache.get(rover_name))
+    rovers.append(rover_object)
 
   return render(request, 'tabs/mars.html', {"rovers": rovers})
 
 def get_rover(rover_name):
-  if not cache.get(rover_name):
-    cameras = []
-    base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
-    response = requests.get(base_url + rover_name + '/?api_key=' + NASA_API_KEY)
-    rover_data = response.json()
+  cameras = []
+  base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
+  response = requests.get(base_url + rover_name + '/?api_key=' + NASA_API_KEY)
+  rover_data = response.json()
 
-    landing_date_time_obj = datetime.datetime.strptime(rover_data['rover']['landing_date'], '%Y-%m-%d')
-    max_date_time_obj = datetime.datetime.strptime(rover_data['rover']['max_date'], '%Y-%m-%d')
-    camera_data = rover_data['rover']['cameras']
+  landing_date_time_obj = datetime.datetime.strptime(rover_data['rover']['landing_date'], '%Y-%m-%d')
+  max_date_time_obj = datetime.datetime.strptime(rover_data['rover']['max_date'], '%Y-%m-%d')
+  camera_data = rover_data['rover']['cameras']
 
-    for camera in camera_data:
-      camera_object = {camera['name']: camera['full_name']}
-      cameras.append(camera)
+  for camera in camera_data:
+    camera_object = {camera['name']: camera['full_name']}
+    cameras.append(camera)
 
-    rover_object = {
-      "rover_name": rover_name,
-      "landing_date": landing_date_time_obj,
-      "max_date": max_date_time_obj,
-      "max_sol": rover_data['rover']['max_sol'],
-      "status": rover_data['rover']['status'],
-      "total_photos": rover_data['rover']['total_photos'],
-      "cameras": cameras
-    }
-
-    cache.set(rover_name, rover_object)
-  else:
-    rover_object = cache.get(rover_name)
+  rover_object = {
+    "rover_name": rover_name,
+    "landing_date": landing_date_time_obj,
+    "max_date": max_date_time_obj,
+    "max_sol": rover_data['rover']['max_sol'],
+    "status": rover_data['rover']['status'],
+    "total_photos": rover_data['rover']['total_photos'],
+    "cameras": cameras
+  }
 
   return rover_object
 
