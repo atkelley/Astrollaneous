@@ -1,0 +1,33 @@
+.create-post-container {
+  width: 50%;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.create-post-footer {
+  margin: 30px 0px;
+}
+
+.create-comment-footer {
+  float: right;
+  margin: 20px 0px;
+}
+
+.create-post-button {
+  margin-right: 10px;
+}
+
+.create-post-title {
+  font-weight: bold;
+  margin: 20px 0px;
+}
+
+input[name="image_url"] {
+  background-color: #F5F5F5;
+}
+
+input[name="image_url"]:not(:placeholder-shown) {
+  background-color: #ffffff;
+}

@@ -16,16 +16,44 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
-from mySpaceStuff import views
+from . import views
+from blog import views as blog
+# from accounts import views as accounts
 
 urlpatterns = [
-    path('', include('tabs.urls')),
-    path('blog/', include('blog.urls')),
-    path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
-    path('admin/', admin.site.urls),
-    path('accounts/', include("accounts.urls", namespace="accounts")),
-    path('accounts/', include("django.contrib.auth.urls"))
+  path('', include('frontend.urls')),
+  path('blog', include('frontend.urls')),
+  path('blog/create', include('frontend.urls')),
+  path('blog/update/<int:id>', include('frontend.urls')),
+  path('user/<int:id>', include('frontend.urls')),
+
+  path('mars', include('frontend.urls')),
+  path('rovers', include('frontend.urls')),
+  path('satellites', include('frontend.urls')),
+  path('nasa', include('frontend.urls')),
+  path('techport', include('frontend.urls')),
+  path('about', include('frontend.urls')),
+  path('contact', include('frontend.urls')),
+  path('login', include('frontend.urls')),
+  path('register', include('frontend.urls')),
+
+  path('', include('accounts.urls')),
+
+  path('api/user/<int:id>', blog.get_user),
+  path('api/user/<int:id>/posts', blog.user_posts),
+  path('api/user/<int:id>/comments', blog.user_comments),
+
+  path('api/posts', blog.posts),
+  path('api/posts/<int:id>', blog.get_post),
+  path('api/posts/create', blog.create_post),
+  path('api/posts/update/<int:id>', blog.update_post),
+  path('api/posts/delete/<int:id>', blog.delete_post),
+
+  path('api/comments/create', blog.create_comment),
+  path('api/comments/update/<int:id>', blog.update_comment),
+  path('api/comments/delete/<int:id>', blog.delete_comment),
+  path('api/satellites/<str:name>', views.satellite),
+  path('admin/', admin.site.urls)
 ]
 
 if settings.DEBUG:

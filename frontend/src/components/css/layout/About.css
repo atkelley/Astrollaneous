@@ -1,0 +1,25 @@
+.main-container:last-of-type {
+  margin-bottom: 55px;
+}
+
+.about-image {
+  padding: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 25px;
+}
+
+.about-column-image {
+  margin-top: 35px;
+}
+
+.about-image:hover {
+  cursor: pointer;
+}
+
+.about-title {
+  margin: 0px 10px;
+  padding: 0px 10px;
+  font-size: .75em;
+  font-weight: bold;
+}

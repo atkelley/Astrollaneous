@@ -1,0 +1,85 @@
+.mars-header__left {
+  text-align: center;
+  padding: 0 0 0 0!important;
+}
+
+.mars-header__icon {
+  width: 150px;
+  height: auto;
+}
+
+.mars-insight-link {
+  cursor: pointer;
+  color: #007bff!important;
+}
+
+.mars-header__dropdown-box {
+  margin: 5px 0 40px 0;
+}
+
+.mars-header__select {
+  border-radius: 5px;
+  width: 300px;
+}
+
+.mars-header__option {
+  width: 300px;
+}
+
+.table thead th {
+  border-top: 1px solid #bbbbbb;
+  border-bottom: 1px solid #bbbbbb;
+}
+
+.table td, .table th {
+  border-top: none;
+}
+
+.mars-table {
+  margin: 5px 75px 40px 75px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+}
+
+.temp, .pressure, .speed {
+  cursor: pointer;
+  color: #343a40;
+}
+
+.toggle {
+  color: #A9A9A9;
+}
+
+.mars-table__cell {
+  text-align: right;
+}
+
+.mars-table__row-title {
+  font-weight: 500;
+}
+
+.mars-text {
+  padding: 0 75px 0 0;
+}
+
+.mars-container {
+  width: 50%;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.daily-image {
+  padding: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 25px;
+}
+
+.daily-image:hover {
+  cursor: pointer;
+}
+
+.daily-description {
+  margin-right: 20px;
+}

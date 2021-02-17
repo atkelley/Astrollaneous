@@ -1,0 +1,127 @@
+/* POST */
+.main-container:last-of-type {
+  margin-bottom: 55px;
+}
+
+.post-button-box {
+  margin: 20px 0px;
+}
+
+.fa-plus, .fa-minus, .fa-remove, .fa-edit, .fa-comments, .icon-label {
+  color: #FFFFFF;
+}
+
+.icon-label {
+  padding-left: 5px;
+}
+
+.post-button-box > button, .post-button-box > a {
+  margin-right: 5px;
+}
+
+.img-fluid {
+  width: 100%;
+}
+
+
+/* COMMENT */
+.btn-comment {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: white;
+  line-height: .75rem;
+  color: #069;
+  cursor: pointer;
+}
+
+.btn-comment:hover {
+  text-decoration: underline;
+}
+
+.comment-wrapper {
+  border: 1px solid grey;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 10px;
+  background-color:rgba(0, 0, 255, 0.25);
+  margin: 10px 0px;
+  padding: 10px;
+}
+
+.comment-title {
+  display: inline-block;
+  border-top: 1px solid grey;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color:rgba(255, 255, 255, 1.0);
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.comment-body {
+  border: 1px solid grey;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color:rgba(255, 255, 255, 1.0);
+  padding-left: 5px;
+  padding-right: 5px;
+  font-style: italic;
+}
+
+.comment-body-unauth {
+  border-bottom-right-radius: 10px;
+}
+
+.comment-body p {
+  margin: 5px;
+}
+
+ .comment-delete {
+  float: right;
+  display: inline-block;
+  border-bottom: 1px solid grey;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color:rgba(255, 255, 255, 1.0);
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.comment-edit {
+  float: right;
+  display: inline-block;
+  border-bottom: 1px solid grey;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color:rgba(255, 255, 255, 1.0);
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.comment-textarea {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.fa-comments{
+  color: white!important;
+}
+
+.create-comment-footer {
+  float: right;
+  margin: 0px 0px 10px 0px;
+}

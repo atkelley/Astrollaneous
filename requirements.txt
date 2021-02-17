@@ -1,5 +1,5 @@
 asgiref==3.2.7
-astroid==2.3.3
+astroid
 beautifulsoup4==4.8.1
 certifi==2019.11.28
 cffi==1.14.0

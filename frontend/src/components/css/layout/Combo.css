@@ -1,0 +1,24 @@
+.nav-tabs .nav-link:first-of-type {
+  border-left: none;
+  border-top: none
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  border-color: none;
+}
+
+.nav-tabs .nav-link:first-of-type.active {
+  border-top-left-radius: .5rem;
+}
+
+.combo-tab-link {
+  width: 50%;
+  padding: 15px;
+}
+
+.combo-tabs-box {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  background-color:rgba(52, 58, 64, 0.1);
+}

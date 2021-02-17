@@ -1,13 +1,9 @@
-from django.contrib.auth import get_user_model
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 import misaka
 
-from django.contrib.auth import get_user_model
-User = get_user_model()
-
-# Create your models here.
 class Post(models.Model):
     user = models.ForeignKey(User, related_name="blog", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -42,7 +38,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
-    author = models.CharField(max_length=200)
+    user = models.ForeignKey(User, default = 1, null = True, related_name="comments", on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
 

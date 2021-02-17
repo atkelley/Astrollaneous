@@ -1,0 +1,208 @@
+.rover-container {
+  border: 1px solid #A0A0A0;
+  border-radius: 15px;
+  margin: 20px auto;
+}
+
+.rover-image-anchor {
+  margin: 0 auto;
+}
+
+.rover-image {
+  width: 320px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.rover-stats {
+  margin: 10px auto;
+  width: 325px;
+  border: 2px solid #bbbbbb;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.rover-stats-title, .rover-stats p {
+  margin: 0 0;
+}
+
+.rover-stats p {
+  font-size: .85rem;
+}
+
+.rover-stats-title {
+  font-weight: 800;
+}
+
+.rover-complete {
+  font-weight: 600;
+}
+
+.rover-active {
+  font-weight: 600;
+  animation: blinker 2.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+    color: green;
+  }
+}
+
+.rover-search {
+  border: 1px solid #A0A0A0;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.rover-search-title {
+  display: block;
+  background-color: #A0A0A0;
+  margin-bottom: 20px;
+  padding: 10px 0px;
+  border: 1px solid #A0A0A0;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.rover-search-cameras p, .rover-search-earth-title , .rover-search-sol-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+
+.rover-search-earth-title , .rover-search-sol-title {
+  display: inline;
+}
+
+.rover-first-line {
+  margin-bottom: 10px;
+}
+
+.form-check-input {
+  margin-top: .4rem;
+}
+
+.rover-search-cameras label {
+  font-size: .85rem;
+  font-weight: 400;
+}
+
+label {
+  width: 100%;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.rover-search-cameras, .rover-search-dates {
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+}
+
+.rover-search-cameras {
+  padding: 15px 15px 20px 25px;
+}
+
+.rover-search-dates {
+  padding: 15px 15px 10px 15px;
+}
+
+.rover-search-dates:last-of-type {
+  margin-top: 15px;
+}
+
+.rover-search-date-checkbox {
+  margin-right: 5px;
+}
+
+.rover-search-earth-checkbox, .rover-search-sol-checkbox {
+  width: 100%;
+}
+
+.rover-search-earth-text, .rover-search-sol-text {
+  margin: 0 0 0 10px;
+}
+
+.rover-search-sol-input {
+  float: right;
+  width: 100px;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    float: right;
+    width: 100px;
+}
+
+.rover-submit {
+  margin-top: 20px;
+}
+
+.rover-submit-button {
+  border-radius: 10px;
+}
+
+
+/* TABLE */
+.rover-table-container {
+  margin: 0px auto;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.rover-table {
+  font-size: .8rem;
+  margin: 0 0 0 0;
+  width: 325px;
+}
+
+.rover-table tr {
+  line-height: .75rem;
+}
+
+.rover-table td {
+  vertical-align: middle;
+}
+
+table tr th,
+table tr td {
+  border-right: 1px solid #bbbbbb;
+  border-bottom: 1px solid #bbbbbb;
+  padding: 5px;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+  border-left: 1px solid #bbbbbb;
+}
+
+table tr th {
+  background: #eeeeee;
+  border-top: 1px solid #bbbbbb;
+  text-align: left;
+}
+
+table tr:first-child th:first-child {
+  border-top-left-radius: 6px;
+}
+
+table tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+
+.rover-tabs-box {
+  margin: 0 15px 5px 0;
+}

@@ -1,0 +1,58 @@
+.satellites-top, .satellites-left {
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.col-md-3 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.satellites-right {
+  margin-left: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  padding: .5rem 1rem;
+}
+
+.satellite-tab, .satellite-title-box {
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #007bff;
+}
+
+.satellite-tab {
+  padding: 0px 15px;
+}
+
+.satellite-icon {
+  float: right;
+  padding: 3px 8px;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+}
+
+.satellite-title-box, .satellite-text {
+  padding: 0 .75rem .25rem .75rem;
+}
+
+.satellite-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.satellite-title-box {
+  display: block;
+}
+
+.satellite-rule {
+  margin-top: .5rem;
+}

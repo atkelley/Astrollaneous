@@ -1,0 +1,44 @@
+.daily-image {
+  padding: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 25px;
+}
+
+.daily-image:hover {
+  cursor: pointer;
+}
+
+.daily-description {
+  margin-right: 20px;
+}
+
+.modal-title {
+  font-size: 1rem;
+  margin-left: 10px;
+  margin-top: 1.25rem!important;
+}
+
+.modal-body {
+  padding-bottom: .5rem!important;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-content iframe {
+  margin: 0 auto;
+  display: block;
+}
+
+.video-modal-content {
+  border: 10px solid white!important;
+}
+
+.button-float-right {
+  float: right;
+  margin: 15px 0px .5rem 0px;
+  padding: 3px 6px;
+  border-radius: 10px;
+}

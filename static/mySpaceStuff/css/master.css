@@ -1,147 +1,5 @@
-#rover-number {
+/* #rover-number {
   text-align: right;
-}
-
-.nasa-search-container {
-    text-align: center;
-}
-
-.nasa-search-input {
-  width: 50%;
-  border: 2px solid grey!important;
-  border-radius: 5px;
-  padding: 6px;
-  font-size: 17px;
-  border: none;
-}
-
-.nasa-search-container button {
-  /* float: right; */
-  padding: 6px 10px;
-  border: 2px solid grey!important;
-  border-radius: 5px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-}
-
-.nasa-search-container button:hover {
-  background: #ccc;
-}
-
-.techport_search_property_container {
-  border: 1px solid grey;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 5px 0px;
-}
-
-.techport_search_right {
-  float: left!important;
-  margin: 20px 10px;
-}
-
-.techport_search_left {
-  float: right!important;
-  margin: 20px 10px;
-}
-
-.techport-search-submit {
-  margin-top: 10px;
-}
-
-.btn-comment {
-  padding: 0;
-  margin: 0;
-  border: 0;
-  background-color: white;
-  line-height: .75rem;
-  color: #069;
-  cursor: pointer;
-}
-
-.btn-comment:hover {
-  text-decoration: underline;
-}
-
-.comment-wrapper {
-  border: 1px solid grey;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 10px;
-  background-color:rgba(0, 0, 255, 0.25);
-  margin: 10px 0px;
-  padding: 10px;
-}
-
-.comment-title {
-  display: inline-block;
-  border-top: 1px solid grey;
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  background-color:rgba(255, 255, 255, 1.0);
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.comment-body {
-  border: 1px solid grey;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  background-color:rgba(255, 255, 255, 1.0);
-  padding-left: 5px;
-  padding-right: 5px;
-  font-style: italic;
-}
-
-.comment-body p {
-  margin: 5px!important;
-}
-
- .comment-delete {
-  float: right;
-  display: inline-block;
-  border-bottom: 1px solid grey;
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color:rgba(255, 255, 255, 1.0);
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.comment-edit {
-  float: right;
-  display: inline-block;
-  border-bottom: 1px solid grey;
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color:rgba(255, 255, 255, 1.0);
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-
-.comment-textarea {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  outline: none;
-
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-
-.fa-edit, .fa-comments{
-  color: white!important;
 }
 
 .create-post-footer {
@@ -234,24 +92,11 @@
   margin-right: 20px;
 }
 
-.main-content hr {
-  margin: 10px 0px!important;
-}
-
-.telescope-title {
-  margin: 0px!important;
-  padding: 0px 10px!important;
-  font-size: .75em!important;
-  font-weight: bold!important;
-}
-
 input[type="checkbox"]:checked {
   box-shadow: 0 0 0 3px hotpink;
 }
 
-.buttons {
-  margin: 20px 0px;
-}
+
 
 .post-list {
   margin: 20px 0px 0px 0px;
@@ -260,17 +105,6 @@ input[type="checkbox"]:checked {
   border-radius: 10px;
 }
 
-.sign {
-  line-height: 1;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: white;
-}
-
-.icon-label {
-  padding-left: 2px;
-  color: white!important;
-}
 
 h6.blog-header {
   margin-top: 5px!important;
@@ -332,11 +166,6 @@ h6.blog-header {
   opacity: 1.0;
 }
 
-.container-links {
-  margin: 0px auto 20px auto;
-  max-width: 100%;
-  background-color: white;
-}
 
 .form-control-sm {
   font-size: .8rem!important;
@@ -346,95 +175,41 @@ h6.blog-header {
   margin-left: .25rem;
 }
 
-.astro-banner {
-  padding: 0px;
-  margin: 0px;
-  max-width: 100%;
-  height: 150px;
-  background-image:url("/static/mySpaceStuff/img/astro-banner.jpeg");
-  background-repeat:no-repeat;
-}
-
 .navbar-logo-title {
   font-size: 2em;
   font-weight: bolder;
-}
-
-.daily-row {
-  padding: 20px;
-  border-radius: 5px;
-  background-color: #fff;
-}
-
-.techport-search-row {
-  padding: 20px 20px 0px 20px;
-  border-radius: 5px;
-}
-
-.techport-search-results-row {
-  margin: 30px 5px 50px 20px;
-  border-top: 1px dashed black;
-  padding: 20px 20px 20px 20px;
 }
 
 audio:focus {
   outline: none;
 }
 
-.nasa-search-checkbox {
-  margin: 7px;
+
+
+.table {
+  width: 98%;
+  font-size: 1rem;
 }
 
-.nasa-search-checkbox input {
-  margin-right: 5px;
-  margin-bottom: 3px;
-  vertical-align: middle;
+h2.modal-title {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin: 5px 15px!important;
 }
 
-.nasa-image-wrapper {
-   position: relative;
+.col {
+  display: inline-block!important;
+  padding-bottom: 5px;
+  height: 200px;
 }
 
-.nasa-image-wrapper .fa-play {
-   position: absolute;
-   top: 32.5%;
-   left: 42.5%;
-   color: white!important;
-}
 
-.nasa-image {
-  padding: 10px;
-  max-width: 100%;
+
+
+.mars-images {
+  width: 100%;
   height: auto;
-  border: 1px solid grey;
   border-radius: 5px;
-}
-
-.nasa-image:hover, .nasa-image-wrapper .fa-play:hover {
-  cursor: pointer;
-}
-
-.nasa-image:hover {
-  box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-}
-
-.daily-image {
-  padding: 10px;
-  max-width: 100%;
-  height: auto;
-}
-
-.daily-image:hover {
-  cursor: pointer;
-}
-
-.daily-description {
-  margin-right: 20px;
-}
-
-.nasa-search-title {
-  margin-bottom: 0px!important;
-  text-decoration: underline;
 }
 
 .nasa-search-content, .nasa-main-content {
@@ -452,187 +227,17 @@ audio:focus {
   padding-bottom: 40px;
 } 
 
-.home-content, .nasa-main-content, .satellite-main-content {
+.nasa-main-content, .satellite-main-content {
   margin-bottom: 80px!important;
 }
 
-.rover-bottom {
-  margin-top: 20px!important;
+.customOverlay {
+  background: rgba(36, 123, 160, 0.7);
 }
 
-.button-float-right {
-  float: right;
-  margin: 15px 0px .5rem 0px;
-  padding: 3px 6px;
+.customModal {
   border-radius: 10px;
-}
-
-.table {
-  width: 98%;
-  font-size: 1rem;
-}
-
-h2.modal-title {
-  font-size: 2rem;
-  font-weight: bolder;
-  margin: 5px 15px!important;
-}
-
-.modal-title {
-  font-size: 1rem;
-  margin-left: 10px;
-  margin-top: 1.25rem!important;
-}
-
-.modal-body {
-  padding-bottom: .5rem!important;
-}
-
-.modal-content {
-  border-radius: 10px;
-}
-
-.modal-content iframe {
-  margin: 0 auto;
-  display: block;
-}
-
-.video-modal-content {
-  border: 10px solid white!important;
-}
-
-.col {
-  display: inline-block!important;
-  padding-bottom: 5px;
-  height: 200px;
-}
-
-.techport-search-label {
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 10px;
-  background-color: white;
-}
-
-.techport-search-container {
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 10px;
-  background-color: rgba(0, 128, 128, 0.25);
-}
-
-.techport-search-container {
-  height: 247px;
-}
-
-.techport-search-info {
-  height: 245px;
-}
-
-.techport-search-info {
-  vertical-align: middle;
-  border-radius: 5px;
-  background-color: #fff;
-}
-
-.rover-sol, .rover-earth, .rover-cameras {
-  padding: 20px;
-  border: 1px solid lightgrey;
-  border-radius: 10px;
-  height: 150px;
-}
-
-.rover-sol p, .rover-earth p, .techport-search-label p {
-  font-size: .75em;
-}
-
-.rover-sol:hover, .rover-earth:hover {
-  background-color: #F5F5F5;
-}
-
-.rover-select, .rover-select option {
-  width: 100%;
-}
-.rover-title {
-  margin: 0px 0px 10px 20px;
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.rover-caption {
-  margin: 0px 0px 10px 20px;
-  font-size: 1em;
-  font-weight: bold;
-}
-
-.rover-content {
-  height: auto;
-  padding: 20px;
-}
-
-.rover-container {
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-}
-
-.rover-image-results {
-  padding: 0px 10px;
-}
-
-.rover-image-container, .img-responsive {
-  margin: 5px;
-  border: 1px solid #ccc;
-  width: 20%;
-  display: inline-block;
-  text-align: justify;
-}
-
-.rover-image-container img {
-  width: 100%;
-  height: auto;
-}
-
-.rover-submit {
-  margin: 20px 0px;
-}
-
-.rover-submit-button {
-  width: 100px;
-}
-
-.rover-search-title {
-  background-color: #A0A0A0;
-  margin-bottom: 20px;
-  padding: 10px 0px;
-  border: 1px solid #A0A0A0;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.mars-images {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.about-images img {
-  width: 100%;
-  height: auto;
-}
-
-.daily-image {
-  border-radius: 25px!important;
-}
-
-.rover-image {
-  width: 100%;
-  height: auto;
-}
-
-.rover-images {
-  margin-left: 20px;
-  width: 90%;
-  height: auto;
+  width: 40%;
 }
 
 .mars-images:hover {
@@ -698,182 +303,4 @@ footer {
 
 .nav-item > button {
   font-size: .75rem;
-}
-
-/* NASA Image Slideshow */
-.nasa-slideshow-container {
-  padding: 15px;
-}
-
-.nasa-slides {
-  background-color: #F5F5F5;
-  border: 1px solid #A0A0A0;
-  border-radius: 10px;
-}
-
-.nasa-slides-wrapper {
-  width: 100%;
-  height: 520px;
-  position: relative;
-}
-
-.nasa-slides-wrapper > a > img {
-  cursor: pointer;
-  display: block!important;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  max-height: 100%;
-  padding-top: 10px;
-}
-
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 20px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.6);
-}
-
-.nasa-slide-description {
-  font-size: 1.0rem;
-  padding: 10px 40px;
-  width: 100%;
-  text-align: center;
-}
-
-.nasa-slide-counter {
-  font-size: 0.75rem;
-  padding: 10px 10px;
-  position: absolute;
-  top: 0;
-}
-
-.fade-in {
-  -webkit-animation-name: fade-in;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade-in;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade-in {
-  from {opacity: 0.4}
-  to {opacity: 1.0}
-}
-
-@keyframes fade-in {
-  from {opacity: 0.4}
-  to {opacity: 1.0}
-}
-
- .tabs {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  float: right;
-  margin: 15px 30px 0px 0px;
-}
-
-.tablinks.left, .tablinks.left.active {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-right: 1px solid #ccc!important;
-}
-
-.tablinks.right, .tablinks.right.active {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-left: 1px solid #ccc!important;
-}
-
-.tabs button {
-  background-color: #fff;
-  float: left;
-  border: none!important;
-  cursor: pointer;
-  padding: 8px 10px;
-}
-
-.tabs button:hover {
-  background-color: #ccc;
-  outline: 0;
-}
-
-.tabs button.active {
-  background-color: #ccc;
-  outline: 0;
-}
-
-.tab-content {
-  display: none;
-} 
-
-.nasa-image-content.tab-content {
-  display: block;
-}
-
-.nasa-search-checkbox input[type="checkbox"]:checked {
-  box-shadow: none!important;
-}
-
-#loader-wrap {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  top: 20%;
-}
-
-#loading-wrap {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  top: 32%;
-}
-
-.loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-  display: flex;
-  margin: 0 auto;
-}
-
-.loading {
-  color: #fff;
-  display: flex;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-#loader-container {
-  display: none;
-}
+} */

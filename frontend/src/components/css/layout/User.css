@@ -1,0 +1,16 @@
+.user-title-hr {
+  margin-top: .5rem;
+}
+
+.user-title-row {
+  padding-left: 40px;
+}
+
+.user-gravatar {
+  border: 2px double #343a40;
+  box-shadow: 2px 2px 4px #cccccc;
+  border-radius: 50%;
+  height: 45px;
+  width: auto;
+  margin-right: 15px;
+}

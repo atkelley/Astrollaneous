@@ -1,0 +1,115 @@
+/* SEARCH */
+.nasa-search-input-container {
+  display: flex;
+  width: 75%;
+  margin: 20px auto;
+}
+
+.nasa-search-input-button {
+  border-radius: 5px;
+  min-width: 50px;
+  padding: 10px;
+}
+
+.nasa-search-input-button:hover {
+  background: #CCCCCC;
+}
+
+.nasa-search-input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid grey;
+  margin-right: 10px;
+}
+
+.nasa-search-checkbox-container {
+  display: flex;
+  width: 35%;
+  margin: 20px auto 0px auto;
+}
+
+.nasa-search-checkbox {
+  margin: auto;
+}
+
+.nasa-search-checkbox label {
+  margin-bottom: 0;
+}
+
+.nasa-search-checkbox input {
+  margin-right: 5px;
+}
+
+.nasa-search-checkbox input[type="checkbox"]:checked {
+  box-shadow: none;
+}
+
+/* VIDEO */
+.video-container {
+  padding: 20px 0px 40px 0;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.video-container:first-of-type {
+  padding: 10px 0px 20px 0;
+}
+
+.video-container:last-of-type {
+  border-bottom: none;
+}
+
+.video-image-wrapper {
+  position: relative;
+}
+
+.video-image-wrapper .fa-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.video-image {
+ padding: 10px;
+ max-width: 100%;
+ height: auto;
+ border: 2px solid #CCCCCC;
+ border-radius: 5px;
+}
+
+.video-image:hover, .video-image-wrapper .fa-play:hover {
+ cursor: pointer;
+}
+
+.video-image:hover {
+ box-shadow: 1px 1px 2px black, 0 0 5px #007bff, 0 0 5px #0056b3;
+}
+
+
+/* AUDIO */
+.audio-container {
+  padding: 20px 0px 20px 0;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.audio-container:first-of-type {
+  padding: 10px 0px 20px 0;
+}
+
+.audio-container:last-of-type {
+  border-bottom: none;
+}
+
+
+/* VIDEO & AUDIO */
+.toggle-click {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.toggle-click:hover {
+  color: #0056b3;
+}

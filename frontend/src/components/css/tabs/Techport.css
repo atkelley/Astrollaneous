@@ -1,0 +1,107 @@
+.techport-search-row {
+  padding: 20px 20px 0px 20px;
+  border-radius: 5px;
+}
+
+.techport-search-results-row {
+  margin: 30px 5px 50px 20px;
+  border-top: 1px dashed black;
+  padding: 20px 20px 20px 20px;
+}
+
+.techport-search-box {
+  width: 80%;
+  padding: 30px 20px 50px 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.techport-search-box p {
+  font-size: .75em;
+}
+
+.techport-search-input, .techport-search-info {
+  height: 275px;
+  padding: 30px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.techport-search-info { 
+  background-color: #FFFFFF;
+}
+
+.techport-chevron {
+  float: left;
+  margin-right: 20px;
+}
+
+.techport-results {
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  padding: 30px;
+}
+
+.techport-result {
+  display: inline-block;
+  margin: 5px 20px;
+}
+
+.techport-result-cell {
+  font-size: 1rem;
+}
+
+.techport-search-property-container {
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px 0px;
+}
+
+.techport-search-left, .techport-search-right {
+  cursor: pointer;
+  margin: 20px 10px;
+  color: #007bff;
+}
+
+.techport-search-right {
+  float: left;
+}
+
+.techport-search-left {
+  float: right;
+}
+
+.techport-search-left:hover, .techport-search-right:hover {
+  color: #0056b3;
+}
+
+.techport-search-submit {
+  margin-top: 10px;
+}
+
+.techport-search-input, .techport-search-results-backdrop {
+  background-color: rgba(90, 166, 185, 0.9);
+}
+
+.col-md-4, .col-md-6, .col-md-12 {
+  background-color: #FFFFFF;
+}
+
+.techport-result th:first-child, .techport-result td:first-child {
+  border: none;
+}
+
+.techport-result th, .techport-result td {
+  border: none;
+}
+
+.btn-outline-secondary.focus, .btn-outline-secondary:focus {
+  box-shadow: none;
+}
+
+.btn.focus, .btn:focus {
+  box-shadow: none;
+}
