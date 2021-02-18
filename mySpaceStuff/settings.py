@@ -29,7 +29,7 @@ else:
   SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+# DEBUG = False
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ['astrollaneous.herokuapp.com', '127.0.0.1', 'localhost']
@@ -43,17 +43,13 @@ INSTALLED_APPS = [
   'django.contrib.sessions',
   'django.contrib.messages',
   'django.contrib.staticfiles',
-  'bootstrap_modal_forms',
-  'debug_toolbar',
-  'bootstrap4',
   'accounts.apps.AccountsConfig',
-  'tabs.apps.TabsConfig',
+  'frontend.apps.FrontendConfig',
   'blog.apps.BlogConfig',
   'widget_tweaks',
   'rest_framework',
-  'frontend',
-  'knox',
-  'corsheaders'
+  'corsheaders',
+  'knox'
 ]
 
 REST_FRAMEWORK = {
@@ -70,7 +66,6 @@ MIDDLEWARE = [
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
-  'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

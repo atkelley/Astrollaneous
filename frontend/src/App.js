@@ -18,8 +18,8 @@ import Techport from './components/tabs/Techport';
 import About from './components/tabs/About';
 import Footer from './components/layout/Footer';
 
-import Login from './components/accounts/Login';
-import Register from './components/accounts/Register';
+import Login from './components/layout/Login';
+import Register from './components/layout/Register';
 import Modal from './components/common/Modal';
 import './components/css/common/Common.css';
 

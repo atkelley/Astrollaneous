@@ -1,15 +1,20 @@
 from django.urls import path
-from blog import views
+from . import views
 
 app_name = 'blog'
 
 urlpatterns = [
-    # path('', views.PostList.as_view(), name='post_list'),
-    # path('post_create/', views.PostCreateView.as_view(), name='post_create'),
-    # path('<username>/<int:pk>/post_edit/', views.PostEditView.as_view(), name='post_edit'),
-    # path('<username>/<int:pk>/post_delete/', views.PostDeleteView.as_view(), name='post_delete'),
+  path('api/user/<int:id>', views.get_user),
+  path('api/user/<int:id>/posts', views.user_posts),
+  path('api/user/<int:id>/comments', views.user_comments),
 
-    # path('<username>/<int:pk>/comment_create/', views.add_comment_to_post, name='comment_create'),
-    # path('<username>/<int:pk>/comment_edit/', views.CommentEditView.as_view(), name='comment_edit'),
-    # path('<username>/<int:pk>/comment_delete/', views.CommentDeleteView.as_view(), name='comment_delete'),
+  path('api/posts', views.posts),
+  path('api/posts/<int:id>', views.get_post),
+  path('api/posts/create', views.create_post),
+  path('api/posts/update/<int:id>', views.update_post),
+  path('api/posts/delete/<int:id>', views.delete_post),
+
+  path('api/comments/create', views.create_comment),
+  path('api/comments/update/<int:id>', views.update_comment),
+  path('api/comments/delete/<int:id>', views.delete_comment),
 ]

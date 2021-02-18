@@ -16,11 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
-from . import views
-from blog import views as blog
-# from accounts import views as accounts
+# from blog import views
+
+from frontend import urls
+from accounts import urls
+from blog import urls
+
 
 urlpatterns = [
+  path('', include('blog.urls')),
+  path('', include('accounts.urls')),
+  
   path('', include('frontend.urls')),
   path('blog', include('frontend.urls')),
   path('blog/create', include('frontend.urls')),
@@ -37,25 +43,5 @@ urlpatterns = [
   path('login', include('frontend.urls')),
   path('register', include('frontend.urls')),
 
-  path('', include('accounts.urls')),
-
-  path('api/user/<int:id>', blog.get_user),
-  path('api/user/<int:id>/posts', blog.user_posts),
-  path('api/user/<int:id>/comments', blog.user_comments),
-
-  path('api/posts', blog.posts),
-  path('api/posts/<int:id>', blog.get_post),
-  path('api/posts/create', blog.create_post),
-  path('api/posts/update/<int:id>', blog.update_post),
-  path('api/posts/delete/<int:id>', blog.delete_post),
-
-  path('api/comments/create', blog.create_comment),
-  path('api/comments/update/<int:id>', blog.update_comment),
-  path('api/comments/delete/<int:id>', blog.delete_comment),
-  path('api/satellites/<str:name>', views.satellite),
   path('admin/', admin.site.urls)
 ]
-
-if settings.DEBUG:
-	import debug_toolbar
-	urlpatterns = [path('__debug__/', include(debug_toolbar.urls)),] + urlpatterns

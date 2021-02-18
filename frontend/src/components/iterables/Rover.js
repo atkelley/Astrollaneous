@@ -63,7 +63,6 @@ class Rover extends Component {
     } catch (error) {
       console.log(error);
     }
-    console.log(cameraData);
     
     this.setState({ 
       cameraData,

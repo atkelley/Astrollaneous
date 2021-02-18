@@ -155,7 +155,7 @@ h6.blog-header {
 .nav-link.active {
   font-weight: bolder;
   /* border-left: 1px solid grey!important;
-  border-right: 1px solid grey!important; */
+  border-right: 1px solid grey!important; 
 }
 
 .btn-link a:hover {
@@ -261,7 +261,7 @@ h2.modal-title {
 }
 
 /* FOOTER SECTION */
-footer {
+/* footer {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -303,4 +303,4 @@ footer {
 
 .nav-item > button {
   font-size: .75rem;
-} */
+}  */
