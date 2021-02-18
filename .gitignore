@@ -37,3 +37,6 @@ media
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# tle2czml files
+/static/mySpaceStuff/tle2czml
