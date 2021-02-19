@@ -1,8 +1,8 @@
 const Dotenv = require('dotenv-webpack');
-var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 module.exports = {
   watch: true,
+  devtool: false,
   module: {
     rules: [
       {
@@ -21,7 +21,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new CaseSensitivePathsPlugin(),
     new Dotenv()
   ]
 };
