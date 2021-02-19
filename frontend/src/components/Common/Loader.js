@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Loader = () => {
-
+function Loader() {
   return (
     <div className="loader-container">
       <div className="loader-wrap">
@@ -11,7 +10,7 @@ const Loader = () => {
         <h3 className="loading">Loading...</h3>
       </div>
     </div>
-  )
+  );
 }
 
 export default Loader;

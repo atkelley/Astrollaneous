@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 
 const DeleteModal = ({ isPost, title, handleDeleteSubmit }) => {
   return (
-    <div className="modal fade show bd-example-modal-lg" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div className="modal fade show bd-example-modal-lg" id="deleteModal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <form onSubmit={handleDeleteSubmit}>

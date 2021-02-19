@@ -4,7 +4,7 @@ const getOrdinalNumber = (number) => {
   return number + ['th', 'st', 'nd', 'rd'][selector];
 };
 
-export const getConvertedDateString = (dateString) => {
+export function getConvertedDateString(dateString) {
   let date = (dateString) ? new Date(dateString) : new Date();
   let day = getOrdinalNumber(date.getDate());
   let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][date.getMonth()];
@@ -13,21 +13,21 @@ export const getConvertedDateString = (dateString) => {
   return `${month} ${day}, ${year}`;
 }
 
-export const getConvertedDateTime = (dateString) => {
+export function getConvertedDateTime(dateString) {
   let date = new Date(dateString);
   return ((date.getHours() % 12) ? date.getHours() % 12 : 12) + ':' + ((date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()) + ' ' + ((date.getHours() >= 12) ? 'PM' : 'AM');
 }
 
-export const capitalizeEveryFirstLetter = (string) => {
+export function capitalizeEveryFirstLetter(string) {
   return (string.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' '));
 }
 
-export const reformatDateString = (dateString) => {
+export function reformatDateString(dateString) {
   let dateArray = dateString.split('-');
   return `${dateArray[1]}/${dateArray[2]}/${dateArray[0].substring(2, 4)}`;
 }
 
-export const getNewSlideIndex = (value, slideIndex, collection) => {
+export function getNewSlideIndex(value, slideIndex, collection) {
   let newSlideIndex = slideIndex + value;
 
   if (newSlideIndex > collection.length - 1) { 
