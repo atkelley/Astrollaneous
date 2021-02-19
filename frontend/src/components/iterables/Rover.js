@@ -52,7 +52,7 @@ class Rover extends Component {
           ...(this.state.selectedDateType == 'earth' ? { earth_date: `${this.state.selectedEarthDate.getFullYear()}-${this.state.selectedEarthDate.getMonth()+1}-${this.state.selectedEarthDate.getDate()}` } : {}),
           ...(this.state.selectedDateType == 'sol' ? { sol: this.state.selectedSolNumber } : {}),
           ...(this.state.selectedCamera != 'ALL' ? { camera: this.state.selectedCamera.toLowerCase() } : {}),
-          api_key: `${(process.env.NASA_API_KEY) || env['NASA_API_KEY']}`
+          api_key: `${process.env.NASA_API_KEY}`
         },
       });
 

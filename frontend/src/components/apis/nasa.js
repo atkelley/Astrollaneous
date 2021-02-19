@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = (process.env.NASA_API_KEY) || env['NASA_API_KEY'];
+const API_KEY = process.env.NASA_API_KEY;
 
 export const getDailyPhotoData = axios.create({
   baseURL: `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`,
