@@ -2,9 +2,6 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   watch: false,
-  resolve: {
-    extensions: [".jsx", ".js"]
-  },
   module: {
     rules: [
       {
