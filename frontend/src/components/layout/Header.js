@@ -32,8 +32,8 @@ class Header extends Component {
             <div className="navbar-nav ml-auto">
               { this.props.auth.isAuthenticated ? 
                 <Fragment>
-                  <button className="btn btn-link" type="button" name="button" onClick={() => this.props.logout()}>Logout</button>
                   <Link className="btn btn-link" to="/blog/create">Create Post</Link>
+                  <button className="btn btn-link" type="button" name="button" onClick={() => this.props.logout()}>Logout</button>
                 </Fragment>
               : 
                 <Fragment>
