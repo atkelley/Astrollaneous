@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Modal({ isImage, modalUrl, modalAuthor }) {
+const Modal = ({ isImage, modalUrl, modalAuthor }) => {
   return (
     <div className="modal fade bd-example-modal-lg" id='modal' tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
