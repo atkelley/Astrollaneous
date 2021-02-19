@@ -1,6 +1,9 @@
 {
   "name": "Astrollaneous",
   "version": "2.0.0",
+  "engines": {
+    "node": "14.8.0"
+  },
   "description": "Astrollaneous is an assortment of space-related images and articles consumed from various NASA APIs. Visitors can also create posts and comments.",
   "main": "index.js",
   "scripts": {
