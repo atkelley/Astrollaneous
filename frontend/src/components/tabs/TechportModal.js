@@ -23,7 +23,7 @@ class TechportModal extends Component {
 
   fetchProjectData = async () => {
     try {
-      const { data } = await getTechportProjectData.get(`${this.props.project}`, { params: { api_key: (process.env.NASA_API_KEY) || env['NASA_API_KEY'] } });
+      const { data } = await getTechportProjectData.get(`${this.props.project}`, { params: { api_key: (process.env && process.env.NASA_API_KEY) || env['NASA_API_KEY'] } });
       this.setState({
         project: data.project
       });

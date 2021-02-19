@@ -1,11 +1,13 @@
 import axios from 'axios';
 
+const API_KEY = (process.env.NASA_API_KEY) || env['NASA_API_KEY'];
+
 export const getDailyPhotoData = axios.create({
-  baseURL: `https://api.nasa.gov/planetary/apod?api_key=${(process.env.NASA_API_KEY) || env['NASA_API_KEY']}`,
+  baseURL: `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`,
 });
 
 export const getMarsWeatherData = axios.create({
-  baseURL: `https://api.nasa.gov/insight_weather/?feedtype=json&ver=1.0&api_key=${(process.env.NASA_API_KEY) || env['NASA_API_KEY']}`,
+  baseURL: `https://api.nasa.gov/insight_weather/?feedtype=json&ver=1.0&api_key=${API_KEY}`,
 });
 
 export const getRoverData = axios.create({
@@ -13,7 +15,7 @@ export const getRoverData = axios.create({
 });
 
 export const getTechportData = axios.create({
-  baseURL: `https://api.nasa.gov/techport/api/projects?api_key=${(process.env.NASA_API_KEY) || env['NASA_API_KEY']}`,
+  baseURL: `https://api.nasa.gov/techport/api/projects?api_key=${API_KEY}`,
 });
 
 export const getTechportProjectData = axios.create({

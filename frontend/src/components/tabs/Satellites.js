@@ -37,7 +37,7 @@ class Satellites extends Component {
       .then(response => {
         if (response.status == 200) {
           this.setState({ isLoaded: true, isLoading: false, satellite: response.data });
-          Cesium.Ion.defaultAccessToken = (process.env.CESIUM_TOKEN || env['CESIUM_TOKEN']);
+          Cesium.Ion.defaultAccessToken = ((process.env && process.env.CESIUM_TOKEN) || env['CESIUM_TOKEN']);
           var viewer = new Cesium.Viewer("cesiumContainer", { shouldAnimate: true, });
           viewer.entities.removeAll();
           viewer.dataSources.add( Cesium.CzmlDataSource.load(`/static/mySpaceStuff/tle2czml/tle_${name}.czml`) );

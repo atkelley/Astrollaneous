@@ -25,7 +25,7 @@ class Rovers extends Component {
     this.setState({ isLoaded: false });
     
     try {
-      const { data: { rover } } = await getRoverData.get(`${name}/`, {params: { api_key: `${(process.env.NASA_API_KEY) || env['NASA_API_KEY']}` } } );
+      const { data: { rover } } = await getRoverData.get(`${name}/`, {params: { api_key: `${(process.env && process.env.NASA_API_KEY) || env['NASA_API_KEY']}` } } );
       this.setState({ rover, isLoaded: true });
     } catch(error) {
       console.log(error);
