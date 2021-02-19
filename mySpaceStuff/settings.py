@@ -31,18 +31,6 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", True)
 
-if (DEBUG == False):
-  import django_heroku
-  django_heroku.settings(locals())
-
-# Configure Django App for Heroku.
-# server = request.META.get('wsgi.file_wrapper', None)
-# if server is not None and server.__module__ == 'django.core.servers.basehttp':
-#   print('inside dev')
-# else:
-#   import django_heroku
-#   django_heroku.settings(locals())
-
 ALLOWED_HOSTS = ['astrollaneous.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
