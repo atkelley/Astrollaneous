@@ -1,6 +1,8 @@
-const Dotenv = require('dotenv-webpack');
-const webpack = require('webpack');
-const dotenv = require('dotenv');
+// const Dotenv = require('dotenv-webpack');
+// const webpack = require('webpack');
+// const dotenv = require('dotenv');
+
+require('dotenv').config();
 
 module.exports = {
   watch: false,
@@ -22,9 +24,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new Dotenv(),
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(dotenv.config().parsed) 
-   })
+      'process.env': {
+        'NASA_API_KEY': JSON.stringify(process.env.NASA_API_KEY),
+      }
+    })
   ]
 };
