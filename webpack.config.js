@@ -1,6 +1,6 @@
-// const Dotenv = require('dotenv-webpack');
-// const webpack = require('webpack');
-// const dotenv = require('dotenv');
+const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 require('dotenv').config();
 
