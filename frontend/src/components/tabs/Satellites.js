@@ -24,9 +24,11 @@ class Satellites extends Component {
   }
 
   componentWillUnmount = () => { 
-    var viewer = new Cesium.Viewer("cesiumContainer", { shouldAnimate: true, });
-    viewer.entities.removeAll();
-    viewer.destroy();
+    if ($("#cesiumContainer").length) {
+      var viewer = new Cesium.Viewer("cesiumContainer", { shouldAnimate: true, });
+      viewer.entities.removeAll();
+      viewer.destroy();
+    }
   }
 
   fetchSatelliteData = async (name) => {
