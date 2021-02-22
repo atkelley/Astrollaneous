@@ -20,7 +20,6 @@ class Satellites extends Component {
   }
 
   componentDidMount = () => {
-    console.log(process.env);
     this.fetchSatelliteData(DEFAULT_CHECKED);
   }
 
