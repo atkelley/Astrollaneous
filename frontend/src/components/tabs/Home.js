@@ -61,7 +61,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log('testing:', process.env);
     return (
       <Fragment>
         { this.state.isLoaded ?
