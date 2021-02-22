@@ -28,7 +28,7 @@ def satellite(request, name):
     input_file = "static/mySpaceStuff/tle2czml/tle_{}.txt".format(name)
 
     with open(input_file, 'wb') as f:
-        f.write(r.content)
+      f.write(r.content)
     f.close()
 
     output_file = "static/mySpaceStuff/tle2czml/tle_{}.czml".format(name)
