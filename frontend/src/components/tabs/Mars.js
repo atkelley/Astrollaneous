@@ -240,7 +240,7 @@ class Mars extends Component {
                 </div>
               </div>
               <div className="row">
-                <table className="table mars-table">
+                <table className="mars-table">
                   <thead>
                     <tr>
                       <th>Parameter</th>
