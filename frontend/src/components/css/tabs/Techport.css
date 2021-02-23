@@ -3,6 +3,13 @@
   border-radius: 5px;
 }
 
+.react-datepicker-wrapper, 
+.react-datepicker__input-container, 
+.react-datepicker__input-container input {
+  float: left!important;
+  width: none!important;
+}
+
 .techport-search-results-row {
   margin: 30px 5px 50px 20px;
   border-top: 1px dashed black;
