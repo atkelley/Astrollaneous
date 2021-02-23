@@ -7,7 +7,6 @@
 .react-datepicker__input-container, 
 .react-datepicker__input-container input {
   float: left!important;
-  width: none!important;
 }
 
 .techport-search-results-row {
