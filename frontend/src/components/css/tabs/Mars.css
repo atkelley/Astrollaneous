@@ -36,8 +36,8 @@
 }
 
 .mars-table {
-  border: 1px solid #dee2e6;
   border-radius: 10px;
+  padding: 0 20px;
 }
 
 .temp, .pressure, .speed {
