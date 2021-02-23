@@ -26,18 +26,16 @@
   width: 300px;
 }
 
-.mars-table thead th {
+.table thead th {
   border-top: 1px solid #bbbbbb;
   border-bottom: 1px solid #bbbbbb;
 }
 
-.mars-table td, .mars-table th {
+.table td, .table th {
   border-top: none;
 }
 
 .mars-table {
-  max-width: 100%!important;
-  color: #212529;
   margin: 5px 75px 40px 75px;
   border: 1px solid #dee2e6;
   border-radius: 10px;

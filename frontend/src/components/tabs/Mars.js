@@ -240,42 +240,44 @@ class Mars extends Component {
                 </div>
               </div>
               <div className="row">
-                <table className="mars-table">
-                  <thead>
-                    <tr>
-                      <th>Parameter</th>
-                      <th className="mars-table__cell">Avg.</th>
-                      <th className="mars-table__cell">Min.</th>
-                      <th className="mars-table__cell">Max.</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="mars-table__row-title">Temperature (<span className='temp' id="°C" onClick={this.metricClickHandler}>°C</span> | <span className='temp toggle' id="°F" onClick={this.metricClickHandler}>°F</span>)</td>
-                      {this.state.selectedTemps.map((temp, index) => {
-                        return (
-                          <td key={index} className="mars-table__cell">{temp}</td>
-                        )
-                      })}
-                    </tr>
-                    <tr>
-                    <td className="mars-table__row-title">Pressure (<span className='pressure' id="Pa" onClick={this.metricClickHandler}>Pa</span> | <span className='pressure toggle' id="mm Hg" onClick={this.metricClickHandler}>mm Hg</span>)</td>
-                      {this.state.selectedPressures.map((pressure, index) => {
-                        return (
-                          <td key={index} className="mars-table__cell">{pressure}</td>
-                        )
-                      })}
-                    </tr> 
-                    <tr>
-                      <td className="mars-table__row-title">Wind Speed (<span className='speed' id="m/s" onClick={this.metricClickHandler}>m/s</span> | <span className='speed toggle' id="mph" onClick={this.metricClickHandler}>mph</span>)</td>
-                      {this.state.selectedSpeeds.map((speed, index) => {
-                        return (
-                          <td key={index} className="mars-table__cell">{speed}</td>
-                        )
-                      })}
-                    </tr>
-                  </tbody>
-                </table>
+                <div className="col-md-12">
+                  <table className="table mars-table">
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        <th className="mars-table__cell">Avg.</th>
+                        <th className="mars-table__cell">Min.</th>
+                        <th className="mars-table__cell">Max.</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="mars-table__row-title">Temperature (<span className='temp' id="°C" onClick={this.metricClickHandler}>°C</span> | <span className='temp toggle' id="°F" onClick={this.metricClickHandler}>°F</span>)</td>
+                        {this.state.selectedTemps.map((temp, index) => {
+                          return (
+                            <td key={index} className="mars-table__cell">{temp}</td>
+                          )
+                        })}
+                      </tr>
+                      <tr>
+                      <td className="mars-table__row-title">Pressure (<span className='pressure' id="Pa" onClick={this.metricClickHandler}>Pa</span> | <span className='pressure toggle' id="mm Hg" onClick={this.metricClickHandler}>mm Hg</span>)</td>
+                        {this.state.selectedPressures.map((pressure, index) => {
+                          return (
+                            <td key={index} className="mars-table__cell">{pressure}</td>
+                          )
+                        })}
+                      </tr> 
+                      <tr>
+                        <td className="mars-table__row-title">Wind Speed (<span className='speed' id="m/s" onClick={this.metricClickHandler}>m/s</span> | <span className='speed toggle' id="mph" onClick={this.metricClickHandler}>mph</span>)</td>
+                        {this.state.selectedSpeeds.map((speed, index) => {
+                          return (
+                            <td key={index} className="mars-table__cell">{speed}</td>
+                          )
+                        })}
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
