@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import dotenv
 from pathlib import Path
-import dj_database_url
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -21,21 +19,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
-# load environment variables from .env
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
 my_file = Path(".env")
-
 if my_file.exists():
   from decouple import config
   SECRET_KEY = config('DJANGO_SECRET_KEY')
-else:
-  SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", False)
@@ -52,13 +39,13 @@ INSTALLED_APPS = [
   'django.contrib.messages',
   'whitenoise.runserver_nostatic',
   'django.contrib.staticfiles',
-  'accounts.apps.AccountsConfig',
-  'frontend.apps.FrontendConfig',
-  'blog.apps.BlogConfig',
   'widget_tweaks',
   'rest_framework',
   'corsheaders',
-  'knox'
+  'knox',
+  'accounts.apps.AccountsConfig',
+  'frontend.apps.FrontendConfig',
+  'blog.apps.BlogConfig',
 ]
 
 REST_FRAMEWORK = {
@@ -101,9 +88,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mySpaceStuff.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 # DATABASES = {
 #   'default': {
 #     'ENGINE': 'django.db.backends.sqlite3',
@@ -111,10 +95,7 @@ WSGI_APPLICATION = 'mySpaceStuff.wsgi.application'
 #   }
 # }
 
-
-# load database from the DATABASE_URL environment variable
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default='postgres://xbcyfbbibgxujv:26549452b6579e0357edbc1fe24eeeeb71389ca99c67783e45a55d6813ff5293@ec2-3-222-127-167.compute-1.amazonaws.com:5432/d22ojimkpjdovu')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -172,18 +153,16 @@ LOGGING = {
 }
 
 
-# Configure app for Heroku deployment
-django_heroku.settings(locals())
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
-# Place static in the same location as webpack build files
-# STATIC_ROOT = os.path.join(BASE_DIR, 'build', 'static') FOR DEV(?)
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'build', 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_DIRS = [] FOR DEV(?)
-STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'static'),
-]
+
+# STATICFILES_DIRS = [] 
+STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'),]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# Configure app for Heroku deployment
+django_heroku.settings(locals())
