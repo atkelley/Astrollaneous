@@ -240,7 +240,7 @@ class Mars extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-12 table-responsive">
                   <table className="table mars-table">
                     <thead>
                       <tr>
