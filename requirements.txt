@@ -8,7 +8,11 @@ colorama==0.4.3
 cryptography==3.3.1
 dj-database-url==0.5.0
 Django==3.0.6
+django-bootstrap-modal-forms==1.5.0
+django-bootstrap4==1.1.1
+django-braces==1.13.0
 django-cors-headers==3.6.0
+django-debug-toolbar==2.1
 django-heroku==0.3.1
 django-rest-knox==4.1.0
 django-widget-tweaks==1.4.5
@@ -26,6 +30,7 @@ pygeoif==0.7
 pylint==2.4.4
 python-dateutil==2.6.1
 python-decouple==3.3
+python-dotenv==0.15.0
 pytz==2018.3
 requests==2.22.0
 sgp4==1.4
