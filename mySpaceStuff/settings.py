@@ -30,7 +30,7 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = ['astrollaneous.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['astrollaneous.herokuapp.com',]
 
 # Application definition
 
@@ -68,7 +68,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('http://localhost:8000', 'http://astrollaneous.herokuapp.com')
+CORS_ORIGIN_WHITELIST = ('http://astrollaneous.herokuapp.com')
 
 ROOT_URLCONF = 'mySpaceStuff.urls'
 
