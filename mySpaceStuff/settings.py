@@ -80,6 +80,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
   'http://localhost:8000',
+  'astrollaneous.herokuapp.com'
 )
 
 ROOT_URLCONF = 'mySpaceStuff.urls'
@@ -116,7 +117,7 @@ WSGI_APPLICATION = 'mySpaceStuff.wsgi.application'
 
 # load database from the DATABASE_URL environment variable
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+DATABASES['default'] = dj_database_url.config(default='postgres://xbcyfbbibgxujv:26549452b6579e0357edbc1fe24eeeeb71389ca99c67783e45a55d6813ff5293@ec2-3-222-127-167.compute-1.amazonaws.com:5432/d22ojimkpjdovu')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
