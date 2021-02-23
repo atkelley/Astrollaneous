@@ -34,8 +34,10 @@ class Blog extends Component {
   }
 
   getPosts = async () => {
+    console.log("Blog: ", process.env.NODE_ENV);
     await PostDataService.getPosts()
       .then(response => {
+        console.log('response: ', response.data);
         this.setState({ posts: response.data, isLoaded: true });
       })
       .catch(error => {
