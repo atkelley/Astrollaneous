@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,6 +24,8 @@ my_file = Path(".env")
 if my_file.exists():
   from decouple import config
   SECRET_KEY = config('DJANGO_SECRET_KEY')
+else:
+  SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", False)
@@ -96,6 +99,8 @@ WSGI_APPLICATION = 'mySpaceStuff.wsgi.application'
 # }
 
 DATABASES = {}
+DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
