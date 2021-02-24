@@ -30,7 +30,7 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['astrollaneous.herokuapp.com',]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'astrollaneous.herokuapp.com',]
 
 INSTALLED_APPS = [
   'django.contrib.admin',
