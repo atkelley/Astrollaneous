@@ -28,11 +28,9 @@ else:
   SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", False)
+DEBUG = False
 
 ALLOWED_HOSTS = ['astrollaneous.herokuapp.com',]
-
-# Application definition
 
 INSTALLED_APPS = [
   'django.contrib.admin',
@@ -68,7 +66,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('http://localhost:8000', 'http://astrollaneous.herokuapp.com')
+CORS_ORIGIN_WHITELIST = ('http://localhost:8000', 'http://astrollaneous.herokuapp.com', 'https://astrollaneous.herokuapp.com')
 
 ROOT_URLCONF = 'mySpaceStuff.urls'
 
@@ -144,17 +142,17 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
+  'version': 1,
+  'disable_existing_loggers': False,
+  'handlers': {
+    'console': {
+      'class': 'logging.StreamHandler',
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG',
-    },
+  },
+  'root': {
+    'handlers': ['console'],
+    'level': 'DEBUG',
+  },
 }
 
 
@@ -164,7 +162,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # STATICFILES_DIRS = [] 
-STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'),]
+STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'staticfiles'),]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

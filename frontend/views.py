@@ -29,6 +29,7 @@ def satellite(request, name):
       os.mkdir(os.path.join('staticfiles/mySpaceStuff/tle2czml/'))
 
     input_file = "staticfiles/mySpaceStuff/tle2czml/tle_{}.txt".format(name)
+    
 
     with open(input_file, 'wb') as f:
       f.write(r.content)
