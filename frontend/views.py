@@ -25,12 +25,12 @@ def satellite(request, name):
     base_url = "https://celestrak.com/NORAD/elements/{}.txt".format(name)
     r = requests.get(base_url)
 
-    input_file = "static/mySpaceStuff/tle_{}.txt".format(name)
+    input_file = "static/mySpaceStuff/tle2czml/tle_{}.txt".format(name)
     
     with open(input_file, 'wb') as f:
       f.write(r.content)
     f.close()
 
-    output_file = "static/mySpaceStuff/tle_{}.czml".format(name)
+    output_file = "static/mySpaceStuff/tle2czml/tle_{}.czml".format(name)
     tle2czml.create_czml(input_file, outputfile_path=output_file)
     return JsonResponse(result, safe=False)

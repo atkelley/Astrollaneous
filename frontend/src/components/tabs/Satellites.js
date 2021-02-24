@@ -42,7 +42,7 @@ class Satellites extends Component {
           Cesium.Ion.defaultAccessToken = process.env.CESIUM_TOKEN;
           var viewer = new Cesium.Viewer("cesiumContainer", { shouldAnimate: true, });
           viewer.entities.removeAll();
-          viewer.dataSources.add( Cesium.CzmlDataSource.load(`/static/mySpaceStuff/tle_${name}.czml`) );
+          viewer.dataSources.add( Cesium.CzmlDataSource.load(`/static/mySpaceStuff/tle2czml/tle_${name}.czml`) );
           let collapseTop = document.getElementById('collapseTop');
           collapseTop.classList.remove("show");
         }
