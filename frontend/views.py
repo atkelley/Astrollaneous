@@ -1,3 +1,4 @@
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -25,12 +26,8 @@ def satellite(request, name):
     base_url = "https://celestrak.com/NORAD/elements/{}.txt".format(name)
     r = requests.get(base_url)
 
-    if not os.path.isdir('staticfiles/mySpaceStuff/tle2czml/'):
-      os.mkdir(os.path.join('staticfiles/mySpaceStuff/tle2czml/'))
-
     input_file = "staticfiles/mySpaceStuff/tle2czml/tle_{}.txt".format(name)
     
-
     with open(input_file, 'wb') as f:
       f.write(r.content)
     f.close()
