@@ -8,7 +8,7 @@ class Post(models.Model):
   user = models.ForeignKey(User, related_name="blog", on_delete=models.CASCADE)
   title = models.CharField(max_length=200)
   image_url = models.CharField(max_length=200, null=True, blank=True)
-  created_date = models.DateTimeField(auto_now_add=True, editable=True)
+  created_date = models.DateTimeField(default=timezone.now, editable=True)
   text = models.TextField()
   text_html = models.TextField(null=True, editable=False)
 
