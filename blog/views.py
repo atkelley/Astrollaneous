@@ -86,12 +86,11 @@ def create_comment(request):
     try:
       data = JSONParser().parse(request)
       pk = data.get('postId')
-      post_title = data.get('postTitle')
       text = data.get('commentText')
       user_data = data.get('user')
       user = User.objects.get(id=user_data.get('id'))
       post = get_object_or_404(Post, pk=pk)
-      comment = Comment(post=post, post_title=postTitle, user=user, text=text)
+      comment = Comment(post=post, user=user, text=text)
       comment.save()
       return HttpResponse(status=200)
     except Comment.ParseError(detail=None, code=None): 

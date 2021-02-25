@@ -20,9 +20,4 @@ class Migration(migrations.Migration):
           name='created_date',
           field=models.DateTimeField(default=timezone.now, editable=True),
         ),
-        migrations.AddField(
-          model_name='comment',
-          name='post_title',
-          field=models.CharField(max_length=200, null=True, blank=True),
-        ),
     ]

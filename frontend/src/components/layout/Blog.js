@@ -24,7 +24,6 @@ class Blog extends Component {
       deleteTitle: '',
 
       postId: -1,
-      postTitle: '',
       commentId: -1,
       commentText: ''
     }
@@ -76,8 +75,8 @@ class Blog extends Component {
     this.setState({ isPost, deleteId, deleteTitle });
   }
 
-  showCommentModal = (postId, postTitle, commentId, commentText) => {
-    this.setState({ postId, postTitle, commentId, commentText });
+  showCommentModal = (postId, commentId, commentText) => {
+    this.setState({ postId, commentId, commentText });
   };
 
   handleCommentSubmit = (event) => {
@@ -91,11 +90,11 @@ class Blog extends Component {
   }
 
   handleCommentAdd = async() => {
-    const { postId, postTitle, commentText } = this.state;
+    const { postId, commentText } = this.state;
 
-    await CommentDataService.create({ postId, postTitle, commentText, user: this.props.user })
+    await CommentDataService.create({ postId, commentText, user: this.props.user })
     .then(response => {
-      this.setState({ postId: -1, postTitle: '', commentText: '' });
+      this.setState({ postId: -1, commentText: '' });
       $('#commentModal').css('display','none');
       $('body').removeClass('modal-open');
       $('.modal-backdrop').remove();
