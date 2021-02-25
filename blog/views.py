@@ -86,25 +86,26 @@ def create_comment(request):
     try:
       data = JSONParser().parse(request)
       pk = data.get('postId')
+      post_title = data.get('postTitle')
       text = data.get('commentText')
       user_data = data.get('user')
       user = User.objects.get(id=user_data.get('id'))
       post = get_object_or_404(Post, pk=pk)
-      comment = Comment(post=post, user=user, text=text)
+      comment = Comment(post=post, post_title=postTitle, user=user, text=text)
       comment.save()
       return HttpResponse(status=200)
-    except Post.ParseError(detail=None, code=None): 
-        return JsonResponse({'error': 'Post could not be created.'}, status=status.HTTP_400_BAD_REQUEST)
+    except Comment.ParseError(detail=None, code=None): 
+        return JsonResponse({'error': 'Comment could not be created.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @csrf_exempt
 @api_view(['GET'])
 def get_comment(request, id):
   try: 
-    post = Post.objects.filter(id=id).values()
-    return JsonResponse({"post": list(post)[0]})
-  except Post.DoesNotExist: 
-      return JsonResponse({'error': 'Post not found.'}, status=status.HTTP_404_NOT_FOUND)
+    comment = Comment.objects.filter(id=id).values()
+    return JsonResponse({"comment": list(comment)[0]})
+  except Comment.DoesNotExist: 
+      return JsonResponse({'error': 'Comment not found.'}, status=status.HTTP_404_NOT_FOUND)
 
 
 @csrf_exempt

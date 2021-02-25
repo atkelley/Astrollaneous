@@ -54,11 +54,7 @@ class User extends Component {
 
   getUserComments = async (id) => {
     await UserDataService.getUserComments(id)
-      .then(response => {
-        this.asyncForEach(response.data, async (comment) => {
-          comment.title = await this.getPostTitle(comment.post);
-        });
-
+      .then(response => {      
         this.setState({ comments: response.data });
       })
       .catch(error => {
@@ -66,26 +62,40 @@ class User extends Component {
       });
   }
 
-  asyncForEach = async (array, callback) => {
-    for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array);
-    }
-  }
+  // getUserComments = async (id) => {
+  //   await UserDataService.getUserComments(id)
+  //     .then(response => {
+  //       this.asyncForEach(response.data, async (comment) => {
+  //         comment.title = await this.getPostTitle(comment.post);
+  //       });
+
+  //       this.setState({ comments: response.data });
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
+
+  // asyncForEach = async (array, callback) => {
+  //   for (let index = 0; index < array.length; index++) {
+  //     await callback(array[index], index, array);
+  //   }
+  // }
+
+  // getPostTitle = async (id) => {
+  //   return await PostDataService.getPost(id)
+  //   .then(response => {
+  //     return response.data.post.title;
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   });
+  // }
 
   setTruncatedTextState = (index) => {
     let showTruncatedText = this.state.showTruncatedText;
     showTruncatedText[index] = !this.state.showTruncatedText[index];
     this.setState({ showTruncatedText });
-  }
-
-  getPostTitle = async (id) => {
-    return await PostDataService.getPost(id)
-    .then(response => {
-      return response.data.post.title;
-    })
-    .catch(error => {
-      console.log(error);
-    });
   }
 
   render() {

@@ -79,7 +79,7 @@ class Post extends Component {
               }
 
               {this.props.isAuthenticated &&
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target='#commentModal' onClick={() => this.props.showCommentModal(id, -1, '')}>
+                <button type="button" className="btn btn-primary" data-toggle="modal" data-target='#commentModal' onClick={() => this.props.showCommentModal(id, title, -1, '')}>
                   <span className="far fa-comments" aria-hidden="true"></span>
                   <span className="icon-label">Add Comment ({comments.length})</span>
                 </button>
