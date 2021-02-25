@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='comment',
+            model_name='Comment',
             name='post_title',
             field=models.CharField(max_length=200, null=True, blank=True),
         ),
