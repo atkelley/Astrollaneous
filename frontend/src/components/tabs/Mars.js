@@ -5,6 +5,52 @@ import Loader from '../common/Loader';
 import '../css/common/Common.css';
 import '../css/tabs/Mars.css';
 
+const DEFAULT_DATA = [
+  {
+    AT: {av: -58.1011, mn: -94.6003, mx: -9.0021},
+    HWS: {av: 10.4112, mn: 4.4532, mx: 16.3821},
+    PRE: {av: 722.156, mn: 699.0953, mx: 741.2991},
+    WD: { most_common: { compass_point: 'W'} }
+  },
+  {
+    AT: {av: -52.6495, mn: -97.102, mx: -8.1971},
+    HWS: {av: 10.4112, mn: 4.7012, mx: 14.1007},
+    PRE: {av: 722.156, mn: 689.1053, mx: 739.2991},
+    WD: { most_common: { compass_point: 'W'} }
+  },
+  {
+    AT: {av: -52.49655, mn: -96.0021, mx: -8.991},
+    HWS: {av: 13.80615, mn: 6.412, mx: 21.2003},
+    PRE: {av: 743.72645, mn: 722.4134, mx: 765.0395},
+    WD: { most_common: { compass_point: 'W'} }
+  },
+  {
+    AT: {av: -54.9143, mn: -96.5963, mx: -13.2323},
+    HWS: {av: 13.306, mn: 5.721, mx: 20.8910},
+    PRE: {av: 736.07975, mn: 721.0925, mx: 751.1345},
+    WD: { most_common: { compass_point: 'WNW'} }
+  },
+  {
+    AT: {av: -53.8393, mn: -97.7803, mx: -9.8983},
+    HWS: {av: 9.2017, mn: 4.1823, mx: 14.2211},
+    PRE: {av: 720.43125, mn: 699.3875, mx: 735.4750},
+    WD: { most_common: { compass_point: 'WNW'} }
+  },
+  {
+    AT: {av: -55.4963, mn: -96.4003, mx: -14.5923},
+    HWS: {av: 15.2606, mn: 6.7991, mx: 23.7222},
+    PRE: {av: 712.8126, mn: 687.4233, mx: 738.2019},
+    WD: { most_common: { compass_point: 'W'} }
+  },
+  {
+    AT: {av: -54.4207, mn: -96.7012, mx: -12.4401},
+    HWS: {av: 14.1096, mn: 6.393, mx: 21.8893},
+    PRE: {av: 701.1121, mn: 674.2213, mx: 740.0029},
+    WD: { most_common: { compass_point: 'WNW'} }
+  }
+]
+
+
 class Mars extends Component {
   constructor(props) {
     super(props);
@@ -24,10 +70,31 @@ class Mars extends Component {
     this.getMarsWeather();
   }
 
+  getCurrentSolNumber = () => {
+    let current = new Date(); 
+    let start = new Date("12/19/2018"); // InSight's estimated start date
+    let diffTime= current.getTime() - start.getTime(); 
+    return Math.round(diffTime / (1000 * 3600 * 24));
+  }
+
   getMarsWeather = async () => {
     try {
+      // As of February 2021, the Mars Insight API no longer reliable
+      // DEFAULT_DATA from above contrived for demonstration purposes only
+      // FYI: Possible future enhancements could include data from Perseverence rover
+      // (if they ever publish an API)
+      // const { data } = await getMarsWeatherData.get();
+
+      let data = {};
       let weatherData = [];
-      const { data } = await getMarsWeatherData.get();
+      let currentSolNumber = this.getCurrentSolNumber();
+
+      for (let i = 0; i < 7; i++) {
+        let date = new Date();
+        let day = new Date(date.getTime() - ((i * 24 * 60 * 60 * 1000)));
+        DEFAULT_DATA[i]['First_UTC'] = day;
+        data[currentSolNumber - i] = DEFAULT_DATA[i];
+      }  
       
       Object.keys(data).forEach((key) => {
         if (Number.isInteger(parseInt(key))) {
@@ -36,9 +103,6 @@ class Mars extends Component {
 
           for (const [metric, value] of Object.entries(sol)) {
             switch(metric) {
-              case 'Season':
-                solDataObj['season'] = value;
-                break;
               case 'First_UTC':
                 solDataObj['date_string'] = getConvertedDateString(value);
                 break;
