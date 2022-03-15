@@ -28,10 +28,11 @@ class Techport extends Component {
 
   handleDateSelect = async (date = new Date()) => {
     try {
-      const { data } = await getTechportData.get('', { params: { updatedSince: `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }` } });
-      this.setState({
-        selectedDate: date,
-        projects: (data.projects.projects || [])
+      await getTechportData.get('', { params: { updatedSince: `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }` } }).then(res => {
+        this.setState({
+          selectedDate: date,
+          projects: (res.data.projects || [])
+        });
       });
     } catch(error) {
       console.log(error);
@@ -40,7 +41,7 @@ class Techport extends Component {
 
   handleProjectSelect = (index) => {
     this.setState({ 
-      selectedProjectId: this.state.projects[index].id,
+      selectedProjectId: this.state.projects[index].projectId,
       previous: ((index == 0) ? this.state.projects.length - 1 : index - 1),
       next: ((index == this.state.projects.length - 1) ? 0 : index + 1)
     });
@@ -106,7 +107,7 @@ class Techport extends Component {
                         return (
                           <tr key={index} className="techport-result">
                             <td className="techport-result-cell">
-                              <button className="btn btn-outline-secondary" data-toggle="modal" data-target='#techportModal' onClick={() => this.handleProjectSelect(index)}>{project.id}</button>
+                              <button className="btn btn-outline-secondary" data-toggle="modal" data-target='#techportModal' onClick={() => this.handleProjectSelect(index)}>{project.projectId}</button>
                             </td>
                           </tr>
                         );

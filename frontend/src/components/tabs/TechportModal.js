@@ -23,9 +23,10 @@ class TechportModal extends Component {
 
   fetchProjectData = async () => {
     try {
-      const { data } = await getTechportProjectData.get(`${this.props.project}`, { params: { api_key: process.env.NASA_API_KEY } });
-      this.setState({
-        project: data.project
+      await getTechportProjectData.get(`${this.props.project}`, { params: { api_key: process.env.NASA_API_KEY } }).then(res => {
+        this.setState({
+          project: res.data.project
+        });
       });
     } catch(error) {
       console.log(error);
@@ -56,7 +57,7 @@ class TechportModal extends Component {
                       <div className="techport-search-property-container">
                         <h4><strong>Project Name:</strong></h4>
                         <span>
-                          <a href={`https://techport.nasa.gov/view/${ this.state.project.id }`} target="_blank" rel="noopener noreferrer">{ this.state.project.title }</a>
+                          <a href={`https://techport.nasa.gov/view/${ this.state.project.projectId }`} target="_blank" rel="noopener noreferrer">{ this.state.project.title }</a>
                           { this.state.project.acronym && 
                             <span> (<strong>{ this.state.project.acronym }</strong>)</span>
                           }
@@ -66,33 +67,33 @@ class TechportModal extends Component {
                     <div className="col-md-6">
                       <div className="techport-search-property-container">
                         <h4><strong>Responsible Program:</strong></h4>
-                        <span>{ this.state.project.responsibleProgram }</span>
+                        <span>{ this.state.project.program.title }({ this.state.project.program.acronym })</span>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="techport-search-property-container">
                         <h4><strong>Lead Organization:</strong></h4>
                         { this.state.project.leadOrganization &&
-                          <span>{this.state.project.leadOrganization.name} - {this.state.project.leadOrganization.city}, {this.state.project.leadOrganization.state}</span>
+                          <span>{this.state.project.leadOrganization.organizationName} - {this.state.project.leadOrganization.city}, {this.state.project.leadOrganization.stateTerritory.name}</span>
                         } 
                       </div>
                     </div>
                     <div className="col-md-4">
                       <div className="techport-search-property-container">
                         <h4><strong>Start Date:</strong></h4>
-                        <span>{ this.state.project.startDate }</span>
+                        <span>{ this.state.project.startDateString }</span>
                       </div>
                     </div>
                     <div className="col-md-4">
                       <div className="techport-search-property-container">
                         <h4><strong>End Date:</strong></h4>
-                        <span>{ this.state.project.endDate }</span>
+                        <span>{ this.state.project.endDateString }</span>
                       </div>
                     </div>
                     <div className="col-md-4">
                       <div className="techport-search-property-container">
                         <h4><strong>Status:</strong></h4>
-                        <span>{ this.state.project.status }</span>
+                        <span>{ this.state.project.statusDescription }</span>
                       </div>
                     </div>
                     <div className="col-md-4">
@@ -101,7 +102,7 @@ class TechportModal extends Component {
                           {(this.state.project.projectManagers && this.state.project.projectManagers.length > 0) ?
                             <span>
                               {this.state.project.projectManagers.map((projectManager, index) => {
-                                return <li key={index}>{ projectManager }</li>
+                                return <li key={index}>{ projectManager.fullNameInverted }</li>
                               })}
                             </span>
                           :
@@ -115,7 +116,7 @@ class TechportModal extends Component {
                           {(this.state.project.programDirectors && this.state.project.programDirectors.length > 0) ?
                             <span>
                               {this.state.project.programDirectors.map((programDirector, index) => {
-                                return <li key={index}>{ programDirector }</li>
+                                return <li key={index}>{ programDirector.fullNameInverted }</li>
                               })}
                             </span>
                           :
@@ -129,7 +130,7 @@ class TechportModal extends Component {
                           {(this.state.project.principalInvestigators && this.state.project.principalInvestigators.length > 0) ?
                             <span>
                               {this.state.project.principalInvestigators.map((principalInvestigator, index) => {
-                                return <li key={index}>{ principalInvestigator }</li>
+                                return <li key={index}>{ principalInvestigator.fullNameInverted }</li>
                               })}
                             </span>
                           :
@@ -167,12 +168,12 @@ class TechportModal extends Component {
                             }
                           <br />
 
-                            {(this.state.project.closeoutDocuments && this.state.project.closeoutDocuments.length > 0) &&
+                            {(this.state.project.libraryItems && this.state.project.libraryItems.length > 0) &&
                               <Fragment>
                                 <h4><strong>Closeout Document(s):</strong></h4>
                                   <span>
-                                    { this.state.project.closeoutDocuments.map((document, index) => {
-                                      return <li key={index}><a href={`${ document }`}>{ document }</a></li>
+                                    { this.state.project.libraryItems.map((document, index) => {
+                                      return <li key={index}><a href={`${ document.url }`}>{ document.title }</a></li>
                                     })}
                                   </span>
                                   <br />
