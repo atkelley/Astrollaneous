@@ -71,7 +71,7 @@ class CreatePost extends Component {
             }
             
             <div className="md-form mb-3">
-              <label for="title">Title:
+              <label htmlFor="title">Title:
                 <input 
                   type="text" 
                   name="title" 
@@ -85,7 +85,7 @@ class CreatePost extends Component {
             </div>
 
             <div className="md-form mt-2 mb-3">
-              <label for="image_url">Image URL:
+              <label htmlFor="image_url">Image URL:
                 <input 
                   type="text" 
                   name="image_url" 
@@ -98,7 +98,7 @@ class CreatePost extends Component {
             </div>
 
             <div className="md-form mt-2 mb-3">
-              <label for="text">Text:
+              <label htmlFor="text">Text:
                 <textarea 
                   type="text" 
                   name="text" 
@@ -112,9 +112,9 @@ class CreatePost extends Component {
               </label>
             </div>
     
-            <div class="create-post-footer">
-              <button type="submit" class="btn btn-large btn-primary create-post-button">Create Post</button>
-              <a href="/blog" class="btn btn-large btn-secondary create-post-button">Cancel</a>
+            <div className="create-post-footer">
+              <button type="submit" className="btn btn-large btn-primary create-post-button">Create Post</button>
+              <a href="/blog" className="btn btn-large btn-secondary create-post-button">Cancel</a>
             </div>
           </div>
         </form>
