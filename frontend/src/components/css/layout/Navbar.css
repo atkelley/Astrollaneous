@@ -14,7 +14,7 @@
   border: none;
 }
 
-.nav-tabs .nav-item .nav-link:hover {
+.nav-tabs .nav-item .nav-link:first-of-type:hover, .nav-tabs .nav-item .nav-link:last-of-type:hover {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border: 1px solid #dee2e6;
