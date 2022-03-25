@@ -1,3 +1,27 @@
+
+.nav-tabs .nav-link:first-of-type {
+  border-left: none;
+  border-top: none;
+}
+
+.nav-tabs .nav-link:first-of-type:hover {
+  border: 1px solid #e9ecef;
+  border-top-left-radius: 0.5rem;
+}
+
+.nav-tabs .nav-link:first-of-type.active {
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+}
+
+.nav-tabs .nav-link:last-of-type.active {
+  border-top-right-radius: 0.5rem;
+}
+
+.nav-tabs .nav-link:last-of-type:hover {
+  border-top-right-radius: 0.5rem;
+}
+
 .rover-container {
   border: 1px solid #A0A0A0;
   border-radius: 15px;
