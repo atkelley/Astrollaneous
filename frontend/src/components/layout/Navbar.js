@@ -4,6 +4,7 @@ import '../css/layout/Navbar.css';
 
 const Navbar = () => {
   const handleTabChange = (event) => {
+
     $('.nav-tabs .nav-item .nav-link').each(function() { 
       if($(this).is(`#${event.target.id}`)) {
         if(!$(this).is('.active')) {
