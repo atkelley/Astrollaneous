@@ -51,9 +51,12 @@
   padding: 30px;
 }
 
+.techport-results .row .col-md-12 {
+  padding-right: 0px;
+}
+
 .techport-result {
   display: inline-block;
-  margin: 5px 20px;
 }
 
 .techport-result-cell {
@@ -105,10 +108,7 @@
   border: none;
 }
 
-.btn-outline-secondary.focus, .btn-outline-secondary:focus {
-  box-shadow: none;
+.btn-outline-secondary {
+  width: 85px;
 }
 
-.btn.focus, .btn:focus {
-  box-shadow: none;
-}
