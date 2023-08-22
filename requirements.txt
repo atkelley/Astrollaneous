@@ -46,16 +46,6 @@ clyent
 colorama==0.4.6
 colorcet==3.0.1
 comm==0.1.2
-conda-build==3.26.0
-conda-content-trust==0+unknown
-conda_index==0.2.3
-conda-libmamba-solver==23.5.0
-conda-pack==0.6.0
-conda-package-handling==2.2.0
-conda_package_streaming==0.9.0
-conda-repo-cli==1.0.41
-conda-token==0.4.0
-conda-verify==3.4.2
 constantly==15.1.0
 contourpy==1.0.5
 cookiecutter==1.7.3
