@@ -23,7 +23,6 @@ class Migration(migrations.Migration):
                 ('text_html', models.TextField(editable=False, null=True)),
             ],
             options={
-                'db_table': 'satellite',
                 'ordering': ['-created_date'],
             },
         ),

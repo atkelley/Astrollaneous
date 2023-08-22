@@ -27,7 +27,6 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='blog', to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'db_table': 'post',
                 'ordering': ['-created_date'],
                 'unique_together': {('user', 'text')},
             },
@@ -42,7 +41,6 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(default=1, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='comments', to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'db_table': 'comment',
                 'ordering': ['created_date'],
             },
         ),
