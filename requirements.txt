@@ -7,7 +7,6 @@ aiosqlite==0.18.0
 alabaster==0.7.12
 anaconda-catalogs==0.2.0
 anaconda-client
-anaconda-project
 anyio==3.5.0
 appdirs==1.4.4
 argon2-cffi==21.3.0
