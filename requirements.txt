@@ -244,7 +244,6 @@ python-lsp-black==1.2.1
 python-lsp-jsonrpc==1.0.0
 python-lsp-server==1.7.2
 python-slugify==5.0.2
-python-snappy
 pytoolconfig==1.2.5
 pytz==2022.7
 pyviz-comms==2.3.0
@@ -322,7 +321,6 @@ tqdm==4.65.0
 traitlets==5.7.1
 transformers==2.1.1
 Twisted==22.10.0
-twisted-iocpsupport
 typing_extensions==4.7.1
 tzdata==2023.3
 uc-micro-py==1.0.1
