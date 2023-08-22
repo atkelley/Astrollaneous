@@ -43,7 +43,7 @@ INSTALLED_APPS = [
   'widget_tweaks',
   'rest_framework',
   'knox',
-  # 'accounts.apps.AccountsConfig',
+  'accounts.apps.AccountsConfig',
   'frontend.apps.FrontendConfig',
   'blog.apps.BlogConfig',
 ]
