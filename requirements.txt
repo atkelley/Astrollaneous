@@ -87,7 +87,7 @@ future==0.18.3
 gensim==4.3.0
 glob2==0.7
 greenlet==2.0.1
-h5py==3.7.0
+h5py
 HeapDict==1.0.1
 holoviews==1.17.0
 houdini.py==0.1.0
@@ -228,7 +228,7 @@ pylint==2.16.2
 pylint-venv==2.3.0
 pyls-spyder==0.4.0
 PyNaCl==1.5.0
-pyodbc==4.0.34
+pyodbc
 pyOpenSSL==23.2.0
 pyparsing==3.0.9
 PyQt5==5.15.7
@@ -244,7 +244,7 @@ python-lsp-black==1.2.1
 python-lsp-jsonrpc==1.0.0
 python-lsp-server==1.7.2
 python-slugify==5.0.2
-python-snappy==0.6.1
+python-snappy
 pytoolconfig==1.2.5
 pytz==2022.7
 pyviz-comms==2.3.0
@@ -322,7 +322,7 @@ tqdm==4.65.0
 traitlets==5.7.1
 transformers==2.1.1
 Twisted==22.10.0
-twisted-iocpsupport==1.0.2
+twisted-iocpsupport
 typing_extensions==4.7.1
 tzdata==2023.3
 uc-micro-py==1.0.1
