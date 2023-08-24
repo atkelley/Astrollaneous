@@ -27,12 +27,17 @@ if my_file.exists():
 else:
   SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
+IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
+
 # SECURITY WARNING: don't run with debug turned on in production!
+if not IS_HEROKU_APP:
+  DEBUG = True
 DEBUG = False
 
-
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = ["*"] 
+if IS_HEROKU_APP:
+  ALLOWED_HOSTS = ["astrollaneous.herokuapp.com"]
+else:
+  ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
   'django.contrib.admin',
@@ -67,7 +72,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('http://localhost:8000', 'http://astrollaneous.herokuapp.com', 'https://astrollaneous.herokuapp.com')
+CORS_ORIGIN_WHITELIST = ('http://localhost:8000', 'https://localhost:8000', 'http://astrollaneous.herokuapp.com', 'https://astrollaneous.herokuapp.com')
 
 ROOT_URLCONF = 'mySpaceStuff.urls'
 
@@ -169,7 +174,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 # Configure app for Heroku deployment
 django_heroku.settings(locals())
