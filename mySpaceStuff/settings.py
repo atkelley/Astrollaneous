@@ -30,8 +30,8 @@ else:
 # SECURITY WARNING: don't run with DEBUG turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["astrollaneous.herokuapp.com"]
-# ALLOWED_HOSTS = ['http://localhost', 'http://127.0.0.1']
+# ALLOWED_HOSTS = ["astrollaneous.herokuapp.com"]
+ALLOWED_HOSTS = ['http://localhost', 'http://127.0.0.1']
 
 INSTALLED_APPS = [
   'django.contrib.admin',
@@ -88,23 +88,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mySpaceStuff.wsgi.application'
 
+  # DATABASES = {
+  #   "default": {
+  #     "ENGINE": "django.db.backends.postgresql",
+  #     "NAME": "ddhuvdnv1ln37",
+  #     "USER": "dvhwfkepdfwomk",
+  #     "PASSWORD": "cfc2d62a8866ee2882aa2ceed053098bf7d46c777353f625abb2773b05a40187",
+  #     "HOST": "ec2-52-5-167-89.compute-1.amazonaws.com",
+  #     "PORT": "5432",
+  #   }
+  # }
+
 DATABASES = {
   "default": {
-    "ENGINE": "django.db.backends.postgresql",
-    "NAME": "ddhuvdnv1ln37",
-    "USER": "dvhwfkepdfwomk",
-    "PASSWORD": "cfc2d62a8866ee2882aa2ceed053098bf7d46c777353f625abb2773b05a40187",
-    "HOST": "ec2-52-5-167-89.compute-1.amazonaws.com",
-    "PORT": "5432",
+    "ENGINE": "django.db.backends.sqlite3",
+    "NAME": os.path.join(BASE_DIR, 'db.sqlite3'),
   }
 }
-
-# DATABASES = {
-#   "default": {
-#     "ENGINE": "django.db.backends.sqlite3",
-#     "NAME": os.path.join(BASE_DIR, 'db.sqlite3'),
-#   }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
