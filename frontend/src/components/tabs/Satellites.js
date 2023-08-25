@@ -27,6 +27,7 @@ class Satellites extends Component {
     if ($("#cesiumContainer").length) {
       var viewer = new Cesium.Viewer("cesiumContainer", { shouldAnimate: true, });
       viewer.entities.removeAll();
+      viewer.dataSources.removeAll();
       viewer.destroy();
     }
   }
@@ -95,13 +96,11 @@ class Satellites extends Component {
             <div className="col-md-3">
               <div className="satellites-right">
                 <div id="accordion">
-
                   <div className="card">
                     <div className="card-header" id="headingTwo">
                       <h5 className="mb-0">
                         <span className="satellite-tab" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                          <span>Weather & Earth</span>
-                          <span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
+                          <span>Weather & Earth</span><span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
                         </span>
                       </h5>
                     </div>
@@ -109,21 +108,15 @@ class Satellites extends Component {
                       <div className="card-body">
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="noaa" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'noaa')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            NOAA
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="weather" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'weather')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Weather
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">NOAA</label>
                         </div>
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="goes" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'goes')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            GOES
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">GOES</label>
+                        </div>
+                        <div className="form-check">
+                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="argos" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'argos')} />
+                          <label className="form-check-label" forhtml="exampleRadios1">ARGOS</label>
                         </div>
                       </div>
                     </div>
@@ -133,30 +126,23 @@ class Satellites extends Component {
                     <div className="card-header" id="headingThree">
                       <h5 className="mb-0">
                         <span className="satellite-tab" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                          <span>Communications</span>
-                          <span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
+                          <span>Communications</span><span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
                         </span>
                       </h5>
                     </div>
                     <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                       <div className="card-body">
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="iridium" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'iridium')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Iridium
-                          </label>
+                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="ses" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'ses')} />
+                          <label className="form-check-label" forhtml="exampleRadios1">SES</label>
                         </div>
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="orbcomm" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'orbcomm')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Orbcomm
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">Orbcomm</label>
                         </div>
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="molniya" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'molniya')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Molniya
-                          </label>
+                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="swarm" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'swarm')} />
+                          <label className="form-check-label" forhtml="exampleRadios1">Swarm</label>
                         </div>
                       </div>
                     </div>
@@ -166,8 +152,7 @@ class Satellites extends Component {
                     <div className="card-header" id="headingFour">
                       <h5 className="mb-0">
                         <span className="satellite-tab" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                          <span>Navigation</span>
-                          <span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
+                          <span>Navigation</span><span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
                         </span>
                       </h5>
                     </div>
@@ -175,21 +160,15 @@ class Satellites extends Component {
                       <div className="card-body">
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="galileo" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'galileo')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Galileo
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">Galileo</label>
                         </div>
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="beidou" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'beidou')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Beidou
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">BeiDou</label>
                         </div>
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="nnss" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'nnss')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Navy Navigation Satellite System (NNSS)
-                          </label>
+                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="gps-ops" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'gps-ops')} />
+                          <label className="form-check-label" forhtml="exampleRadios1">GPS</label>
                         </div>
                       </div>
                     </div>
@@ -199,8 +178,7 @@ class Satellites extends Component {
                     <div className="card-header" id="headingFive">
                       <h5 className="mb-0">
                         <span className="satellite-tab" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                          <span>Scientific</span>
-                          <span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
+                          <span>Scientific</span><span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
                         </span>
                       </h5>
                     </div>
@@ -208,21 +186,15 @@ class Satellites extends Component {
                       <div className="card-body">
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="geodetic" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'geodetic')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Geodetic
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">Geodetic</label>
                         </div>
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="science" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'science')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Space & Earth Science
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">Space & Earth Science</label>
                         </div>
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="engineering" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'engineering')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Engineering
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">Engineering</label>
                         </div>
                       </div>
                     </div>
@@ -232,8 +204,7 @@ class Satellites extends Component {
                     <div className="card-header" id="headingOne">
                       <h5 className="mb-0">
                         <span className="satellite-tab" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          <span>Special Interest</span>
-                          <span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
+                          <span>Special Interest</span><span className="satellite-icon"><i className="fas fa-angle-down"></i></span>
                         </span>
                       </h5>
                     </div>
@@ -241,26 +212,19 @@ class Satellites extends Component {
                       <div className="card-body">
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="education" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'education')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                          Education 
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">Education</label>
                         </div>
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="military" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'military')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Military
-                          </label>
+                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="amateur" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'amateur')} />
+                          <label className="form-check-label" forhtml="exampleRadios1">Amateur radio</label>
                         </div>
                         <div className="form-check">
                           <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="radar" onChange={(event) => this.handleOnChange(event)} onClick={(event) => this.setState({ checked: event.target.value })} checked={(this.state.checked == 'radar')} />
-                          <label className="form-check-label" forhtml="exampleRadios1">
-                            Radar
-                          </label>
+                          <label className="form-check-label" forhtml="exampleRadios1">Radar</label>
                         </div>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
