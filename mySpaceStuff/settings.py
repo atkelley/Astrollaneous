@@ -89,11 +89,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mySpaceStuff.wsgi.application'
 
 DATABASES = {
-  "default": dj_database_url.config(
-    conn_max_age=600,
-    conn_health_checks=True,
-    ssl_require=True,
-  ),
+  "default": {
+    "ENGINE": "django.db.backends.postgresql",
+    "NAME": "ddhuvdnv1ln37",
+    "USER": "dvhwfkepdfwomk",
+    "PASSWORD": "cfc2d62a8866ee2882aa2ceed053098bf7d46c777353f625abb2773b05a40187",
+    "HOST": "ec2-52-5-167-89.compute-1.amazonaws.com",
+    "PORT": "5432",
+  }
 }
 
 # DATABASES = {
