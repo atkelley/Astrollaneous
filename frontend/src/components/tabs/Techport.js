@@ -212,7 +212,7 @@ class Techport extends Component {
               </div>
             </div>
             </div>
-          </Fragment>
+        </Fragment>
         :
         <Loader />
       }
