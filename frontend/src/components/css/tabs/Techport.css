@@ -112,3 +112,17 @@
   width: 85px;
 }
 
+.techport-custom-input {
+  background: url("../../../../static/images/calendar.svg") no-repeat right;
+  background-origin: content-box;
+  background-size: 20px;
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.react-datepicker {
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
