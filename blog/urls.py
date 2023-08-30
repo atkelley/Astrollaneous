@@ -17,4 +17,5 @@ urlpatterns = [
   path('api/comments/create', views.create_comment),
   path('api/comments/update/<int:id>', views.update_comment),
   path('api/comments/delete/<int:id>', views.delete_comment),
+  path('api/comments/delete/<int:id>', views.delete_comment),
 ]

@@ -27,6 +27,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NASA_API_KEY': JSON.stringify(process.env.NASA_API_KEY),
+        'NASA_TECHPORT_API_KEY': JSON.stringify(process.env.NASA_TECHPORT_API_KEY),
         'CESIUM_TOKEN': JSON.stringify(process.env.CESIUM_TOKEN),
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       }

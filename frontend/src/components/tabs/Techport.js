@@ -32,9 +32,7 @@ class Techport extends Component {
     });
 
     try {
-      await getTechportData.get('', (req, res) => {
-        res.header("Access-Control-Allow-Origin", "*");
-      }).then(res => {
+      await getTechportData.get('').then(res => {
         let projectDatesObject = {};
         if (res.data.projects && res.data.projects.length > 0) {
           res.data.projects.forEach((project) => {
@@ -45,13 +43,9 @@ class Techport extends Component {
             }
           });
         }
-
-
-        console.log("DATES OBJECT: ", projectDatesObject)
         
         let projectDates = Object.keys(projectDatesObject);
         const mostRecentDate = new Date(projectDates[0]);
-        console.log("DATES: ", projectDatesObject[projectDates[0]])
 
         this.setState({
           isLoading: false,
@@ -76,33 +70,9 @@ class Techport extends Component {
         selectedDate
       });
     }
-
-
-    console.log('DATE: ', date, selectedDateString);
-    // try {
-    //   await getTechportData.get('', { params: { updatedSince: `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }` } }).then(res => {
-    //     this.setState({
-    //       selectedDate: date,
-    //       projects: (res.data.projects || [])
-    //     });
-    //   });
-    // } catch(error) {
-    //   console.log(error);
-    // }
   }  
 
   handleProjectSelect = (index) => {
-    // try {
-    //   await getTechportData.get('', { params: { updatedSince: `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }` } }).then(res => {
-    //     this.setState({
-    //       selectedDate: date,
-    //       projects: (res.data.projects || [])
-    //     });
-    //   });
-    // } catch(error) {
-    //   console.log(error);
-    // }
-
     this.setState({ 
       selectedProjectId: this.state.selectedProjects[index],
       previous: ((index == 0) ? this.state.selectedProjects.length - 1 : index - 1),

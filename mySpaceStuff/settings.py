@@ -28,7 +28,7 @@ else:
   SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with DEBUG turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["astrollaneous.herokuapp.com"]
 # ALLOWED_HOSTS = ['http://localhost', 'http://127.0.0.1']
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
   'django.contrib.staticfiles',
   'widget_tweaks',
   'rest_framework',
+  'corsheaders',
   'knox',
   'accounts.apps.AccountsConfig',
   'frontend.apps.FrontendConfig',
@@ -66,7 +67,6 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('http://localhost:8000', 'https://localhost:8000', 'http://astrollaneous.herokuapp.com', 'https://astrollaneous.herokuapp.com')
 
 ROOT_URLCONF = 'mySpaceStuff.urls'
 
@@ -134,9 +134,6 @@ USE_TZ = True
 
 INTERNAL_IPS = ['127.0.0.1']
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# TBD: additional EMAIL configuration needed for email server
-
 LOGGING = {
   'version': 1,
   'disable_existing_loggers': False,
@@ -166,3 +163,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# TBD: additional EMAIL configuration needed for email server

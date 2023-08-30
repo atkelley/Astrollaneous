@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const NASA_API_KEY = process.env.NASA_API_KEY;
-const NASA_TECHPORT_API_KEY = process.env.NASA_API_KEY;
+const NASA_TECHPORT_API_KEY = process.env.NASA_TECHPORT_API_KEY;
 
 export const getDailyPhotoData = axios.create({
   baseURL: `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`,
@@ -17,10 +17,16 @@ export const getRoverData = axios.create({
 
 export const getTechportData = axios.create({
   baseURL: `https://techport.nasa.gov/api/projects?api_key=${NASA_TECHPORT_API_KEY}`,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  }
 });
 
 export const getTechportProjectData = axios.create({
   baseURL: 'https://techport.nasa.gov/api/projects/',
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  }
 });
 
 export const getNasaData = axios.create({

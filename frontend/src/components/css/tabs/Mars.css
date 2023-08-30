@@ -4,7 +4,7 @@
 }
 
 .mars-header__icon {
-  width: 150px;
+  width: 100%;
   height: auto;
 }
 
@@ -19,7 +19,7 @@
 
 .mars-header__select {
   border-radius: 5px;
-  width: 300px;
+  width: 100%;
 }
 
 .mars-header__option {
@@ -58,7 +58,7 @@
 }
 
 .mars-text {
-  padding: 0 75px 0 0;
+  width: 85%;
 }
 
 .mars-container {
@@ -81,4 +81,38 @@
 
 .daily-description {
   margin-right: 20px;
+}
+
+@media screen and (max-width: 970px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .mars-container {
+    margin-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  h2 {
+    font-size: 1.5rem;
+    margin: 0px auto;
+  }
+  
+  .mars-table {
+    padding: 0px 0px;
+  }
+
+  .mars-text {
+    margin: 10px auto;
+  }
+
+  .mars-container .row .col-md-12 .row .col-md-9 .row {
+    margin: 0px 0px;
+  }
+
+  .mars-container .row .col-md-12 .row .col-md-9 .row .mars-header__dropdown-box {
+    margin: 5px auto 40px auto;
+    width: 85%;
+  }
 }

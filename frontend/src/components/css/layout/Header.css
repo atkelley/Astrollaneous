@@ -4,3 +4,54 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.btn-link, .btn-link:active {
+  color: #E1E1BB;
+}
+
+.btn-link:hover {
+  color:  #FAFAB9;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .navbar-nav  {
+    display: block; 
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .container .ml-auto, .align-items-center  {
+    margin: 0px auto;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .align-items-center {
+    margin: 0px auto;
+    padding-left: 35px;
+  }
+
+  .ml-auto {
+    margin: 0 auto;
+  }
+
+  .navbar-nav {
+    display: block
+  }
+
+  .daily-headline {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .main-container .row .col-md-4 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .main-container .row .col-md-8 .row {
+    margin-left: 0px;
+    margin-right: 0px
+  }
+}

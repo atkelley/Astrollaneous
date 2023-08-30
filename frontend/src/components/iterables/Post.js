@@ -55,7 +55,7 @@ class Post extends Component {
               {this.state.showTruncatedText ?
                 <button type="button" className="btn btn-success" value="hidden" onClick={() => this.setState({ showTruncatedText: !this.state.showTruncatedText })}>
                   <span className="fa fa-plus" aria-hidden="true"></span>
-                  <span className="icon-label">Show More</span>
+                  <span className="icon-label">Show More ({comments.length})</span>
                 </button>
               :
                 <button type="button" className="btn btn-success" value="hidden" onClick={() => this.setState({ showTruncatedText: !this.state.showTruncatedText })}>
@@ -81,7 +81,7 @@ class Post extends Component {
               {this.props.isAuthenticated &&
                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target='#commentModal' onClick={() => this.props.showCommentModal(id, -1, '')}>
                   <span className="far fa-comments" aria-hidden="true"></span>
-                  <span className="icon-label">Add Comment ({comments.length})</span>
+                  <span className="icon-label">Add Comment</span>
                 </button>
               }
             </div>
