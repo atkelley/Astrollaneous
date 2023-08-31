@@ -1,12 +1,14 @@
 import React, { Component, Fragment, forwardRef } from 'react';
 import DatePicker, { CalendarContainer } from "react-datepicker";
-import { getTechportData } from '../apis/nasa';
+import { getTechportData, whatever } from '../apis/nasa';
 import TechportModal from './TechportModal';
 import Loader from '../common/Loader';
 
 import "react-datepicker/dist/react-datepicker.css";
 import '../css/common/Common.css';
 import '../css/tabs/Techport.css';
+
+const NASA_TECHPORT_API_KEY = process.env.NASA_TECHPORT_API_KEY;
 
 class Techport extends Component {
   constructor(props) {
