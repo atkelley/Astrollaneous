@@ -70,6 +70,15 @@
   margin: 5px 0px;
 }
 
+.techport-search-property-container span li {
+  margin-left: 5px;
+}
+
+.techport-search-property-container span li span {
+  position: relative;
+  left: -5px;
+}
+
 .techport-search-left, .techport-search-right {
   cursor: pointer;
   margin: 20px 10px;

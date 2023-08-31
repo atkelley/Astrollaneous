@@ -102,7 +102,7 @@ class TechportModal extends Component {
                           {(this.state.project.projectManagers && this.state.project.projectManagers.length > 0) ?
                             <span>
                               {this.state.project.projectManagers.map((projectManager, index) => {
-                                return <li key={index}>{ projectManager.fullNameInverted }</li>
+                                return <li key={index}><span>{ projectManager.fullNameInverted }</span></li>
                               })}
                             </span>
                           :
@@ -116,7 +116,7 @@ class TechportModal extends Component {
                           {(this.state.project.programDirectors && this.state.project.programDirectors.length > 0) ?
                             <span>
                               {this.state.project.programDirectors.map((programDirector, index) => {
-                                return <li key={index}>{ programDirector.fullNameInverted }</li>
+                                return <li key={index}><span>{ programDirector.fullNameInverted }</span></li>
                               })}
                             </span>
                           :
@@ -130,7 +130,7 @@ class TechportModal extends Component {
                           {(this.state.project.principalInvestigators && this.state.project.principalInvestigators.length > 0) ?
                             <span>
                               {this.state.project.principalInvestigators.map((principalInvestigator, index) => {
-                                return <li key={index}>{ principalInvestigator.fullNameInverted }</li>
+                                return <li key={index}><span>{ principalInvestigator.fullNameInverted }</span></li>
                               })}
                             </span>
                           :

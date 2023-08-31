@@ -17,6 +17,25 @@ class Header extends Component {
     }
   }
 
+  clearActiveTab = () => {
+    var navLinks = document.getElementsByClassName('nav-link');
+    for (let i = 0; i < navLinks.length; ++i) {
+      if (navLinks[i].classList.contains('active')) {
+        navLinks[i].classList.remove('active')
+      }
+    }
+  }
+
+  logoutClick = () => {
+    this.clearActiveTab(); 
+    this.props.logout();
+  }
+
+  setStateClick = (event) => {
+    this.clearActiveTab(); 
+    this.setState({ event });
+  }
+
   render() {
     return (
       <div className="astro-banner">
@@ -26,24 +45,24 @@ class Header extends Component {
         <nav className="navbar navbar-expand-lg mynav" role="navigation" id="navbar">
           <div className="container">
             <div className="navbar-nav align-items-center">
-              <Link to="/" className="btn btn-link"><img src="/static/mySpaceStuff/img/astro-logo.png" alt="astro-logo" /></Link>
+              <Link to="/" className="btn btn-link" onClick={() => this.clearActiveTab()}><img src="/static/mySpaceStuff/img/astro-logo.png" alt="astro-logo" /></Link>
             </div>
   
             <div className="navbar-nav ml-auto">
               { this.props.auth.isAuthenticated ? 
                 <Fragment>
-                  <Link className="btn btn-link" to="/blog/create">Create Post</Link>
-                  <button className="btn btn-link" type="button" name="button" onClick={() => this.props.logout()}>Logout</button>
+                  <Link className="btn btn-link" to="/blog/create" onClick={() => this.clearActiveTab()}>Create Post</Link>
+                  <button className="btn btn-link" type="button" name="button" onClick={() => this.logoutClick()}>Logout</button>
                 </Fragment>
               : 
                 <Fragment>
-                  <button className="btn btn-link openTab" data-toggle="modal" data-target='#comboModal' id="login" onClick={(event) => this.setState({ event })}>Login</button>
-                  <button className="btn btn-link openTab" data-toggle="modal" data-target='#comboModal' id="register" onClick={(event) => this.setState({ event })}>Register</button>
+                  <button className="btn btn-link openTab" data-toggle="modal" data-target='#comboModal' id="login" onClick={(event) => this.setStateClick(event)}>Login</button>
+                  <button className="btn btn-link openTab" data-toggle="modal" data-target='#comboModal' id="register" onClick={(event) =>  this.setStateClick(event)}>Register</button>
                 </Fragment>
               }
               
-              <Link className="btn btn-link" to="/blog">Blog</Link>
-              <button className="btn btn-link" data-toggle="modal" data-target='#contactModal'>Contact</button>
+              <Link className="btn btn-link" to="/blog" onClick={() => this.clearActiveTab()}>Blog</Link>
+              <button className="btn btn-link" data-toggle="modal" data-target='#contactModal' onClick={() => this.clearActiveTab()}>Contact</button>
 
               <form className="form-inline my-2 my-lg-0">
                 <input className="form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search" />

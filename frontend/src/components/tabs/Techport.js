@@ -62,14 +62,15 @@ class Techport extends Component {
   }
 
   handleDateSelect = (date) => {   
-    const selectedDateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-
-    if (selectedDateString in this.state.projectDatesObject) {
-      const selectedDate = new Date(selectedDateString);
+    const newSelectedDateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    
+    if (newSelectedDateString in this.state.projectDatesObject) {
+      const newSelectedDate = new Date(newSelectedDateString);
+      const newSelectedProjects = this.state.projectDatesObject[newSelectedDateString];
 
       this.setState({
-        selectedProjects: this.state.projectDatesObject[selectedDateString],
-        selectedDate
+        selectedProjects: newSelectedProjects,
+        selectedDate: newSelectedDate
       });
     }
   }  
