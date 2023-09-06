@@ -26,16 +26,16 @@ class Home extends Component {
 
   getPicOfTheDay = async () => {
     try {
-      let thumbnailUrl = '../images/default-space-thumbnail.jpg';
+      // let thumbnailUrl = '../images/default-space-thumbnail.jpg';
       const { data } = await getDailyPhotoData.get();
       let isImage = (data.media_type == 'image') ? true : false;
 
-      if (!isImage) {
-        if (data.url.includes('youtube')) {
-          let youtubeId = data.url.substring(30, data.url.length - 6);
-          thumbnailUrl = `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
-        }
-      }
+      // if (!isImage) {
+      //   if (data.url.includes('youtube')) {
+      //     let youtubeIdString = data.url.substring(30, data.url.length - 6);
+      //     thumbnailUrl = `https://img.youtube.com/vi/${youtubeIdString.split('?')[0]}/2.jpg`;
+      //   }
+      // }
 
       this.setState({
         isImage,
@@ -44,7 +44,7 @@ class Home extends Component {
         description: data.explanation.split('Gallery:')[0],
         author: ((data.copyright) ? capitalizeEveryFirstLetter(data.copyright) : 'NASA'),
         hdUrl: (data.media_type == 'image') ? data.hdurl : data.url,
-        url: (data.media_type == 'image') ? data.url : thumbnailUrl,
+        url: (data.media_type == 'image') ? data.url : data.url,
       });
     } catch(error) {
       console.log(error);
@@ -72,12 +72,15 @@ class Home extends Component {
             </div>
             <hr />
             <div className="row">
-              <div className="col-md-4">
+              <div className={`${this.state.isImage ? "col-md-4" : "col-md-6"}`}>
                 <a data-toggle="modal" data-target='#modal' onClick={() => this.props.showModal({'isImage': this.state.isImage, 'modalUrl': this.state.hdUrl, 'modalAuthor': this.state.author })}>
-                  <img className="daily-image" src={ this.state.url } alt={this.state.title} />
+                  {(this.state.isImage) 
+                    ? <img className="daily-image" src={ this.state.url } alt={this.state.title} /> 
+                    : <iframe className="daily-movie" src={ this.state.url } alt={this.state.title} /> 
+                  }
                 </a>
               </div>
-              <div className="col-md-8">
+              <div className={`${this.state.isImage ? "col-md-8" : "col-md-6"}`}>
                 <div className="row">
                   <h6><em>{this.state.date}</em></h6>
                 </div>

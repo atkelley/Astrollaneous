@@ -5,7 +5,15 @@
   border-radius: 25px;
 }
 
-.daily-image:hover {
+.daily-movie {
+  padding: 10px;
+  width: 100%;
+  height: 70%;
+  border-radius: 25px;
+  border: 0;
+}
+
+.daily-image:hover, .daily-movie:hover {
   cursor: pointer;
 }
 
