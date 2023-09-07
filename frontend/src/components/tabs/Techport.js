@@ -45,15 +45,17 @@ class Techport extends Component {
             }
           });
         }
-        
+
         let projectDates = Object.keys(projectDatesObject);
         const mostRecentDate = new Date(projectDates[0]);
+        const twelveHoursInMillis = 12 * 60 * 60 * 1000;
+        mostRecentDate.setTime(mostRecentDate.getTime() + twelveHoursInMillis);
 
         this.setState({
           isLoading: false,
           selectedDate: mostRecentDate,
           selectedProjects: projectDatesObject[projectDates[0]],
-          projectDatesObject
+          projectDatesObject: projectDatesObject
         });
       });
     } catch(error) {
@@ -66,6 +68,8 @@ class Techport extends Component {
     
     if (newSelectedDateString in this.state.projectDatesObject) {
       const newSelectedDate = new Date(newSelectedDateString);
+      const twelveHoursInMillis = 12 * 60 * 60 * 1000;
+      newSelectedDate.setTime(newSelectedDate.getTime() + twelveHoursInMillis);
       const newSelectedProjects = this.state.projectDatesObject[newSelectedDateString];
 
       this.setState({
