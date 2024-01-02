@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-left">
-        <button className="btn btn-link btn-link-footer-left"><a href="https://atkelley.github.io/" target="_blank" rel="noopener noreferrer">AK-47</a></button><span> &copy; 2023</span>
+        <button className="btn btn-link btn-link-footer-left"><a href="https://atkelley.github.io/" target="_blank" rel="noopener noreferrer">AK-47</a></button><span> &copy; 2024</span>
       </div>
       <div className="footer-right">
         <button className="btn btn-link"><a href="https://code.nasa.gov" target="_blank" rel="noopener noreferrer">code.nasa.gov</a></button>

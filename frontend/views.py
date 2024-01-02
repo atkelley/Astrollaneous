@@ -22,7 +22,7 @@ def satellite(request, name):
           result = satellite
           break
 
-    base_url = "https://celestrak.com/NORAD/elements/{}.txt".format(name)
+    base_url = "https://celestrak.org/NORAD/elements/gp.php?GROUP={}&FORMAT=tle".format(name)
     r = requests.get(base_url)
 
     input_file = "static/mySpaceStuff/tle2czml/tle_{}.txt".format(name)
