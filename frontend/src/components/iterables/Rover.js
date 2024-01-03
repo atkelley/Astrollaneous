@@ -31,8 +31,8 @@ class Rover extends Component {
 
   componentDidMount = () => {
     this.setState({
-      selectedEarthDate: new Date(this.props.rover.max_date),
-      selectedSolNumber: this.props.rover.max_sol - 1,
+      selectedEarthDate: new Date(this.props.rover.max_date.replace(/-/g, '\/')),
+      selectedSolNumber: this.props.rover.max_sol,
       selectedCamera: 'ALL',
       cameraData: {},
       slideIndex: 0,
@@ -64,13 +64,14 @@ class Rover extends Component {
       console.log(error);
     }
     
+    // parameters commented out for a more intuitive UX - 01/03/2024
     this.setState({ 
       cameraData,
       selectedCameraType: (Object.keys(cameraData).length > 0) ? Object.keys(cameraData)[0] : '',
-      selectedDateType: 'earth',
-      selectedEarthDate: new Date(this.props.rover.max_date),
-      selectedSolNumber: this.props.rover.max_sol - 1,
-      selectedCamera: 'ALL',
+      // selectedDateType: 'earth',
+      // selectedEarthDate: new Date(this.props.rover.max_date.replace(/-/g, '\/')),
+      // selectedSolNumber: this.props.rover.max_sol,
+      // selectedCamera: 'ALL',
       isLoading: false, 
       isLoaded: true 
     });
@@ -181,7 +182,7 @@ class Rover extends Component {
                         </div>
 
                         <p className="rover-search-sol-text"><em>Sol range: </em></p>
-                        <p className="rover-search-sol-text"><em>Day 1 to Day { max_sol - 1 }</em></p>
+                        <p className="rover-search-sol-text"><em>Day 1 to Day { max_sol }</em></p>
                       </div>
                     </label>
                   </div>
